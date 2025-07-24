@@ -1,5 +1,5 @@
-import { DashboardShell } from '../../../../components/layout/dashboard-shell';
-import { AdvancedMonitoringDashboard } from '../../../components/monitoring/advanced-monitoring-dashboard';
+import { DashboardShell } from '@/components/layout/dashboard-shell';
+import { AdvancedMonitoringDashboard } from '@/components/monitoring/advanced-monitoring-dashboard';
 
 export default function MonitoringPage() {
   return (

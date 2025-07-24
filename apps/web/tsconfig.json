@@ -20,7 +20,7 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"],
+      "@/*": ["./src/*", "./*"],
       "@ultimate-ai/ui": ["../../packages/ui/src"],
       "@ultimate-ai/api": ["../../packages/api/src"],
       "@ultimate-ai/database": ["../../packages/database/src"]

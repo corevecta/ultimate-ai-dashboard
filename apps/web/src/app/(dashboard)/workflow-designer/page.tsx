@@ -1,5 +1,5 @@
-import { DashboardShell } from '../../../../components/layout/dashboard-shell';
-import { VisualWorkflowDesigner } from '../../../components/workflow/visual-workflow-designer';
+import { DashboardShell } from '@/components/layout/dashboard-shell';
+import { VisualWorkflowDesigner } from '@/components/workflow/visual-workflow-designer';
 
 export default function WorkflowDesignerPage() {
   return (

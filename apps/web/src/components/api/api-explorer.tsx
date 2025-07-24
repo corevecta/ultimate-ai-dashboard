@@ -12,6 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { toast } from '@/hooks/use-toast';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 import {
   Search,
   Send,
@@ -32,6 +33,7 @@ import {
   Network,
   Settings,
   Clock,
+  RefreshCw,
   CheckCircle,
   XCircle,
   AlertCircle,
@@ -339,7 +341,7 @@ print(response.json())`;
     );
     
     if (filtered.length > 0) {
-      acc[category] = { ...data, endpoints: filtered };
+      (acc as any)[category] = { ...data, endpoints: filtered };
     }
     
     return acc;

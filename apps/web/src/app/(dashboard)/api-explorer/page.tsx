@@ -1,5 +1,5 @@
-import { DashboardShell } from '../../../../components/layout/dashboard-shell';
-import { APIExplorer } from '../../../components/api/api-explorer';
+import { DashboardShell } from '@/components/layout/dashboard-shell';
+import { APIExplorer } from '@/components/api/api-explorer';
 
 export default function APIExplorerPage() {
   return (

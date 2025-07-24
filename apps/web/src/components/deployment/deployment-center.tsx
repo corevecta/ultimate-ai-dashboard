@@ -1,19 +1,19 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
-import { Button } from '../ui/button';
-import { Badge } from '../ui/badge';
-import { Input } from '../ui/input';
-import { Label } from '../ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
-import { Textarea } from '../ui/textarea';
-import { Progress } from '../ui/progress';
-import { Switch } from '../ui/switch';
-import { Alert, AlertDescription } from '../ui/alert';
-import { ScrollArea } from '../ui/scroll-area';
-import { toast } from '../../../hooks/use-toast';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
+import { Progress } from '@/components/ui/progress';
+import { Switch } from '@/components/ui/switch';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { toast } from '@/hooks/use-toast';
 import {
   Cloud,
   Rocket,
@@ -157,7 +157,7 @@ const mockDeployments = [
 export const DeploymentCenter: React.FC = () => {
   const [selectedPlatform, setSelectedPlatform] = useState<string>('aws');
   const [selectedStrategy, setSelectedStrategy] = useState<string>('bluegreen');
-  const [deployments, setDeployments] = useState(mockDeployments);
+  const [deployments, setDeployments] = useState<any[]>(mockDeployments);
   const [deploymentConfig, setDeploymentConfig] = useState({
     name: '',
     environment: 'development',
@@ -173,20 +173,35 @@ export const DeploymentCenter: React.FC = () => {
   const [iacCode, setIacCode] = useState('');
   const [costEstimate, setCostEstimate] = useState<any>(null);
 
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
+    toast({
+      title: 'Copied to clipboard',
+      description: 'The code has been copied to your clipboard.',
+    });
+  };
+
   const handleDeploy = async () => {
-    const newDeployment = {
+    const newDeployment: any = {
       id: `dep_${Date.now()}`,
       name: deploymentConfig.name,
       environment: deploymentConfig.environment,
       platform: deploymentConfig.platform,
       strategy: deploymentConfig.strategy,
-      status: 'deploying' as const,
+      status: 'deploying',
       version: 'v2.3.0',
       instances: deploymentConfig.instances,
       progress: 0,
       startedAt: new Date().toISOString(),
       deployedBy: 'Current User',
-      health: 'unknown' as const,
+      health: 'unknown',
+      metrics: {
+        cpu: 0,
+        memory: 0,
+        requests: 0,
+        errors: 0,
+        latency: 0,
+      },
     };
 
     setDeployments([newDeployment, ...deployments]);

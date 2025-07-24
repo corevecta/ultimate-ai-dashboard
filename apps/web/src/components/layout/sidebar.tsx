@@ -3,13 +3,13 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { cn } from '../../../lib/utils';
-import { navigationItems, isNavItemActive } from '../../lib/navigation';
-import { Button } from '../ui/button';
-import { Badge } from '../ui/badge';
-import { ScrollArea } from '../ui/scroll-area';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '../ui/collapsible';
+import { cn } from '@/lib/utils';
+import { navigationItems, isNavItemActive } from '@/lib/navigation';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { ChevronDown } from 'lucide-react';
 
 interface SidebarProps {
@@ -109,7 +109,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed = false }) => {
                       </Button>
                     </CollapsibleTrigger>
                     <CollapsibleContent className="ml-6 space-y-1">
-                      {item.children.map((child) => {
+                      {item.children?.map((child) => {
                         const childActive = isNavItemActive(child.href, pathname);
                         const ChildIcon = child.icon;
                         

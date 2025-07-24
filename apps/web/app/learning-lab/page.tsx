@@ -1,5 +1,10 @@
+import { DashboardShell } from '@/components/layout/dashboard-shell';
 import { LearningEvolutionLab } from '@/components/learning/learning-evolution-lab';
 
 export default function LearningLabPage() {
-  return <LearningEvolutionLab />;
+  return (
+    <DashboardShell>
+      <LearningEvolutionLab />
+    </DashboardShell>
+  );
 }
