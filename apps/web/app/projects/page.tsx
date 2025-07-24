@@ -1,9 +1,12 @@
 import { Suspense } from 'react'
 import { DashboardShell } from '@/components/layout/dashboard-shell'
-import { ProjectsHeader } from '@/components/projects/projects-header'
-import { ProjectsGrid } from '@/components/projects/projects-grid'
-import { ProjectsFilters } from '@/components/projects/projects-filters'
+import { WorkflowsHeader } from '@/components/workflows/workflows-header'
+import { WorkflowsGrid } from '@/components/workflows/workflows-grid'
+import { WorkflowsFilters } from '@/components/workflows/workflows-filters'
+import { EnhancedProjectsGridV2 } from '@/components/projects/enhanced-projects-grid-v2'
 import { LoadingState } from '@/components/ui/loading-state'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { GitBranch, FolderOpen } from 'lucide-react'
 
 export default function ProjectsPage() {
   return (
@@ -17,25 +20,56 @@ export default function ProjectsPage() {
         </div>
 
         <div className="relative z-10 p-8">
-          <Suspense fallback={<LoadingState />}>
-            <ProjectsHeader />
-          </Suspense>
-
-          <div className="mt-8 grid grid-cols-1 lg:grid-cols-4 gap-8">
-            {/* Filters sidebar */}
-            <div className="lg:col-span-1">
-              <Suspense fallback={<LoadingState />}>
-                <ProjectsFilters />
-              </Suspense>
+          <Tabs defaultValue="projects" className="space-y-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <h1 className="text-4xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
+                  AI Projects & Workflows 
+                </h1>
+                <p className="text-gray-400 mt-2">
+                  Browse existing projects or view active pipeline executions
+                </p>
+              </div>
+              <TabsList className="bg-gray-900/50 border border-white/10">
+                <TabsTrigger value="projects" className="data-[state=active]:bg-white/10">
+                  <FolderOpen className="w-4 h-4 mr-2" />
+                  Projects (2,265+)
+                </TabsTrigger>
+                <TabsTrigger value="workflows" className="data-[state=active]:bg-white/10">
+                  <GitBranch className="w-4 h-4 mr-2" />
+                  Workflows
+                </TabsTrigger>
+              </TabsList>
             </div>
 
-            {/* Projects grid */}
-            <div className="lg:col-span-3">
+            <TabsContent value="projects" className="space-y-6">
               <Suspense fallback={<LoadingState />}>
-                <ProjectsGrid />
+                <EnhancedProjectsGridV2 />
               </Suspense>
-            </div>
-          </div>
+            </TabsContent>
+
+            <TabsContent value="workflows" className="space-y-6">
+              <Suspense fallback={<LoadingState />}>
+                <WorkflowsHeader />
+              </Suspense>
+
+              <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                {/* Filters sidebar */}
+                <div className="lg:col-span-1">
+                  <Suspense fallback={<LoadingState />}>
+                    <WorkflowsFilters />
+                  </Suspense>
+                </div>
+
+                {/* Workflows grid */}
+                <div className="lg:col-span-3">
+                  <Suspense fallback={<LoadingState />}>
+                    <WorkflowsGrid />
+                  </Suspense>
+                </div>
+              </div>
+            </TabsContent>
+          </Tabs>
         </div>
       </div>
     </DashboardShell>
