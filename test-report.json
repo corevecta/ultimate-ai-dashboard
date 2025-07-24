@@ -1,0 +1,82 @@
+{
+  "timestamp": "2025-07-23T21:37:14.007Z",
+  "summary": {
+    "total": 15,
+    "passed": 15,
+    "failed": 0,
+    "withErrors": 1
+  },
+  "results": {
+    "passed": [
+      {
+        "path": "/",
+        "name": "Home/Dashboard"
+      },
+      {
+        "path": "/projects",
+        "name": "Projects"
+      },
+      {
+        "path": "/jobs",
+        "name": "Jobs"
+      },
+      {
+        "path": "/mcp-servers",
+        "name": "MCP Servers"
+      },
+      {
+        "path": "/agents",
+        "name": "Agents"
+      },
+      {
+        "path": "/plugins",
+        "name": "Plugins"
+      },
+      {
+        "path": "/analytics",
+        "name": "Analytics"
+      },
+      {
+        "path": "/errors",
+        "name": "Errors"
+      },
+      {
+        "path": "/settings",
+        "name": "Settings"
+      },
+      {
+        "path": "/docs",
+        "name": "Documentation"
+      },
+      {
+        "path": "/shared-ui-demo",
+        "name": "Shared UI Demo"
+      },
+      {
+        "path": "/ai-studio",
+        "name": "AI Studio"
+      },
+      {
+        "path": "/templates",
+        "name": "Templates"
+      },
+      {
+        "path": "/platforms",
+        "name": "Platforms"
+      },
+      {
+        "path": "/deployments",
+        "name": "Deployments"
+      }
+    ],
+    "failed": [],
+    "errors": {
+      "/": {
+        "pageErrors": [],
+        "consoleErrors": [
+          "Failed to load resource: the server responded with a status of 404 (Not Found)"
+        ]
+      }
+    }
+  }
+}

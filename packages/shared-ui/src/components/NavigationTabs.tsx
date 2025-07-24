@@ -1,0 +1,1 @@
+export { Tabs as NavigationTabs } from './Tabs'
