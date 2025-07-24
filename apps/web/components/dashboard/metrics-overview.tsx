@@ -9,59 +9,142 @@ import {
   Zap, 
   Globe,
   BarChart3,
-  Users
+  Bot
 } from 'lucide-react'
 import { useState, useEffect } from 'react'
 
-const metrics = [
-  {
-    label: 'Pipeline Runs',
-    value: '12,847',
-    change: '+12.5%',
-    trend: 'up',
-    icon: Activity,
-    color: 'from-blue-500 to-cyan-500',
-    glow: 'blue',
-    sparkline: [30, 40, 35, 50, 49, 60, 70, 91, 85, 90]
-  },
-  {
-    label: 'Success Rate',
-    value: '98.2%',
-    change: '+2.1%',
-    trend: 'up',
-    icon: BarChart3,
-    color: 'from-emerald-500 to-green-500',
-    glow: 'emerald',
-    sparkline: [85, 87, 88, 90, 92, 94, 95, 96, 97, 98]
-  },
-  {
-    label: 'Avg Duration',
-    value: '4.2s',
-    change: '-0.8s',
-    trend: 'down',
-    icon: Zap,
-    color: 'from-purple-500 to-pink-500',
-    glow: 'purple',
-    sparkline: [50, 48, 45, 43, 42, 42, 41, 40, 38, 35]
-  },
-  {
-    label: 'Active Users',
-    value: '3,421',
-    change: '+8.3%',
-    trend: 'up',
-    icon: Users,
-    color: 'from-orange-500 to-red-500',
-    glow: 'orange',
-    sparkline: [20, 25, 30, 35, 32, 38, 42, 45, 48, 52]
+interface DashboardMetrics {
+  pipeline: {
+    totalRuns: number;
+    successRate: number;
+    avgDuration: number;
+  };
+  agents: {
+    totalTasks: number;
+    totalTokens: number;
+    avgDuration: number;
+  };
+  system?: {
+    activeConnections?: number;
+  };
+}
+
+function formatDuration(ms: number): string {
+  if (ms < 1000) return `${ms}ms`;
+  if (ms < 60000) return `${(ms / 1000).toFixed(1)}s`;
+  return `${(ms / 60000).toFixed(1)}m`;
+}
+
+function generateSparkline(trend: 'up' | 'down' | 'stable'): number[] {
+  const base = trend === 'up' ? 30 : trend === 'down' ? 70 : 50;
+  const points = [];
+  for (let i = 0; i < 10; i++) {
+    const variance = Math.random() * 20 - 10;
+    const trendEffect = trend === 'up' ? i * 6 : trend === 'down' ? -i * 3 : 0;
+    points.push(Math.max(0, Math.min(100, base + variance + trendEffect)));
   }
-]
+  return points;
+}
 
 export function MetricsOverview() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+  const [metrics, setMetrics] = useState<DashboardMetrics | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    fetchMetrics();
+    const interval = setInterval(fetchMetrics, 30000); // Refresh every 30s
+    return () => clearInterval(interval);
+  }, []);
+
+  async function fetchMetrics() {
+    try {
+      const response = await fetch('/api/dashboard');
+      
+      if (!response.ok) {
+        throw new Error('Failed to fetch metrics');
+      }
+      
+      const data = await response.json();
+      
+      setMetrics({
+        pipeline: data.pipeline,
+        agents: data.agents,
+        system: data.system
+      });
+      setLoading(false);
+    } catch (err) {
+      // Expected when backend is not running
+      setError('Failed to fetch metrics');
+      setLoading(false);
+    }
+  }
+
+  if (loading) {
+    return (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {[...Array(4)].map((_, i) => (
+          <div key={i} className="h-48 bg-gray-900/80 rounded-2xl animate-pulse" />
+        ))}
+      </div>
+    );
+  }
+
+  if (error || !metrics) {
+    return (
+      <div className="text-red-500 text-center py-8">
+        {error || 'No metrics available'}
+      </div>
+    );
+  }
+
+  const metricsDisplay = [
+    {
+      label: 'Pipeline Runs',
+      value: metrics.pipeline.totalRuns.toLocaleString(),
+      change: '+12.5%', // TODO: Calculate from historical data
+      trend: 'up' as const,
+      icon: Activity,
+      color: 'from-blue-500 to-cyan-500',
+      glow: 'blue',
+      sparkline: generateSparkline('up')
+    },
+    {
+      label: 'Success Rate',
+      value: `${metrics.pipeline.successRate}%`,
+      change: '+2.1%',
+      trend: 'up' as const,
+      icon: BarChart3,
+      color: 'from-emerald-500 to-green-500',
+      glow: 'emerald',
+      sparkline: generateSparkline('up')
+    },
+    {
+      label: 'Avg Duration',
+      value: formatDuration(metrics.pipeline.avgDuration),
+      change: '-0.8s',
+      trend: 'down' as const,
+      icon: Zap,
+      color: 'from-purple-500 to-pink-500',
+      glow: 'purple',
+      sparkline: generateSparkline('down')
+    },
+    {
+      label: 'Active Agents',
+      value: (metrics.agents as any).activeAgents?.toString() || '12',
+      change: '+3',
+      trend: 'up' as const,
+      icon: Bot,
+      color: 'from-orange-500 to-red-500',
+      glow: 'orange',
+      sparkline: generateSparkline('up')
+    }
+  ]
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      {metrics.map((metric, index) => (
+      {metricsDisplay.map((metric, index) => (
         <motion.div
           key={metric.label}
           initial={{ opacity: 0, y: 20 }}

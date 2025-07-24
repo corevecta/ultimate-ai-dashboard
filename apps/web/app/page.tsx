@@ -3,9 +3,10 @@ import { DashboardShell } from '../components/layout/dashboard-shell'
 import { MetricsOverview } from '../components/dashboard/metrics-overview'
 import { PipelineVisualization } from '../components/dashboard/pipeline-visualization'
 import { ActivityFeed } from '../components/dashboard/activity-feed'
-import { ProjectsGrid } from '../components/dashboard/projects-grid'
+import { AgentPerformance } from '../components/dashboard/agent-performance'
 import { SystemStatus } from '../components/dashboard/system-status'
 import { AIInsights } from '../components/dashboard/ai-insights'
+import { TokenUsage } from '../components/dashboard/token-usage'
 import { LoadingState } from '../components/ui/loading-state'
 
 export default function DashboardPage() {
@@ -53,11 +54,11 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* Projects and Activity */}
+        {/* Agent Performance and Activity */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Active Projects */}
+          {/* Agent Performance */}
           <Suspense fallback={<LoadingState />}>
-            <ProjectsGrid />
+            <AgentPerformance />
           </Suspense>
 
           {/* Activity Feed */}
@@ -69,6 +70,11 @@ export default function DashboardPage() {
         {/* AI Insights Section */}
         <Suspense fallback={<LoadingState />}>
           <AIInsights />
+        </Suspense>
+
+        {/* Token Usage Section */}
+        <Suspense fallback={<LoadingState />}>
+          <TokenUsage />
         </Suspense>
       </div>
     </DashboardShell>

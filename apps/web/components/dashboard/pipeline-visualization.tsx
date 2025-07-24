@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { 
   GitBranch, 
   Play, 
@@ -44,17 +44,137 @@ const statusConfig = {
 export function PipelineVisualization() {
   const [activeNode, setActiveNode] = useState<string | null>(null)
   const [animateFlow, setAnimateFlow] = useState(true)
+  const [pipelineNodes, setPipelineNodes] = useState<PipelineNode[]>(nodes)
+  const [isConnected, setIsConnected] = useState(false)
+  const [connectionAttempts, setConnectionAttempts] = useState(0)
+  const wsRef = useRef<WebSocket | null>(null)
+  const reconnectTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
-    // Simulate pipeline progress
-    const interval = setInterval(() => {
-      const runningNode = nodes.find(n => n.status === 'running')
-      if (runningNode && runningNode.progress) {
-        runningNode.progress = Math.min(runningNode.progress + 5, 100)
+    // Connect to WebSocket for real-time updates
+    connectWebSocket()
+    
+    return () => {
+      if (wsRef.current) {
+        wsRef.current.close()
       }
-    }, 500)
-    return () => clearInterval(interval)
+      if (reconnectTimeoutRef.current) {
+        clearTimeout(reconnectTimeoutRef.current)
+      }
+    }
   }, [])
+
+  function connectWebSocket() {
+    // In development, go straight to simulation to avoid console errors
+    if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+      simulatePipeline()
+      return
+    }
+    
+    // In production, attempt WebSocket connection with retries
+    if (connectionAttempts >= 3) {
+      simulatePipeline()
+      return
+    }
+    
+    try {
+      createWebSocket()
+    } catch (err) {
+      // Fallback to simulation if WebSocket fails
+      simulatePipeline()
+    }
+  }
+  
+  function createWebSocket() {
+    const wsUrl = process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:3000';
+    const ws = new WebSocket(wsUrl)
+    
+    ws.onopen = () => {
+      setIsConnected(true)
+      setConnectionAttempts(0) // Reset on successful connection
+      // Subscribe to workflow updates
+      ws.send(JSON.stringify({ type: 'subscribe', channel: 'workflow:progress' }))
+    }
+    
+    ws.onmessage = (event) => {
+      try {
+        const data = JSON.parse(event.data)
+        if (data.type === 'workflow:progress') {
+          updatePipelineFromWorkflow(data.payload)
+        }
+      } catch (err) {
+        console.error('WebSocket message error:', err)
+      }
+    }
+    
+    ws.onclose = () => {
+      setIsConnected(false)
+      setConnectionAttempts(prev => prev + 1)
+      // Reconnect with exponential backoff
+      const delay = Math.min(5000 * Math.pow(2, connectionAttempts), 30000)
+      reconnectTimeoutRef.current = setTimeout(connectWebSocket, delay)
+    }
+    
+    ws.onerror = () => {
+      // WebSocket errors are expected when backend is not running
+      // No need to log them as they're handled by showing "Simulated Mode"
+      setIsConnected(false)
+    }
+    
+    wsRef.current = ws
+  }
+  
+  function updatePipelineFromWorkflow(workflowData: any) {
+    // Map workflow data to pipeline nodes
+    setPipelineNodes(prevNodes => {
+      return prevNodes.map(node => {
+        const phase = workflowData.phases?.find((p: any) => 
+          p.name.toLowerCase().includes(node.name.toLowerCase())
+        )
+        
+        if (phase) {
+          return {
+            ...node,
+            status: phase.status === 'completed' ? 'success' : 
+                   phase.status === 'running' ? 'running' : 
+                   phase.status === 'failed' ? 'error' : 'idle',
+            progress: phase.progress || 0,
+            duration: phase.duration ? phase.duration / 1000 : undefined
+          }
+        }
+        return node
+      })
+    })
+  }
+  
+  function simulatePipeline() {
+    // Fallback simulation if WebSocket is not available
+    const interval = setInterval(() => {
+      setPipelineNodes(prevNodes => {
+        const updatedNodes = [...prevNodes]
+        const runningNode = updatedNodes.find(n => n.status === 'running')
+        if (runningNode && runningNode.progress !== undefined) {
+          runningNode.progress = Math.min(runningNode.progress + 5, 100)
+          if (runningNode.progress >= 100) {
+            runningNode.status = 'success'
+            runningNode.progress = undefined
+            // Start next node
+            const currentIndex = updatedNodes.indexOf(runningNode)
+            if (currentIndex < updatedNodes.length - 1) {
+              const nextNode = updatedNodes[currentIndex + 1]
+              if (nextNode.status === 'idle') {
+                nextNode.status = 'running'
+                nextNode.progress = 0
+              }
+            }
+          }
+        }
+        return updatedNodes
+      })
+    }, 500)
+    
+    return () => clearInterval(interval)
+  }
 
   return (
     <div className="relative h-full bg-gray-900/80 backdrop-blur-xl rounded-2xl border border-white/10 p-8 overflow-hidden">
@@ -91,9 +211,17 @@ export function PipelineVisualization() {
         </div>
       </div>
 
+      {/* Connection Status */}
+      {!isConnected && (
+        <div className="absolute top-4 right-4 flex items-center gap-2 px-3 py-1 rounded-lg bg-yellow-500/20 border border-yellow-500/30">
+          <AlertCircle className="w-4 h-4 text-yellow-500" />
+          <span className="text-xs text-yellow-500">Simulated Mode</span>
+        </div>
+      )}
+
       {/* Pipeline nodes */}
       <div className="relative grid grid-cols-4 gap-6">
-        {nodes.map((node, index) => {
+        {pipelineNodes.map((node, index) => {
           const config = statusConfig[node.status]
           const Icon = config.icon
 
