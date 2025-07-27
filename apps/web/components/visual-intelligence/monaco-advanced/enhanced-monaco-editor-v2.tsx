@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import Editor, { Monaco } from '@monaco-editor/react';
 import * as monaco from 'monaco-editor';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
@@ -72,10 +72,20 @@ import { CodeLensProvider } from './code-lens-provider';
 import { AdvancedRefactoring } from './advanced-refactoring';
 import { MultiFileSearch } from './multi-file-search';
 
+interface FileData {
+  id: string;
+  name: string;
+  path: string;
+  content: string;
+  language: string;
+}
+
 interface EnhancedMonacoEditorV2Props {
   projectId: string;
   className?: string;
   onSave?: (content: string) => void;
+  initialFile?: FileData;
+  onFileRequest?: (path: string) => void;
 }
 
 interface EditorTab {
@@ -91,10 +101,19 @@ interface EditorTab {
 export function EnhancedMonacoEditorV2({ 
   projectId, 
   className,
-  onSave
+  onSave,
+  initialFile,
+  onFileRequest
 }: EnhancedMonacoEditorV2Props) {
   const [tabs, setTabs] = useState<EditorTab[]>([
-    {
+    initialFile ? {
+      id: initialFile.id,
+      name: initialFile.name,
+      path: initialFile.path,
+      content: initialFile.content,
+      language: initialFile.language,
+      isDirty: false
+    } : {
       id: '1',
       name: 'App.tsx',
       path: '/src/App.tsx',
@@ -158,12 +177,12 @@ export default App;`,
     }
   ]);
   
-  const [activeTabId, setActiveTabId] = useState('1');
+  const [activeTabId, setActiveTabId] = useState(initialFile ? initialFile.id : '1');
   const [showTerminal, setShowTerminal] = useState(false);
   const [showGitPanel, setShowGitPanel] = useState(false);
   const [showAIAssistant, setShowAIAssistant] = useState(false);
   const [showCommandPalette, setShowCommandPalette] = useState(false);
-  const [showFileExplorer, setShowFileExplorer] = useState(true);
+  const [showFileExplorer, setShowFileExplorer] = useState(false);
   const [showLivePreview, setShowLivePreview] = useState(false);
   const [showDebugging, setShowDebugging] = useState(false);
   const [showRefactoring, setShowRefactoring] = useState(false);
@@ -179,6 +198,30 @@ export default App;`,
   
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
   const monacoRef = useRef<Monaco | null>(null);
+
+  // Handle when a new file is opened from the code explorer
+  useEffect(() => {
+    if (initialFile) {
+      // Check if file is already open
+      const existingTab = tabs.find(tab => tab.id === initialFile.id);
+      if (existingTab) {
+        setActiveTabId(initialFile.id);
+      } else {
+        // Add new tab
+        const newTab: EditorTab = {
+          id: initialFile.id,
+          name: initialFile.name,
+          path: initialFile.path,
+          content: initialFile.content,
+          language: initialFile.language,
+          isDirty: false,
+          breakpoints: []
+        };
+        setTabs(prev => [...prev, newTab]);
+        setActiveTabId(initialFile.id);
+      }
+    }
+  }, [initialFile]);
   const lspClientRef = useRef<LSPClient | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   
@@ -329,6 +372,12 @@ export default App;`,
   }, [activeTabId]);
 
   const handleFileSelect = useCallback((file: { path: string; content: string; language: string }) => {
+    // If onFileRequest is provided, use it instead
+    if (onFileRequest) {
+      onFileRequest(file.path);
+      return;
+    }
+    
     const existingTab = tabs.find(tab => tab.path === file.path);
     
     if (existingTab) {
@@ -346,7 +395,7 @@ export default App;`,
       setTabs(prev => [...prev, newTab]);
       setActiveTabId(newTab.id);
     }
-  }, [tabs]);
+  }, [tabs, onFileRequest]);
 
   const editorOptions: monaco.editor.IStandaloneEditorConstructionOptions = {
     // Basic options
@@ -1048,3 +1097,4 @@ export default App;`,
     </div>
   );
 }
+export default EnhancedMonacoEditorV2;

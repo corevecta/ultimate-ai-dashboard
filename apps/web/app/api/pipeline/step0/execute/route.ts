@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
-import { Step0IdeaToMarkdownEnhanced, IdeaExpansionConfig } from '/home/sali/ai/projects/projecthubv3/ai-enhanced-pipeline/src/steps/step0-idea-to-markdown-enhanced.js'
-import { PipelineConfig } from '/home/sali/ai/projects/projecthubv3/ai-enhanced-pipeline/src/types/index.js'
+// import { Step0IdeaToMarkdownEnhanced, IdeaExpansionConfig } from '/home/sali/ai/projects/projecthubv3/ai-enhanced-pipeline/src/steps/step0-idea-to-markdown-enhanced.js'
+// import { PipelineConfig } from '/home/sali/ai/projects/projecthubv3/ai-enhanced-pipeline/src/types/index.js'
 import path from 'path'
 import { promises as fs } from 'fs'
 
@@ -78,7 +78,7 @@ Requirements: Generate comprehensive requirements including technical architectu
     // Configure the pipeline
     const outputDir = `/tmp/ai-pipeline-step0-${Date.now()}`
     
-    const config: PipelineConfig = {
+    const config: any = {
       projectSlug,
       outputDir,
       model: 'sonnet' as const,
@@ -90,7 +90,7 @@ Requirements: Generate comprehensive requirements including technical architectu
       timeout: 60000
     }
 
-    const ideaConfig: IdeaExpansionConfig = {
+    const ideaConfig: any = {
       idea: enhancedIdea,
       category,
       targetAudience: 'General users', // Could be extracted from description
@@ -107,54 +107,11 @@ Requirements: Generate comprehensive requirements including technical architectu
       // Execute Step 0 of the pipeline
       console.log('Executing Step 0 with config:', { projectSlug, category, outputDir })
       
-      const step0 = new Step0IdeaToMarkdownEnhanced(config)
-      const result = await step0.execute(ideaConfig)
-
-      if (!result.success) {
-        throw new Error(result.error || 'Step 0 execution failed')
-      }
-
-      // Read the generated requirements markdown
-      const requirementsPath = path.join(outputDir, 'requirements.md')
-      const contextPath = path.join(outputDir, 'context.yaml')
+      // const step0 = new Step0IdeaToMarkdownEnhanced(config)
+      // const result = await step0.execute(ideaConfig)
       
-      let requirements = ''
-      let context = null
-
-      try {
-        requirements = await fs.readFile(requirementsPath, 'utf-8')
-      } catch (err) {
-        console.error('Failed to read requirements:', err)
-        // Try alternate path
-        const altPath = path.join(outputDir, result.data?.requirementsFile || 'expanded-requirements.md')
-        requirements = await fs.readFile(altPath, 'utf-8')
-      }
-
-      try {
-        const contextContent = await fs.readFile(contextPath, 'utf-8')
-        context = contextContent // Keep as string for now
-      } catch (err) {
-        console.log('No context.yaml found (optional)')
-      }
-
-      // Clean up temp directory
-      await fs.rm(outputDir, { recursive: true, force: true })
-
-      return NextResponse.json({
-        success: true,
-        requirements,
-        context,
-        metadata: {
-          generator: 'ai-enhanced-pipeline-step0',
-          model: config.model,
-          category,
-          timestamp: new Date().toISOString(),
-          inputLength: description.length,
-          outputLength: requirements.length,
-          executionTime: result.data?.executionTime || 0,
-          ...result.metadata
-        }
-      })
+      // Temporarily skip the actual pipeline execution
+      throw new Error('Pipeline temporarily disabled for local development')
 
     } catch (executionError: any) {
       console.error('Step 0 execution error:', executionError)

@@ -7,7 +7,53 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
-import Editor from '@monaco-editor/react';
+import dynamic from 'next/dynamic';
+
+// Dynamically import components to avoid SSR issues
+const EnhancedMonacoEditorV2 = dynamic(
+  () => import('./monaco-advanced/enhanced-monaco-editor-v2'),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="h-full flex items-center justify-center text-gray-500">
+        <div className="text-center">
+          <Code className="h-16 w-16 mx-auto mb-4 text-gray-600 animate-pulse" />
+          <p>Loading advanced editor...</p>
+        </div>
+      </div>
+    )
+  }
+);
+
+const AIAssistantTab = dynamic(
+  () => import('./ai-assistant-tab').then(mod => ({ default: mod.AIAssistantTab })),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="h-full flex items-center justify-center text-gray-500">
+        <div className="text-center">
+          <Brain className="h-16 w-16 mx-auto mb-4 text-gray-600 animate-pulse" />
+          <p>Loading AI Assistant...</p>
+        </div>
+      </div>
+    )
+  }
+);
+
+const LivePreviewTab = dynamic(
+  () => import('./live-preview-tab').then(mod => ({ default: mod.LivePreviewTab })),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="h-full flex items-center justify-center text-gray-500">
+        <div className="text-center">
+          <Globe className="h-16 w-16 mx-auto mb-4 text-gray-600 animate-pulse" />
+          <p>Loading Preview...</p>
+        </div>
+      </div>
+    )
+  }
+);
 import {
   FileText,
   Copy,
@@ -235,6 +281,17 @@ export function EnhancedCodeExplorer({ projectId, className }: EnhancedCodeExplo
       );
     });
   };
+  
+  const findFileByPath = (nodes: FileNode[], path: string): FileNode | null => {
+    for (const node of nodes) {
+      if (node.path === path) return node;
+      if (node.children) {
+        const found = findFileByPath(node.children, path);
+        if (found) return found;
+      }
+    }
+    return null;
+  };
 
   const editorOptions = {
     minimap: { enabled: true },
@@ -405,82 +462,60 @@ export function EnhancedCodeExplorer({ projectId, className }: EnhancedCodeExplo
               </TabsList>
               
               <TabsContent value="editor" className="flex-1 p-0 m-0">
-                {activeFile ? (
-                  <div className="h-full">
-                    <Editor
-                      height="100%"
-                      language={activeFile.language || 'javascript'}
-                      value={fileContents[activeFile.id] || activeFile.content || ''}
-                      onChange={(value) => {
-                        if (value !== undefined && activeFile) {
-                          setFileContents({
-                            ...fileContents,
-                            [activeFile.id]: value
-                          });
-                        }
-                      }}
-                      theme="vs-dark"
-                      options={editorOptions}
-                      onMount={(editor) => {
-                        editorRef.current = editor;
-                      }}
-                    />
-                  </div>
-                ) : (
-                  <div className="h-full flex items-center justify-center text-gray-500">
-                    <div className="text-center">
-                      <FileCode className="h-16 w-16 mx-auto mb-4 text-gray-600" />
-                      <p>Select a file to start editing</p>
-                    </div>
-                  </div>
-                )}
+                <EnhancedMonacoEditorV2
+                  projectId={projectId}
+                  className="h-full"
+                  initialFile={activeFile ? {
+                    id: activeFile.id,
+                    name: activeFile.name,
+                    path: activeFile.path,
+                    content: fileContents[activeFile.id] || activeFile.content || '',
+                    language: activeFile.language || 'typescript'
+                  } : undefined}
+                  onFileRequest={(path) => {
+                    // Handle file requests from the editor
+                    const file = findFileByPath(fileTree, path);
+                    if (file) {
+                      selectFile(file);
+                    }
+                  }}
+                  onSave={(content) => {
+                    if (activeFile) {
+                      // Save the file content
+                      setFileContents({
+                        ...fileContents,
+                        [activeFile.id]: content
+                      });
+                      console.log('File saved:', activeFile.path);
+                    }
+                  }}
+                />
               </TabsContent>
               
-              <TabsContent value="ai" className="flex-1 p-6">
-                <div className="max-w-2xl mx-auto">
-                  <div className="text-center mb-8">
-                    <Brain className="h-16 w-16 text-blue-500 mx-auto mb-4" />
-                    <h3 className="text-xl font-semibold mb-2">Claude AI Assistant</h3>
-                    <p className="text-gray-400">
-                      Get intelligent code suggestions, explanations, and refactoring help
-                    </p>
-                  </div>
-                  
-                  <div className="grid grid-cols-2 gap-4">
-                    <Button variant="outline" className="h-20 flex-col gap-2">
-                      <Sparkles className="h-6 w-6" />
-                      <span>Explain Code</span>
-                    </Button>
-                    <Button variant="outline" className="h-20 flex-col gap-2">
-                      <Bug className="h-6 w-6" />
-                      <span>Find Bugs</span>
-                    </Button>
-                    <Button variant="outline" className="h-20 flex-col gap-2">
-                      <Code className="h-6 w-6" />
-                      <span>Refactor</span>
-                    </Button>
-                    <Button variant="outline" className="h-20 flex-col gap-2">
-                      <Database className="h-6 w-6" />
-                      <span>Generate Tests</span>
-                    </Button>
-                  </div>
-                </div>
+              <TabsContent value="ai" className="flex-1 p-0 m-0">
+                <AIAssistantTab
+                  selectedFile={activeFile ? {
+                    path: activeFile.path,
+                    content: fileContents[activeFile.id] || activeFile.content || '',
+                    language: activeFile.language || 'typescript'
+                  } : undefined}
+                  onCodeUpdate={(code) => {
+                    if (activeFile) {
+                      setFileContents({
+                        ...fileContents,
+                        [activeFile.id]: code
+                      });
+                    }
+                  }}
+                />
               </TabsContent>
               
-              <TabsContent value="preview" className="flex-1 p-6">
-                <div className="h-full flex items-center justify-center">
-                  <div className="text-center">
-                    <Globe className="h-16 w-16 text-green-500 mx-auto mb-4" />
-                    <h3 className="text-xl font-semibold mb-2">Live Preview</h3>
-                    <p className="text-gray-400 mb-4">
-                      Preview your changes in real-time
-                    </p>
-                    <Button>
-                      <Play className="h-4 w-4 mr-2" />
-                      Start Preview Server
-                    </Button>
-                  </div>
-                </div>
+              <TabsContent value="preview" className="flex-1 p-0 m-0">
+                <LivePreviewTab
+                  projectId={projectId}
+                  projectName={projectInfo?.name}
+                  viewMode={viewMode}
+                />
               </TabsContent>
             </Tabs>
           </div>
