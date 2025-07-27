@@ -1,0 +1,302 @@
+project:
+  name: Meal Plan & Exercise Chart Builder
+  type: static-site
+  description: Privacy-first printable meal plan and exercise chart builder with
+    custom templates and content packs
+  version: 1.0.0
+  category: health-fitness
+features:
+  core:
+    - name: Template Engine
+      description: Browser-side template logic for customizable meal plans and
+        exercise charts
+      priority: high
+      rationale: Enables user customization without server dependencies, maintaining
+        privacy-first approach
+      implementation_notes: Use vanilla JS or lightweight framework for client-side rendering
+      dependencies: []
+      apis: []
+      compliance:
+        - data_privacy
+        - accessibility
+    - name: Content Pack System
+      description: Modular content packs for different nutrition and exercise types
+      priority: high
+      rationale: Provides extensibility and personalization while keeping core app
+        lightweight
+      implementation_notes: JSON-based structure allows for easy import/export and version control
+      dependencies:
+        - template_engine
+      apis: []
+      compliance:
+        - data_privacy
+    - name: Print Optimization
+      description: High-quality printable layouts with customizable formats
+      priority: high
+      rationale: Core value proposition for users who want physical meal plans and
+        exercise charts
+      implementation_notes: CSS print media queries and PDF generation via browser print API
+      dependencies:
+        - template_engine
+      apis:
+        - browser_print_api
+      compliance:
+        - accessibility
+  advanced:
+    - name: Meal Planning Tools
+      description: Comprehensive meal planning with nutritional tracking
+      priority: medium
+      rationale: Adds significant value for health-conscious users without requiring
+        external data
+      implementation_notes: Local nutrition database to maintain privacy, client-side calculations
+      dependencies:
+        - template_engine
+        - content_pack_system
+      apis: []
+      compliance:
+        - data_privacy
+        - health_disclaimers
+    - name: Exercise Chart Builder
+      description: Create structured exercise routines and tracking charts
+      priority: medium
+      rationale: Complements meal planning for holistic health approach
+      implementation_notes: Exercise database with progression tracking, visual chart generation
+      dependencies:
+        - template_engine
+        - content_pack_system
+      apis:
+        - chart_js
+      compliance:
+        - health_disclaimers
+  premium:
+    - name: Advanced Templates
+      description: Professional-grade templates with enhanced customization
+      priority: low
+      rationale: Revenue generation while maintaining free core functionality
+      implementation_notes: Premium template packs loaded conditionally based on subscription
+      dependencies:
+        - template_engine
+      apis: []
+      compliance:
+        - data_privacy
+    - name: Enhanced Nutrition Database
+      description: Expanded nutrition data with micro-nutrients and allergen information
+      priority: low
+      rationale: Provides professional-level nutrition tracking for serious users
+      implementation_notes: Larger JSON datasets with advanced filtering capabilities
+      dependencies:
+        - meal_planning_tools
+      apis: []
+      compliance:
+        - health_disclaimers
+        - allergen_warnings
+  enterprise:
+    - name: White Label Solution
+      description: Customizable branding for fitness professionals and nutritionists
+      priority: low
+      rationale: B2B revenue opportunity for professional users
+      implementation_notes: Theme customization system with configurable branding assets
+      dependencies:
+        - template_engine
+      apis: []
+      compliance:
+        - commercial_licensing
+technical:
+  architecture: Client-side static site with local storage and optional cloud sync
+  stack:
+    frontend:
+      framework: Astro 4.5+
+      styling: Tailwind CSS with custom print styles
+      scripting: TypeScript for type safety
+      charts: Chart.js for exercise progress visualization
+    backend: None - fully client-side
+    database: Local storage with JSON content packs
+    build: Astro static site generation
+  integrations:
+    required: []
+    optional:
+      - name: Cloud Storage
+        purpose: Optional backup of user templates
+        implementation: Client-side encryption before upload
+      - name: PDF Generation
+        purpose: Enhanced print capabilities
+        implementation: Browser print API or client-side PDF library
+  security:
+    data_protection: All data stored locally, no external transmission
+    encryption: Local storage encryption for sensitive health data
+    privacy_by_design: true
+    third_party_scripts: Minimal, CDN-hosted libraries only
+  performance:
+    targets:
+      load_time: under 1.5 seconds
+      first_contentful_paint: under 1 second
+      cumulative_layout_shift: 0.1 or less
+      bundle_size: 200KB or less
+    optimization_strategies:
+      - Code splitting for premium features
+      - Lazy loading of content packs
+      - Optimized images and assets
+      - Service worker for offline functionality
+compliance:
+  requirements:
+    - type: Health Disclaimers
+      description: Nutrition and exercise recommendations are not medical advice
+      implementation: Clear disclaimers on all health-related features
+    - type: Data Privacy
+      description: GDPR and privacy-first compliance
+      implementation: Local-only data storage, no tracking, clear privacy policy
+    - type: Accessibility
+      description: WCAG 2.1 AA compliance
+      implementation: Semantic HTML, proper contrast ratios, keyboard navigation
+    - type: Print Compatibility
+      description: Optimized layouts for various paper sizes
+      implementation: CSS print media queries, standardized formatting
+  measures:
+    privacy:
+      - No external analytics or tracking
+      - Local storage encryption
+      - Optional data export for user control
+    security:
+      - Content Security Policy headers
+      - No inline scripts or styles
+      - Sanitized user-generated content
+    accessibility:
+      - Screen reader compatibility
+      - High contrast mode support
+      - Keyboard-only navigation
+development:
+  phases:
+    phase_1:
+      name: Core Foundation
+      duration: 4 weeks
+      deliverables:
+        - Static site setup with Astro and Tailwind
+        - Basic template engine implementation
+        - Print-optimized CSS framework
+        - Local storage system
+      team_requirements:
+        - 1 Frontend Developer (TypeScript/Astro)
+        - 1 UX/UI Designer (Print design focus)
+    phase_2:
+      name: Content System
+      duration: 3 weeks
+      deliverables:
+        - Content pack structure and loader
+        - Meal planning interface
+        - Exercise chart builder
+        - Basic nutrition calculations
+      team_requirements:
+        - 1 Frontend Developer
+        - 1 Content Specialist (Nutrition/Fitness)
+    phase_3:
+      name: Enhancement & Polish
+      duration: 2 weeks
+      deliverables:
+        - Advanced print layouts
+        - Chart.js integration
+        - Performance optimizations
+        - Accessibility compliance
+      team_requirements:
+        - 1 Frontend Developer
+        - 1 QA Tester
+quality:
+  testing:
+    approaches:
+      - Unit testing for calculation logic
+      - Integration testing for template engine
+      - Print layout testing across browsers
+      - Accessibility testing with screen readers
+      - Performance testing with Lighthouse
+    frameworks:
+      - Vitest for unit testing
+      - Playwright for browser testing
+      - axe-core for accessibility testing
+    coverage_targets:
+      unit_tests: 90% or higher for business logic
+      integration_tests: Critical user paths covered
+      accessibility: WCAG 2.1 AA compliance
+  metrics:
+    performance:
+      - Core Web Vitals monitoring
+      - Bundle size tracking
+      - Load time analysis
+    usability:
+      - Print quality assessment
+      - User interface responsiveness
+      - Cross-browser compatibility
+    reliability:
+      - Local storage data integrity
+      - Offline functionality verification
+      - Template rendering consistency
+  monitoring:
+    client_side:
+      - Performance monitoring with Web Vitals
+      - Error tracking without personal data
+      - Usage analytics (privacy-compliant)
+    build_process:
+      - Automated performance budgets
+      - Bundle analysis
+      - Accessibility testing in CI
+deployment:
+  environments:
+    development:
+      platform: Local development server
+      build_command: npm run dev
+      features:
+        - Hot reloading
+        - Development tools
+    staging:
+      platform: Netlify Deploy Preview
+      build_command: npm run build
+      features:
+        - Production build testing
+        - Content validation
+    production:
+      platform: Netlify/Vercel/GitHub Pages
+      build_command: npm run build
+      output_directory: dist
+      features:
+        - CDN distribution
+        - Automatic SSL
+  ci_cd:
+    platform: GitHub Actions
+    triggers:
+      - Push to main
+      - Pull request
+    pipeline:
+      - Dependency installation
+      - TypeScript compilation
+      - Unit test execution
+      - Build generation
+      - Performance testing
+      - Accessibility validation
+      - Deployment to staging/production
+  hosting:
+    requirements:
+      - Static file hosting
+      - Custom domain support
+      - SSL certificate
+      - CDN distribution
+    recommended_platforms:
+      - name: Netlify
+        features:
+          - Form handling
+          - Edge functions
+          - Branch deploys
+      - name: Vercel
+        features:
+          - Performance analytics
+          - Preview deployments
+      - name: GitHub Pages
+        features:
+          - Free hosting
+          - GitHub integration
+meta:
+  step: 1
+  version: "4.1"
+  timestamp: 2025-07-22T08:41:54.760Z
+  status: complete
+  checksum: 0f29f8f93a3ac88a2cb077cc714523616f77211768e4bebf413a7e0739436f90
+  batch_upgraded: true
+  upgrade_date: 2025-07-22T08:41:54.760Z
+  original_version: "1.0"

@@ -1,0 +1,24 @@
+# Generate requirements.md for ${projectId}
+
+You are generating requirements for a CHROME EXTENSION project.
+
+Read specification.yaml and create requirements.md (min 2000 words).
+
+Project: ${projectId.split('-').slice(3).join(' ').replace(/-/g, ' ').toUpperCase()}
+
+Include:
+1. Chrome Extension Overview (Manifest V3)
+2. 8-12 features with:
+   - User interaction flow
+   - Content script implementation
+   - Background service worker logic
+   - Chrome APIs used
+   - UI components (popup, options)
+3. Technical Architecture (extension structure, permissions)
+4. Chrome-specific requirements (CSP, storage, messaging)
+5. Development Guidelines
+6. Testing Strategy (extension testing, Chrome Web Store compliance)
+
+Focus on browser extension specifics, not generic web features.
+
+Start writing requirements.md now.

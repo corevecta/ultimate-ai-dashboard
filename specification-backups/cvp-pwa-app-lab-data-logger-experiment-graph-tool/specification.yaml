@@ -1,0 +1,267 @@
+project:
+  name: Lab Data Logger & Experiment Graph Tool
+  type: pwa-app
+  description: Records, graphs, and exports lab experiment results - fully offline
+  version: 1.0.0
+  category: Scientific Tools
+features:
+  core:
+    - name: Data Logger
+      description: Record experimental data with timestamps and metadata
+      priority: high
+      rationale: Essential for capturing accurate lab measurements with proper context
+      implementation_notes: Real-time validation prevents data entry errors
+      dependencies: []
+      apis:
+        - IndexedDB
+        - File API
+      compliance:
+        - Data integrity
+        - ALCOA principles
+      technical_details:
+        - Real-time data entry with validation
+        - Custom field configuration
+        - Batch import from CSV/Excel
+        - Auto-save to IndexedDB
+    - name: Graph Visualization
+      description: Interactive charts and graphs for data analysis
+      priority: high
+      rationale: Visual analysis enables pattern recognition and trend identification
+      implementation_notes: Chart.js provides responsive and accessible visualizations
+      dependencies:
+        - Data Logger
+      apis:
+        - Canvas API
+        - WebGL
+      compliance:
+        - Accessibility guidelines
+        - Color contrast standards
+      technical_details:
+        - Line charts, scatter plots, histograms
+        - Real-time chart updates
+        - Zoom, pan, and filter controls
+        - Statistical overlay options
+    - name: Export System
+      description: Export data and graphs in multiple formats
+      priority: high
+      rationale: Data portability ensures integration with existing lab workflows
+      implementation_notes: Client-side export prevents data transmission
+      dependencies:
+        - Data Logger
+        - Graph Visualization
+      apis:
+        - File API
+        - Canvas API
+        - Blob API
+      compliance:
+        - Data export standards
+        - Format compatibility
+      technical_details:
+        - CSV, Excel, JSON export
+        - PDF report generation
+        - PNG/SVG chart export
+        - Batch export capabilities
+    - name: Offline Mode
+      description: Full functionality without internet connection
+      priority: high
+      rationale: Lab environments often have restricted or unreliable internet access
+      implementation_notes: Service worker ensures complete offline functionality
+      dependencies: []
+      apis:
+        - Service Worker
+        - Cache API
+        - IndexedDB
+      compliance:
+        - Offline-first design
+        - Data persistence
+      technical_details:
+        - Service worker implementation
+        - Cache API for assets
+        - IndexedDB for data persistence
+        - Sync indicator UI
+  advanced:
+    - name: Advanced Statistical Analysis
+      description: Statistical functions and regression analysis
+      priority: medium
+      rationale: Enhanced analysis capabilities for research-grade requirements
+      implementation_notes: Client-side calculations maintain privacy
+      dependencies:
+        - Data Logger
+        - Graph Visualization
+      apis:
+        - Web Workers
+      compliance:
+        - Statistical accuracy standards
+    - name: Custom Report Templates
+      description: Configurable report layouts and branding
+      priority: medium
+      rationale: Professional presentation for research publication
+      implementation_notes: Template system enables lab-specific formatting
+      dependencies:
+        - Export System
+      apis:
+        - Canvas API
+        - File API
+      compliance:
+        - Document standards
+        - Accessibility
+  premium:
+    - name: Data Collaboration Tools
+      description: Share experiments and collaborate on analysis
+      priority: low
+      rationale: Team collaboration enhances research productivity
+      implementation_notes: Peer-to-peer sharing maintains privacy focus
+      dependencies:
+        - Export System
+      apis:
+        - WebRTC
+        - Web Share API
+      compliance:
+        - Data sharing protocols
+        - Privacy protection
+    - name: Cloud Backup Integration
+      description: Optional encrypted backup to cloud storage
+      priority: low
+      rationale: Data redundancy for critical research data
+      implementation_notes: Client-side encryption before transmission
+      dependencies:
+        - Export System
+      apis:
+        - Crypto API
+        - File System Access API
+      compliance:
+        - Encryption standards
+        - Privacy by design
+  enterprise:
+    - name: Multi-lab Management
+      description: Manage experiments across multiple laboratory locations
+      priority: low
+      rationale: Scalability for research institutions with multiple facilities
+      implementation_notes: Hierarchical data organization with access controls
+      dependencies:
+        - Data Collaboration Tools
+      apis:
+        - IndexedDB
+        - Web Crypto API
+      compliance:
+        - Access control
+        - Audit trails
+technical:
+  architecture: Client-side PWA with service worker and offline-first design
+  stack:
+    frontend: Next.js 15.0.0 with React 19.0.0
+    styling: Tailwind CSS 4.0.0 with glassmorphism design system
+    charts: Chart.js 4.4.0 for data visualization
+    storage: IndexedDB for persistent local storage
+    pwa: Workbox 7.0.0 for service worker management
+    language: TypeScript 5.5.0 for type safety
+  integrations:
+    file_handling: File API for import/export operations
+    offline_sync: Background Sync API for data synchronization
+    notifications: Push API for experiment reminders
+  security:
+    data_protection: Client-side only processing, no data transmission
+    encryption: Web Crypto API for sensitive data encryption
+    access_control: Local authentication with biometric options
+    privacy: Zero data collection, GDPR compliant by design
+  performance:
+    targets:
+      - First Contentful Paint under 1.5 seconds
+      - Largest Contentful Paint under 2.5 seconds
+      - Time to Interactive under 3 seconds
+      - Offline cache size under 10MB
+    optimization:
+      - Code splitting and lazy loading
+      - Service worker caching strategy
+      - IndexedDB query optimization
+      - Chart rendering performance
+compliance:
+  requirements:
+    - ALCOA principles for data integrity
+    - GDPR compliance for EU users
+    - WCAG 2.1 AA accessibility standards
+    - FDA 21 CFR Part 11 electronic records
+  measures:
+    data_integrity: Audit trails and version control for all data changes
+    privacy_protection: Local-only storage with optional client-side encryption
+    accessibility: Screen reader support and keyboard navigation
+    validation: Input validation and error handling throughout application
+development:
+  phases:
+    phase_1:
+      name: Core Data Management
+      duration: 4 weeks
+      deliverables:
+        - Data logger with validation
+        - IndexedDB storage implementation
+        - Basic PWA structure
+        - Service worker setup
+    phase_2:
+      name: Visualization & Charts
+      duration: 3 weeks
+      deliverables:
+        - Chart.js integration
+        - Interactive data visualization
+        - Real-time chart updates
+        - Chart export functionality
+    phase_3:
+      name: Export & Offline Features
+      duration: 3 weeks
+      deliverables:
+        - Multi-format export system
+        - PDF report generation
+        - Complete offline functionality
+        - Data synchronization
+    phase_4:
+      name: Polish & Optimization
+      duration: 2 weeks
+      deliverables:
+        - Performance optimization
+        - UI/UX refinements
+        - Testing and bug fixes
+        - Documentation
+  team_size: 2-3 developers
+  roles:
+    - Frontend Developer (React/Next.js)
+    - PWA Specialist (Service Workers/IndexedDB)
+    - UI/UX Designer (Optional)
+quality:
+  testing_approaches:
+    unit_testing: Jest for component and utility function testing
+    integration_testing: Testing Library for user interaction flows
+    e2e_testing: Playwright for complete user journey validation
+    pwa_testing: Lighthouse for PWA compliance and performance
+    offline_testing: Manual testing with network disabled
+  metrics:
+    code_coverage: 90% or higher for critical paths
+    performance_score: Lighthouse score 95+ for all categories
+    accessibility_score: WCAG 2.1 AA compliance verified
+    pwa_score: Perfect PWA score on Lighthouse audit
+  monitoring:
+    error_tracking: Client-side error logging to local storage
+    performance_monitoring: Web Vitals tracking and reporting
+    usage_analytics: Privacy-respecting local usage statistics
+deployment:
+  environments:
+    development: Local development with hot reload
+    staging: Preview deployment for testing
+    production: Static hosting with CDN distribution
+  ci_cd:
+    build_process: Automated builds with GitHub Actions
+    testing_pipeline: Automated testing on pull requests
+    deployment_pipeline: Automated deployment to production
+    quality_gates: Lighthouse CI for performance validation
+  hosting:
+    primary: Vercel with PWA optimization and edge functions
+    alternative: Netlify with service worker support and form handling
+    self_hosted: Static files with proper HTTPS and caching headers
+    cdn: Global CDN for fast asset delivery
+meta:
+  step: 1
+  version: "4.1"
+  timestamp: 2025-07-22T09:03:14.947Z
+  status: complete
+  checksum: 0f29f8f93a3ac88a2cb077cc714523616f77211768e4bebf413a7e0739436f90
+  batch_upgraded: true
+  upgrade_date: 2025-07-22T09:03:14.947Z
+  original_version: "1.0"

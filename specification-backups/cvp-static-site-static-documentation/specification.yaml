@@ -1,0 +1,316 @@
+project:
+  name: Static Documentation
+  type: static-site
+  description: Beautiful documentation sites generated from markdown files with
+    privacy-first design
+  version: 1.0.0
+  category: documentation
+features:
+  core:
+    - name: Markdown Processing
+      description: Convert markdown files into beautiful documentation sites
+      priority: critical
+      rationale: Core functionality for converting content to web pages
+      implementation_notes: GitHub Flavored Markdown with syntax highlighting
+      dependencies:
+        - Theme System
+      apis:
+        - File System API
+        - Markdown Parser API
+      compliance:
+        - WCAG 2.1 AA
+    - name: Theme System
+      description: Customizable themes optimized for documentation
+      priority: critical
+      rationale: Essential for branded, professional appearance
+      implementation_notes: Dark/light mode with responsive design
+      dependencies: []
+      apis:
+        - CSS Custom Properties API
+        - Media Query API
+      compliance:
+        - WCAG 2.1 AA
+        - Color Contrast Standards
+    - name: Static Site Generation
+      description: Generate fast, SEO-optimized static sites
+      priority: critical
+      rationale: Core build process for deployment-ready sites
+      implementation_notes: Pre-rendered HTML with progressive enhancement
+      dependencies:
+        - Markdown Processing
+        - Theme System
+      apis:
+        - Build API
+        - File System API
+      compliance:
+        - SEO Standards
+        - Performance Standards
+  advanced:
+    - name: Search Integration
+      description: Client-side search functionality for documentation
+      priority: high
+      rationale: Improves user experience for large documentation sites
+      implementation_notes: Lightweight search index generation at build time
+      dependencies:
+        - Static Site Generation
+      apis:
+        - Search Index API
+        - Local Storage API
+      compliance:
+        - Privacy Standards
+    - name: Advanced Navigation
+      description: Hierarchical navigation with breadcrumbs and TOC
+      priority: high
+      rationale: Essential for complex documentation structure
+      implementation_notes: Auto-generated from folder structure and frontmatter
+      dependencies:
+        - Markdown Processing
+      apis:
+        - Navigation API
+        - History API
+      compliance:
+        - WCAG 2.1 AA Navigation
+    - name: Asset Optimization
+      description: Automatic image and asset optimization
+      priority: medium
+      rationale: Improves page load performance
+      implementation_notes: WebP conversion and lazy loading
+      dependencies:
+        - Static Site Generation
+      apis:
+        - Image Processing API
+        - Intersection Observer API
+      compliance:
+        - Performance Standards
+  premium:
+    - name: Analytics Dashboard
+      description: Privacy-focused analytics for site usage
+      priority: medium
+      rationale: Provides insights while maintaining privacy
+      implementation_notes: Local analytics without external tracking
+      dependencies:
+        - Static Site Generation
+      apis:
+        - Local Storage API
+        - Performance Observer API
+      compliance:
+        - GDPR
+        - Privacy Standards
+    - name: Premium Themes
+      description: Professional theme collection
+      priority: low
+      rationale: Differentiated offering for paid users
+      implementation_notes: Extended theme library with custom components
+      dependencies:
+        - Theme System
+      apis:
+        - CSS Custom Properties API
+      compliance:
+        - Brand Guidelines
+  enterprise:
+    - name: White Label Branding
+      description: Complete customization of branding and appearance
+      priority: low
+      rationale: Enterprise customers need full brand control
+      implementation_notes: Custom CSS injection and logo placement
+      dependencies:
+        - Theme System
+        - Premium Themes
+      apis:
+        - Branding API
+        - CSS Injection API
+      compliance:
+        - Brand Guidelines
+        - Corporate Standards
+technical:
+  architecture: Static Site Generator with Astro framework and build-time optimization
+  stack:
+    frontend:
+      - Astro 4.5+
+      - TypeScript 5.5+
+      - Tailwind CSS 4.0+
+    build_tools:
+      - Vite 5.0+
+      - Astro Check
+      - ESLint 9.0+
+    content:
+      - Rehype Highlight 7.0+
+      - Remark GFM 4.0+
+    deployment:
+      - Static hosting
+      - CDN integration
+  integrations:
+    required:
+      - File System
+      - Markdown Parser
+      - CSS Processor
+    optional:
+      - Git Integration
+      - CMS Integration
+      - API Endpoints
+    third_party:
+      - GitHub Pages
+      - Netlify
+      - Vercel
+  security:
+    measures:
+      - Content Security Policy
+      - Static asset validation
+      - Build-time security checks
+    compliance:
+      - No data collection
+      - Privacy by design
+      - Local-only processing
+    vulnerabilities:
+      - XSS prevention
+      - Content sanitization
+  performance:
+    targets:
+      core_web_vitals: 90+ score
+      first_contentful_paint: under 1.5 seconds
+      time_to_interactive: under 2 seconds
+      bundle_size: under 50KB gzipped
+    optimizations:
+      - Tree shaking
+      - Code splitting
+      - Image optimization
+      - CSS purging
+compliance:
+  requirements:
+    - WCAG 2.1 AA
+    - Privacy by Design
+    - GDPR Ready
+    - SEO Standards
+  measures:
+    - Accessibility testing
+    - Privacy impact assessment
+    - Performance monitoring
+development:
+  phases:
+    - phase: Foundation
+      duration: 2 weeks
+      deliverables:
+        - Project setup
+        - Core markdown processing
+        - Basic theme system
+      team_size: 2
+      roles:
+        - Frontend Developer
+        - DevOps Engineer
+    - phase: Core Features
+      duration: 4 weeks
+      deliverables:
+        - Static site generation
+        - Navigation system
+        - Search integration
+      team_size: 3
+      roles:
+        - Frontend Developer
+        - UI/UX Designer
+        - QA Engineer
+    - phase: Enhancement
+      duration: 3 weeks
+      deliverables:
+        - Asset optimization
+        - Advanced themes
+        - Performance tuning
+      team_size: 2
+      roles:
+        - Frontend Developer
+        - Performance Engineer
+    - phase: Premium Features
+      duration: 3 weeks
+      deliverables:
+        - Analytics dashboard
+        - Premium themes
+        - Enterprise features
+      team_size: 2
+      roles:
+        - Frontend Developer
+        - Designer
+quality:
+  testing:
+    approaches:
+      - Unit testing
+      - Integration testing
+      - Performance testing
+      - Accessibility testing
+    frameworks:
+      - Vitest
+      - Playwright
+      - Lighthouse CI
+    coverage_target: 85% or higher
+  metrics:
+    performance:
+      - Core Web Vitals
+      - Bundle size
+      - Build time
+    quality:
+      - Code coverage
+      - Accessibility score
+      - SEO score
+    user_experience:
+      - Page load speed
+      - Navigation efficiency
+  monitoring:
+    build_monitoring:
+      - Build success rate
+      - Build duration
+      - Asset size
+    runtime_monitoring:
+      - Performance metrics
+      - Error tracking
+deployment:
+  environments:
+    - name: development
+      description: Local development with hot reload
+      requirements:
+        - Node.js 18+
+        - npm/yarn
+    - name: staging
+      description: Pre-production testing environment
+      requirements:
+        - Static hosting
+        - Preview URLs
+    - name: production
+      description: Live documentation site
+      requirements:
+        - CDN
+        - Custom domain
+        - SSL certificate
+  ci_cd:
+    pipeline:
+      - Build
+      - Test
+      - Deploy
+      - Verify
+    triggers:
+      - Git push
+      - Pull request
+      - Scheduled builds
+    tools:
+      - GitHub Actions
+      - Netlify Build
+      - Vercel CLI
+  hosting:
+    primary:
+      - Netlify
+      - Vercel
+      - GitHub Pages
+    alternative:
+      - AWS S3 + CloudFront
+      - Azure Static Web Apps
+      - Self-hosted
+    requirements:
+      - Static file serving
+      - Custom domains
+      - SSL support
+meta:
+  step: 1
+  version: "4.1"
+  timestamp: 2025-07-22T08:36:12.753Z
+  status: complete
+  checksum: 0f29f8f93a3ac88a2cb077cc714523616f77211768e4bebf413a7e0739436f90
+  batch_upgraded: true
+  upgrade_date: 2025-07-22T08:36:12.753Z
+  original_version: "1.0"

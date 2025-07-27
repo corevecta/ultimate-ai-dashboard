@@ -1,0 +1,83 @@
+project:
+  name: "Investor Deck Builder"
+  type: "notion-integration"
+  description: "Privacy-first investor deck builder with template export functionality for Notion"
+  version: "1.0.0"
+
+branding:
+  company: "Corevecta"
+  vision: "Privacy by Default, Performance by Design"
+  style: "Professional privacy-first, dark theme, glassmorphism"
+  colors:
+    primary: "#f59e0b"
+    secondary: "#ea580c"
+    background: "gray-950"
+    surface: "gray-900"
+
+core_features:
+  - name: "Template-Based Deck Builder"
+    description: "Create investor decks from pre-built templates with Notion data integration"
+    priority: high
+    technical_details:
+      - "Notion API v2 integration for data fetching"
+      - "Template engine with customizable slide layouts"
+      - "Real-time preview with drag-and-drop editing"
+      - "Auto-population from Notion database properties"
+
+  - name: "Multi-Format Export"
+    description: "Export decks to PowerPoint, PDF, and Google Slides formats"
+    priority: high
+    technical_details:
+      - "PPTX generation with proper formatting"
+      - "PDF export with vector graphics support"
+      - "Google Slides API integration"
+      - "Batch export for multiple decks"
+
+  - name: "Privacy-First Workflow"
+    description: "Zero data collection with local-only processing and encryption"
+    priority: high
+    technical_details:
+      - "Client-side template processing"
+      - "Encrypted local storage for drafts"
+      - "No server-side data retention"
+      - "Optional offline mode support"
+
+technical:
+  architecture: "Client-side Notion integration with local processing"
+  dependencies:
+    production:
+      - "@notionhq/client": "^2.2.15"
+      - "typescript": "^5.5.4"
+      - "pptxgenjs": "^3.12.0"
+      - "jspdf": "^2.5.1"
+      - "tailwindcss": "^4.0.0"
+    development:
+      - "vite": "^5.3.5"
+      - "vitest": "^2.0.5"
+      - "@types/node": "^22.1.0"
+
+performance:
+  target_metrics:
+    - "Initial load: <2s"
+    - "Template render: <500ms"
+    - "Export generation: <5s"
+    - "Memory usage: <256MB"
+
+privacy:
+  data_collection: "none"
+  tracking: false
+  storage: "local_only"
+  privacy_first: true
+
+deployment:
+  platforms:
+    - platform: "Notion Integration Directory"
+      details: "OAuth 2.0 authentication with workspace permissions"
+
+monetization:
+  model: "Free"
+  free_tier: "Full core features forever"
+  paid_tiers:
+    - name: "Pro"
+      price: "$9/month"
+      features: ["Premium templates", "Advanced export options", "Team collaboration"]

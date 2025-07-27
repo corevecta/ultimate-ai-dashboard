@@ -1,0 +1,82 @@
+project:
+  name: "Email Template Injector"
+  type: "web-app"
+  description: "Quick access to approved email templates for enterprise teams ensuring consistency"
+  version: "1.0.0"
+
+branding:
+  company: "Corevecta"
+  vision: "Privacy by Default, Performance by Design"
+  style: "Professional privacy-first, dark theme, glassmorphism"
+  colors:
+    primary: "#0891b2"
+    secondary: "#2563eb"
+    background: "gray-950"
+    surface: "gray-900"
+
+core_features:
+  - name: "Template Library"
+    description: "Browse and manage approved email templates with search and filtering"
+    priority: high
+    technical_details:
+      - "Template CRUD operations with local storage"
+      - "Search and filter by category, tags, usage frequency"
+      - "Import/export template collections"
+  
+  - name: "Quick Template Injection"
+    description: "One-click insertion of templates into email clients"
+    priority: high
+    technical_details:
+      - "Browser integration for Gmail, Outlook, other clients"
+      - "Smart placeholder replacement with user data"
+      - "Template preview before injection"
+
+  - name: "Template Management"
+    description: "Admin controls for template approval and version control"
+    priority: medium
+    technical_details:
+      - "Role-based access control for template editing"
+      - "Template approval workflow"
+      - "Version history and rollback capabilities"
+
+technical:
+  architecture: "Client-side PWA with local-first data storage"
+  dependencies:
+    production:
+      - "next: 15.0.0"
+      - "react: 19.0.0"
+      - "typescript: 5.5.0"
+      - "tailwindcss: 4.0.0"
+      - "@dexie/react-hooks: latest"
+      - "zustand: latest"
+    development:
+      - "vite: latest"
+      - "vitest: latest"
+      - "playwright: latest"
+
+performance:
+  target_metrics:
+    - "Initial load: <2s"
+    - "Template injection: <100ms"
+    - "Search results: <200ms"
+    - "Offline functionality: 100%"
+
+privacy:
+  data_collection: "none"
+  tracking: false
+  storage: "local_only"
+  privacy_first: true
+
+deployment:
+  platforms:
+    - "Vercel: Static deployment with edge functions"
+    - "PWA: Installable web app with offline support"
+    - "Browser Extension: Chrome/Firefox/Edge compatibility"
+
+monetization:
+  model: "Free"
+  free_tier: "Full core features forever"
+  paid_tiers:
+    - name: "Enterprise"
+      price: "$20/user/month"
+      features: ["Advanced template analytics", "Team collaboration", "Custom branding", "Priority support"]

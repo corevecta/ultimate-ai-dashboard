@@ -1,0 +1,82 @@
+project:
+  name: "Study Plan Generator from Template Prompts"
+  type: "notion-integration"
+  description: "AI-powered study plan generator that creates personalized learning schedules from template prompts, with all data stored locally in Notion"
+  version: "1.0.0"
+
+branding:
+  company: "Corevecta"
+  vision: "Privacy by Default, Performance by Design"
+  style: "Professional privacy-first, dark theme, glassmorphism"
+  colors:
+    primary: "#f59e0b"
+    secondary: "#ea580c"
+    background: "gray-950"
+    surface: "gray-900"
+
+core_features:
+  - name: "Template-Based Study Plan Generation"
+    description: "Generate comprehensive study plans from customizable template prompts with AI assistance"
+    priority: high
+    technical_details:
+      - "Notion API v2 integration for database creation and management"
+      - "Template prompt system with variables and customization options"
+      - "AI-powered plan generation using structured prompts"
+      - "Automatic scheduling with time blocking and milestone tracking"
+  
+  - name: "Local Notion Data Management"
+    description: "All study plans and data stored securely within user's Notion workspace"
+    priority: high
+    technical_details:
+      - "Direct Notion database integration with custom properties"
+      - "Automatic database schema creation for study plans"
+      - "Progress tracking with completion status updates"
+      - "Local data persistence with zero external storage"
+
+  - name: "Smart Template Library"
+    description: "Pre-built and customizable study plan templates for various subjects and learning styles"
+    priority: medium
+    technical_details:
+      - "Template categorization by subject, duration, and difficulty"
+      - "Variable substitution system for personalization"
+      - "Custom template creation and sharing capabilities"
+      - "Template validation and optimization suggestions"
+
+technical:
+  architecture: "Notion Integration with Node.js backend"
+  dependencies:
+    production:
+      - "@notionhq/client": "^2.2.15"
+      - "typescript": "^5.5.0"
+      - "zod": "^3.22.0"
+      - "commander": "^12.1.0"
+    development:
+      - "vitest": "^1.6.0"
+      - "tsx": "^4.16.0"
+      - "eslint": "^9.6.0"
+
+performance:
+  target_metrics:
+    - load_time: "< 2s"
+    - api_response: "< 500ms"
+    - memory_usage: "< 50MB"
+    - notion_sync: "< 3s"
+
+privacy:
+  data_collection: "none"
+  tracking: false
+  storage: "local_only"
+  privacy_first: true
+
+deployment:
+  platforms:
+    - platform: "Notion Integration"
+      details: "OAuth app with workspace permissions for database creation and management"
+
+monetization:
+  model: "Free"
+  free_tier: "Full core features forever"
+  paid_tiers:
+    - name: "Pro"
+      price: "$9/month"
+      features: ["Advanced AI templates", "Bulk plan generation", "Progress analytics"]

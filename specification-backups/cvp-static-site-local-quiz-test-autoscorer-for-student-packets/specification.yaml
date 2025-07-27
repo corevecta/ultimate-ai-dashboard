@@ -1,0 +1,273 @@
+project:
+  name: Local Quiz Test Autoscorer
+  type: static-site
+  description: Self-printable, browser-only quiz and test autoscoring system with
+    no cloud dependency
+  version: 1.0.0
+  category: education
+features:
+  core:
+    - name: Quiz Creation Interface
+      description: Create and format quiz/test templates with answer keys
+      priority: high
+      rationale: Essential for creating standardized assessments that can be printed
+        and distributed without internet connectivity
+      technical_details:
+        - Dynamic form builder with question types (multiple choice, short
+          answer, essay)
+        - Answer key management with point allocation
+        - Export to printable PDF format
+      dependencies: []
+      apis: []
+      compliance:
+        - FERPA compliance for educational records
+        - Accessibility standards (WCAG 2.1 AA)
+      implementation_notes: Use jsPDF for client-side PDF generation to maintain
+        offline functionality
+    - name: Automated Scoring Engine
+      description: Score student responses against answer keys locally
+      priority: high
+      rationale: Core value proposition - automated grading without requiring internet
+        or external services
+      technical_details:
+        - Pattern matching for multiple choice answers
+        - Fuzzy string matching for short answers
+        - Manual review interface for essay questions
+        - Grade calculation with configurable weights
+      dependencies:
+        - Quiz Creation Interface
+      apis: []
+      compliance:
+        - Data privacy protection (no external data transmission)
+        - Educational assessment standards
+      implementation_notes: Implement fuzzy matching with Fuse.js for flexible answer recognition
+    - name: Student Response Input
+      description: Input student answers for batch processing
+      priority: high
+      rationale: Streamlines data entry process for educators processing multiple
+        student responses
+      technical_details:
+        - Bulk answer sheet scanning simulation
+        - Manual data entry interface
+        - CSV import functionality
+        - Student roster management
+      dependencies:
+        - Automated Scoring Engine
+      apis: []
+      compliance:
+        - Student privacy protection
+        - Data validation requirements
+      implementation_notes: Use PapaParse for robust CSV handling and data validation
+  advanced:
+    - name: Results Management
+      description: Generate and export grade reports with analytics
+      priority: medium
+      rationale: Provides comprehensive reporting capabilities for educational
+        assessment tracking
+      technical_details:
+        - Individual student score cards
+        - Class performance analytics
+        - Export to CSV, PDF formats
+        - Grade distribution charts
+      dependencies:
+        - Automated Scoring Engine
+        - Student Response Input
+      apis: []
+      compliance:
+        - Grade reporting standards
+        - Student record confidentiality
+      implementation_notes: Implement chart generation with lightweight canvas-based library
+    - name: Offline Persistence
+      description: Robust local data storage and backup capabilities
+      priority: medium
+      rationale: Ensures data integrity and recovery options in offline-first environment
+      technical_details:
+        - IndexedDB storage with encryption
+        - Data export/import for backup
+        - Version control for quiz templates
+        - Automatic data recovery
+      dependencies:
+        - Quiz Creation Interface
+        - Student Response Input
+      apis: []
+      compliance:
+        - Data backup requirements
+        - Local data protection standards
+  premium:
+    - name: Advanced Analytics Dashboard
+      description: Comprehensive performance metrics and insights
+      priority: low
+      rationale: Provides deeper insights for educational assessment improvement
+      technical_details:
+        - Question difficulty analysis
+        - Performance trend tracking
+        - Comparative analytics
+        - Custom report generation
+      dependencies:
+        - Results Management
+      apis: []
+      compliance:
+        - Educational analytics standards
+        - Performance data privacy
+  enterprise:
+    - name: Multi-Institution Support
+      description: Support for multiple schools or departments
+      priority: low
+      rationale: Enables scalable deployment across educational institutions
+      technical_details:
+        - Institution-specific branding
+        - Multi-tenant data separation
+        - Administrative controls
+        - Bulk deployment tools
+      dependencies:
+        - Advanced Analytics Dashboard
+      apis: []
+      compliance:
+        - Multi-tenant data isolation
+        - Institution-specific regulations
+technical:
+  architecture: Client-side single page application with local storage and
+    offline-first design
+  stack:
+    frontend:
+      - React 19.0.0 for component-based UI
+      - TypeScript 5.5.0 for type safety
+      - Tailwind CSS 4.0.0 for styling
+      - Vite 5.0.0 for build tooling
+    libraries:
+      - jsPDF 2.5.1 for PDF generation
+      - PapaParse 5.4.1 for CSV processing
+      - Fuse.js 7.0.0 for fuzzy searching
+      - Chart.js for data visualization
+    development:
+      - ESLint 8.57.0 for code quality
+      - Prettier 3.0.0 for formatting
+      - Vitest for testing
+  integrations:
+    external_apis: []
+    third_party_services: []
+    data_sources:
+      - Local file system
+      - Browser storage (IndexedDB/localStorage)
+  security:
+    authentication: Not required (local-only application)
+    authorization: File-based access control
+    data_protection:
+      - Client-side encryption for sensitive data
+      - No external data transmission
+      - Secure local storage practices
+    privacy_measures:
+      - Zero data collection
+      - No tracking or analytics
+      - Full offline operation
+  performance:
+    target_metrics:
+      - "First Contentful Paint: under 1.5s"
+      - "Time to Interactive: under 2s"
+      - "Bundle size: under 500KB"
+      - "Lighthouse Score: 95 or higher"
+    optimization_strategies:
+      - Code splitting and lazy loading
+      - Asset optimization
+      - Service worker caching
+      - Efficient bundling with Vite
+compliance:
+  requirements:
+    - FERPA compliance for educational records
+    - WCAG 2.1 AA accessibility standards
+    - Data privacy regulations (no external transmission)
+    - Educational assessment standards
+  measures:
+    - Regular accessibility audits
+    - Privacy-by-design implementation
+    - Offline-first architecture
+    - Local data encryption
+development:
+  phases:
+    - phase: 1
+      name: Core Foundation
+      duration: 4-6 weeks
+      deliverables:
+        - Project setup and architecture
+        - Quiz creation interface
+        - Basic scoring engine
+        - PDF export functionality
+    - phase: 2
+      name: Data Management
+      duration: 3-4 weeks
+      deliverables:
+        - Student response input system
+        - CSV import/export functionality
+        - Local data persistence
+        - Basic reporting
+    - phase: 3
+      name: Enhancement & Polish
+      duration: 2-3 weeks
+      deliverables:
+        - Advanced analytics
+        - UI/UX improvements
+        - Performance optimization
+        - Comprehensive testing
+  team:
+    size: 2-3 developers
+    roles:
+      - Frontend Developer (React/TypeScript)
+      - UI/UX Designer
+      - QA Engineer (optional)
+quality:
+  testing:
+    approaches:
+      - Unit testing with Vitest
+      - Integration testing for data flows
+      - End-to-end testing with Playwright
+      - Accessibility testing
+      - Cross-browser compatibility testing
+    coverage_target: 85% or higher
+  metrics:
+    performance:
+      - Core Web Vitals monitoring
+      - Bundle size tracking
+      - Load time measurements
+    quality:
+      - Code coverage percentage
+      - Accessibility score
+      - Browser compatibility matrix
+  monitoring:
+    - Client-side error tracking (local only)
+    - Performance metrics collection
+    - User experience analytics (privacy-preserving)
+deployment:
+  environments:
+    - development: Local development server
+    - staging: Preview deployment for testing
+    - production: Static hosting platforms
+  ci_cd:
+    pipeline:
+      - Automated testing on commit
+      - Build optimization and bundling
+      - Static site generation
+      - Deployment to hosting platform
+    tools:
+      - GitHub Actions for CI/CD
+      - Automated lighthouse audits
+      - Security scanning
+  hosting:
+    recommended_platforms:
+      - Netlify (with form handling disabled)
+      - Vercel (static deployment)
+      - GitHub Pages
+      - Self-hosted web server
+      - Local file system (file:// protocol)
+    requirements:
+      - Static file hosting capability
+      - HTTPS support (recommended)
+      - No server-side processing needed
+meta:
+  step: 1
+  version: "4.1"
+  timestamp: 2025-07-22T08:44:31.670Z
+  status: complete
+  checksum: 0f29f8f93a3ac88a2cb077cc714523616f77211768e4bebf413a7e0739436f90
+  batch_upgraded: true
+  upgrade_date: 2025-07-22T08:44:31.670Z
+  original_version: "1.0"

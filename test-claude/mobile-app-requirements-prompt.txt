@@ -1,0 +1,24 @@
+# Generate requirements.md for ${projectId}
+
+You are generating requirements for a MOBILE APP project.
+
+Read specification.yaml and create requirements.md (min 2000 words).
+
+Project: ${projectId.split('-').slice(3).join(' ').replace(/-/g, ' ').toUpperCase()}
+
+Include:
+1. Mobile App Overview (iOS/Android)
+2. 8-12 features with:
+   - Screen flows and navigation
+   - Native features (camera, GPS, push)
+   - Offline functionality
+   - Data synchronization
+   - Platform-specific UI
+3. Technical Architecture (React Native/Flutter/Native)
+4. Mobile-specific requirements (app stores, permissions)
+5. Development Guidelines
+6. Testing Strategy (device testing, app store compliance)
+
+Focus on mobile app specifics, not web features.
+
+Start writing requirements.md now.

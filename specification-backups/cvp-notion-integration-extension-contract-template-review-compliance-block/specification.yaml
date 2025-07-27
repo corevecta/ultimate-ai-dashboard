@@ -1,0 +1,78 @@
+project:
+  name: "Contract Template & Compliance Manager"
+  type: "notion-integration"
+  description: "AI-powered contract templates, review workflows, and compliance tracking with local processing and export capabilities"
+  version: "1.0.0"
+
+branding:
+  company: "Corevecta"
+  vision: "Privacy by Default, Performance by Design"
+  style: "Professional privacy-first, dark theme, glassmorphism"
+  colors:
+    primary: "#f59e0b"
+    secondary: "#ea580c"
+    background: "gray-950"
+    surface: "gray-900"
+
+core_features:
+  - name: "Contract Template Engine"
+    description: "Create and manage standardized contract templates with clause libraries"
+    priority: high
+    technical_details:
+      - "Template builder with drag-drop clauses"
+      - "Version control for template iterations"
+      - "Custom field mapping and validation"
+  
+  - name: "Compliance Review Workflow"
+    description: "Automated compliance checking and review routing system"
+    priority: high
+    technical_details:
+      - "Rule-based compliance engine"
+      - "Risk assessment scoring"
+      - "Approval workflow management"
+  
+  - name: "Document Export & Integration"
+    description: "Export contracts to PDF/CSV and sync with Notion databases"
+    priority: medium
+    technical_details:
+      - "Multi-format export (PDF, CSV, Word)"
+      - "Notion database integration"
+      - "Batch processing capabilities"
+
+technical:
+  architecture: "Client-side Notion integration with local processing"
+  dependencies:
+    production:
+      - "@notionhq/client": "^2.2.15"
+      - "jspdf": "^2.5.1"
+      - "csv-parse": "^5.5.0"
+      - "typescript": "^5.5.0"
+    development:
+      - "vite": "^5.3.0"
+      - "tailwindcss": "^4.0.0"
+      - "eslint": "^9.0.0"
+
+performance:
+  target_metrics:
+    - load_time: "<2s"
+    - template_generation: "<500ms"
+    - export_processing: "<3s"
+
+privacy:
+  data_collection: "none"
+  tracking: false
+  storage: "local_only"
+  privacy_first: true
+
+deployment:
+  platforms:
+    - platform: "Notion Integration"
+      details: "OAuth integration with workspace permissions"
+
+monetization:
+  model: "Free"
+  free_tier: "Full core features forever"
+  paid_tiers:
+    - name: "Pro"
+      price: "$9/month"
+      features: ["Advanced templates", "Bulk operations", "Priority support"]

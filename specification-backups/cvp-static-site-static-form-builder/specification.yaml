@@ -1,0 +1,338 @@
+project:
+  name: Static Form Builder
+  type: static-site
+  description: Complex forms for static sites with seamless interactivity and zero
+    backend requirements
+  version: 1.0.0
+  category: productivity
+features:
+  core:
+    - name: Visual Form Builder
+      description: Drag-and-drop interface for creating complex multi-step forms
+      priority: high
+      rationale: Enables non-technical users to create sophisticated forms without coding
+      technical_details:
+        - React-based form designer with real-time preview
+        - Support for 20+ field types including conditional logic
+        - Multi-step form wizard with progress tracking
+        - Custom validation rules and error handling
+      dependencies: []
+      apis:
+        - HTML5 Form Validation API
+        - Drag and Drop API
+        - Local Storage API
+      compliance:
+        - WCAG 2.1 AA accessibility standards
+        - HTML5 form validation compliance
+    - name: Static Site Integration
+      description: Zero-backend form processing with client-side validation
+      priority: high
+      rationale: Eliminates server infrastructure costs while maintaining form
+        functionality
+      technical_details:
+        - Generate embeddable HTML/CSS/JS bundles
+        - Email submission via Formspree/Netlify Forms integration
+        - Local storage for draft saving
+        - Progressive enhancement for accessibility
+      dependencies: []
+      apis:
+        - Formspree API
+        - Netlify Forms API
+        - EmailJS API
+        - Local Storage API
+      compliance:
+        - GDPR data minimization principles
+        - No server-side data storage requirements
+    - name: Advanced Form Logic
+      description: Conditional fields, calculations, and dynamic content
+      priority: medium
+      rationale: Provides enterprise-level form capabilities without backend complexity
+      technical_details:
+        - JavaScript-based conditional field display
+        - Real-time field calculations and summations
+        - Dynamic option loading from JSON/CSV
+        - Custom CSS styling and themes
+      dependencies:
+        - Visual Form Builder
+      apis:
+        - Fetch API for dynamic data loading
+        - Intersection Observer API
+      compliance:
+        - Client-side data processing only
+        - No external data transmission for calculations
+  advanced:
+    - name: Template Library
+      description: Pre-built form templates for common use cases
+      priority: medium
+      rationale: Accelerates form creation for standard business scenarios
+      technical_details:
+        - JSON-based template definitions
+        - Industry-specific form collections
+        - Customizable template variations
+      dependencies:
+        - Visual Form Builder
+      apis: []
+      compliance:
+        - Template content reviewed for accessibility
+    - name: Analytics Integration
+      description: Privacy-first form analytics and conversion tracking
+      priority: low
+      rationale: Provides insights without compromising user privacy
+      technical_details:
+        - Client-side analytics only
+        - No personal data collection
+        - Conversion funnel analysis
+      dependencies: []
+      apis:
+        - Google Analytics 4 (privacy-compliant)
+        - Plausible Analytics API
+      compliance:
+        - GDPR compliant anonymous analytics
+        - No PII tracking
+  premium:
+    - name: White-label Export
+      description: Remove branding and customize appearance completely
+      priority: medium
+      rationale: Enables agencies and businesses to maintain brand consistency
+      technical_details:
+        - Custom CSS theme injection
+        - Logo and branding replacement
+        - Domain whitelisting
+      dependencies:
+        - Static Site Integration
+      apis: []
+      compliance:
+        - License terms for white-labeling
+    - name: Advanced Integrations
+      description: Connect with CRM, email marketing, and business tools
+      priority: medium
+      rationale: Seamless workflow integration for business users
+      technical_details:
+        - Zapier webhook integration
+        - HubSpot API connection
+        - Mailchimp list management
+      dependencies:
+        - Static Site Integration
+      apis:
+        - Zapier Webhooks API
+        - HubSpot CRM API
+        - Mailchimp API
+      compliance:
+        - Third-party data processing agreements
+        - API security standards
+  enterprise:
+    - name: Team Collaboration
+      description: Multi-user form editing and approval workflows
+      priority: low
+      rationale: Enables large teams to collaborate on form creation and management
+      technical_details:
+        - Role-based access control
+        - Version control for forms
+        - Comment and review system
+      dependencies:
+        - Visual Form Builder
+      apis:
+        - GitHub API for version control
+      compliance:
+        - Enterprise security standards
+        - Access control policies
+technical:
+  architecture: Static site generator with client-side interactivity
+  stack:
+    frontend:
+      - framework: Astro
+        version: 4.5.0
+        rationale: Optimal static site generation with island architecture
+      - ui_library: React
+        version: 19.0.0
+        rationale: Component-based interactive form elements
+      - styling: Tailwind CSS
+        version: 4.0.0
+        rationale: Utility-first CSS for rapid UI development
+      - forms: React Hook Form
+        version: 7.50.0
+        rationale: Performant form state management
+      - validation: Zod
+        version: 3.22.0
+        rationale: TypeScript-first schema validation
+    language: TypeScript
+    bundler: Vite
+  integrations:
+    form_backends:
+      - Formspree
+      - Netlify Forms
+      - EmailJS
+    analytics:
+      - Google Analytics 4
+      - Plausible Analytics
+    deployment:
+      - Netlify
+      - Vercel
+      - GitHub Pages
+  security:
+    measures:
+      - Client-side input sanitization
+      - XSS prevention through React
+      - HTTPS enforcement
+      - Content Security Policy headers
+    data_handling:
+      - No server-side data storage
+      - Local storage encryption
+      - Form data validation before submission
+  performance:
+    targets:
+      first_contentful_paint: under 1.5 seconds
+      largest_contentful_paint: under 2.5 seconds
+      bundle_size: under 200KB gzipped
+      lighthouse_score: 95 or higher
+    optimization:
+      - Code splitting by route
+      - Lazy loading of form components
+      - Image optimization with Astro
+      - Critical CSS inlining
+compliance:
+  requirements:
+    - WCAG 2.1 AA accessibility compliance
+    - GDPR data minimization principles
+    - No server-side personal data storage
+    - Privacy-by-design architecture
+  measures:
+    - Automated accessibility testing
+    - Privacy policy template generation
+    - Client-side data processing only
+    - Optional analytics with user consent
+development:
+  phases:
+    - phase: Foundation
+      duration: 4 weeks
+      deliverables:
+        - Basic form builder interface
+        - Core field types implementation
+        - Static site generation pipeline
+        - Initial Astro project setup
+      milestones:
+        - Drag-and-drop form designer working
+        - Basic form rendering functional
+        - Static export capability implemented
+    - phase: Advanced Features
+      duration: 6 weeks
+      deliverables:
+        - Conditional logic system
+        - Multi-step form support
+        - Template library
+        - Third-party integrations
+      milestones:
+        - Conditional fields working
+        - Form submission to external services
+        - Template system operational
+    - phase: Polish & Launch
+      duration: 3 weeks
+      deliverables:
+        - Performance optimization
+        - Accessibility improvements
+        - Documentation and tutorials
+        - Beta testing and feedback integration
+      milestones:
+        - Performance targets met
+        - Full accessibility compliance
+        - Launch-ready product
+  team:
+    size: 3-4 developers
+    roles:
+      - Frontend Developer (React/Astro specialist)
+      - UI/UX Designer
+      - DevOps Engineer
+      - QA/Testing Specialist
+quality:
+  testing:
+    approaches:
+      - Unit testing with Vitest
+      - Component testing with React Testing Library
+      - End-to-end testing with Playwright
+      - Accessibility testing with axe-core
+      - Visual regression testing
+    coverage_target: 90% or higher
+    automation:
+      - Pre-commit hooks for linting
+      - Automated test execution in CI/CD
+      - Performance testing in staging
+  metrics:
+    code_quality:
+      - ESLint compliance
+      - TypeScript strict mode
+      - Zero accessibility violations
+    performance:
+      - Bundle size monitoring
+      - Core Web Vitals tracking
+      - Lighthouse CI integration
+    user_experience:
+      - Form completion rates
+      - Error rate monitoring
+      - User feedback scores
+  monitoring:
+    tools:
+      - Sentry for error tracking
+      - Google Analytics for usage metrics
+      - Lighthouse CI for performance
+    alerts:
+      - Bundle size increases
+      - Performance regression detection
+      - Critical error notifications
+deployment:
+  environments:
+    development:
+      hosting: Local development server
+      url: http://localhost:4321
+      features:
+        - Hot module replacement
+        - Development tools enabled
+        - Mock API endpoints
+    staging:
+      hosting: Netlify Preview
+      url: staging-static-form-builder.netlify.app
+      features:
+        - Production build testing
+        - Integration testing environment
+        - Performance monitoring
+    production:
+      hosting: Multiple platform support
+      urls:
+        - static-form-builder.com
+        - Custom domains for white-label users
+      features:
+        - CDN distribution
+        - Edge caching
+        - SSL certificates
+  ci_cd:
+    pipeline:
+      - Source code analysis
+      - Automated testing suite
+      - Build optimization
+      - Deployment to staging
+      - Manual approval for production
+      - Production deployment
+    tools:
+      - GitHub Actions
+      - Netlify Build
+      - Vercel CI
+  hosting:
+    primary: Netlify
+    alternatives:
+      - Vercel
+      - GitHub Pages
+      - AWS S3 + CloudFront
+      - Self-hosted options
+    requirements:
+      - Static file serving
+      - Form submission handling
+      - Custom domain support
+      - SSL certificate management
+meta:
+  step: 1
+  version: "4.1"
+  timestamp: 2025-07-22T08:33:52.929Z
+  status: complete
+  checksum: 0f29f8f93a3ac88a2cb077cc714523616f77211768e4bebf413a7e0739436f90
+  batch_upgraded: true
+  upgrade_date: 2025-07-22T08:33:52.929Z
+  original_version: "1.0"

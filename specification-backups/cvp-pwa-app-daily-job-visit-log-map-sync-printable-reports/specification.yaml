@@ -1,0 +1,307 @@
+project:
+  name: Daily Job Visit Log PWA
+  type: pwa-app
+  description: Offline-first PWA for field agents to log visits, scan assets, sync
+    maps, and generate printable reports
+  version: 1.0.0
+  category: Field Service Management
+features:
+  core:
+    - name: Daily Job Logging
+      description: Create, edit and manage daily job entries with timestamps and
+        location data
+      priority: high
+      rationale: Essential for field agents to track their daily activities and
+        maintain accurate records
+      dependencies:
+        - offline_storage
+        - geolocation_integration
+      apis:
+        - Geolocation API
+        - IndexedDB
+      compliance:
+        - data_retention
+        - audit_trail
+      implementation_notes:
+        - IndexedDB storage for offline persistence
+        - Geolocation API integration with permission handling
+        - Form validation and auto-save functionality
+        - Offline-first data synchronization strategy
+    - name: Barcode QR Scanner
+      description: Scan asset barcodes and QR codes using device camera
+      priority: high
+      rationale: Streamlines asset identification and reduces manual data entry errors
+      dependencies:
+        - camera_access
+        - asset_database
+      apis:
+        - MediaDevices API
+        - Camera API
+      compliance:
+        - camera_privacy
+        - data_accuracy
+      implementation_notes:
+        - ZXing-js library for comprehensive barcode scanning
+        - Camera API integration with fallback options
+        - Asset database lookup and automatic linking
+        - Manual entry fallback for damaged codes
+    - name: Offline Map Integration
+      description: View and interact with maps without internet connectivity
+      priority: high
+      rationale: Critical for field work in areas with poor connectivity
+      dependencies:
+        - offline_storage
+        - location_services
+      apis:
+        - Mapbox GL JS
+        - Service Worker Cache API
+      compliance:
+        - location_privacy
+        - offline_capability
+      implementation_notes:
+        - Mapbox GL JS with pre-cached offline tiles
+        - Service Worker caching strategy for map resources
+        - GPS tracking with route recording capabilities
+        - Custom markers for job locations and waypoints
+  advanced:
+    - name: Report Generation
+      description: Generate and export printable reports in multiple formats
+      priority: medium
+      rationale: Enables professional documentation and client communication
+      dependencies:
+        - data_processing
+        - export_capabilities
+      apis:
+        - File System Access API
+        - Web Share API
+      compliance:
+        - report_standards
+        - data_export_controls
+      implementation_notes:
+        - PDF generation using jsPDF library
+        - CSV export with customizable field selection
+        - Multiple report templates for different use cases
+        - Print-optimized layouts with responsive design
+    - name: Data Synchronization
+      description: Sync data when connection is restored with conflict resolution
+      priority: medium
+      rationale: Ensures data consistency across devices and prevents data loss
+      dependencies:
+        - background_sync
+        - conflict_resolution
+      apis:
+        - Background Sync API
+        - Fetch API
+      compliance:
+        - data_integrity
+        - sync_reliability
+      implementation_notes:
+        - Background sync with Service Worker integration
+        - Intelligent conflict resolution strategies
+        - Delta sync for bandwidth efficiency
+        - Retry mechanisms with exponential backoff
+  premium:
+    - name: Advanced Analytics Dashboard
+      description: Comprehensive analytics and performance metrics
+      priority: low
+      rationale: Provides insights for performance optimization and business intelligence
+      dependencies:
+        - data_aggregation
+        - visualization_engine
+      apis:
+        - Chart.js
+        - Performance Observer API
+      compliance:
+        - analytics_privacy
+        - performance_monitoring
+    - name: Team Collaboration Tools
+      description: Share reports and coordinate team activities
+      priority: low
+      rationale: Enhances team productivity and communication
+      dependencies:
+        - user_management
+        - real_time_sync
+      apis:
+        - Web Share API
+        - Push API
+      compliance:
+        - team_privacy
+        - secure_sharing
+  enterprise:
+    - name: Advanced Security Suite
+      description: Enterprise-grade security features and audit trails
+      priority: low
+      rationale: Meets enterprise compliance and security requirements
+      dependencies:
+        - encryption_layer
+        - audit_system
+      apis:
+        - Web Crypto API
+        - Credential Management API
+      compliance:
+        - enterprise_security
+        - audit_requirements
+    - name: API Integration Hub
+      description: Connect with enterprise systems and third-party services
+      priority: low
+      rationale: Enables integration with existing enterprise infrastructure
+      dependencies:
+        - api_gateway
+        - authentication_system
+      apis:
+        - Fetch API
+        - Web Workers API
+      compliance:
+        - api_security
+        - data_exchange_standards
+technical:
+  architecture: PWA with offline-first design using Service Workers, IndexedDB,
+    and progressive enhancement
+  stack:
+    frontend:
+      - Next.js 15.0.0 with React 19.0.0
+      - TypeScript 5.5.0 for type safety
+      - Tailwind CSS 4.0.0 for styling
+      - Workbox 7.0.0 for Service Worker management
+    backend:
+      - Node.js runtime environment
+      - IndexedDB for client-side storage
+      - Service Workers for background processing
+    mobile:
+      - PWA manifest for app-like experience
+      - Web App Install prompts
+      - Native device API access
+  integrations:
+    maps: Mapbox GL JS 3.0.0 with offline tile support
+    scanning: ZXing library 0.21.0 for barcode recognition
+    reports: jsPDF 2.5.1 for PDF generation
+    storage: IDB 8.0.0 for IndexedDB abstraction
+    analytics: Built-in performance monitoring
+  security:
+    authentication: Local device authentication
+    encryption: Web Crypto API for sensitive data
+    privacy: No external data transmission
+    permissions: Granular camera and location permissions
+  performance:
+    targets:
+      - First Contentful Paint under 1.5 seconds
+      - Lighthouse PWA Score 90% or higher
+      - Cache API storage up to 50MB
+      - IndexedDB storage up to 100MB
+      - 100% offline functionality
+    optimization:
+      - Code splitting and lazy loading
+      - Image optimization and caching
+      - Service Worker resource caching
+      - Background sync for data operations
+compliance:
+  requirements:
+    - GDPR compliance for EU users
+    - Device privacy protection
+    - Offline data security
+    - Camera and location permissions
+  measures:
+    - Local-only data storage
+    - No tracking or analytics cookies
+    - Transparent permission requests
+    - Secure data handling practices
+development:
+  phases:
+    phase_1:
+      name: Core PWA Foundation
+      duration: 4-6 weeks
+      deliverables:
+        - PWA shell with Service Worker
+        - Basic job logging interface
+        - Offline storage implementation
+        - Geolocation integration
+    phase_2:
+      name: Asset Scanning & Maps
+      duration: 3-4 weeks
+      deliverables:
+        - Barcode/QR scanning functionality
+        - Offline map integration
+        - Asset database and linking
+        - Location tracking features
+    phase_3:
+      name: Reporting & Sync
+      duration: 3-4 weeks
+      deliverables:
+        - Report generation system
+        - Data synchronization
+        - Export capabilities
+        - Print optimization
+    phase_4:
+      name: Polish & Optimization
+      duration: 2-3 weeks
+      deliverables:
+        - Performance optimization
+        - UI/UX refinements
+        - Testing and bug fixes
+        - Deployment preparation
+  team:
+    size: 3-4 developers
+    roles:
+      - Full-stack PWA developer (lead)
+      - Frontend specialist (React/TypeScript)
+      - Mobile/PWA optimization expert
+      - QA engineer (part-time)
+quality:
+  testing:
+    unit: Jest with React Testing Library
+    integration: Playwright for end-to-end testing
+    performance: Lighthouse CI integration
+    offline: Service Worker testing scenarios
+    device: Cross-browser and device testing
+  metrics:
+    performance: Core Web Vitals monitoring
+    reliability: Error tracking and reporting
+    usage: Offline vs online usage patterns
+    quality: Code coverage above 80%
+  monitoring:
+    errors: Client-side error collection
+    performance: Real User Monitoring (RUM)
+    usage: Privacy-preserving analytics
+    health: Service Worker status monitoring
+deployment:
+  environments:
+    development:
+      url: http://localhost:3000
+      features:
+        - hot_reload
+        - debug_tools
+        - test_data
+    staging:
+      url: https://staging-joblog.vercel.app
+      features:
+        - production_build
+        - test_scenarios
+        - qa_access
+    production:
+      url: https://joblog-pwa.vercel.app
+      features:
+        - optimized_build
+        - monitoring
+        - analytics
+  ci_cd:
+    platform: GitHub Actions
+    pipeline:
+      - Code quality checks (ESLint, TypeScript)
+      - Unit and integration tests
+      - Lighthouse performance audits
+      - PWA compliance validation
+      - Automated deployment to staging/production
+  hosting:
+    primary: Vercel with edge network
+    cdn: Automatic static asset optimization
+    pwa: Service Worker and manifest serving
+    ssl: Automatic HTTPS with custom domain support
+meta:
+  step: 1
+  version: "4.1"
+  timestamp: 2025-07-22T09:06:34.646Z
+  status: complete
+  checksum: 0f29f8f93a3ac88a2cb077cc714523616f77211768e4bebf413a7e0739436f90
+  batch_upgraded: true
+  upgrade_date: 2025-07-22T09:06:34.646Z
+  original_version: "1.0"

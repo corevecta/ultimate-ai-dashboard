@@ -1,0 +1,282 @@
+project:
+  name: Trade Diary & Notes
+  type: pwa-app
+  description: Privacy-first trading journal with strategy dashboard and tag-based
+    organization
+  version: 1.0.0
+  category: Finance & Investment
+features:
+  core:
+    - name: Trade Journal
+      description: Record and analyze trading activities with timestamps and market context
+      rationale: Essential for tracking trading decisions and learning from historical
+        data
+      priority: high
+      implementation_notes: Rich text editor with markdown support, trade entry forms
+        with P&L calculation, timestamp tracking and market session detection,
+        attachment support for screenshots and charts
+      dependencies: []
+      apis:
+        - IndexedDB
+        - File API
+        - Notification API
+      compliance:
+        - data_privacy
+        - local_storage
+    - name: Strategy Dashboard
+      description: Visual analytics and performance tracking for trading strategies
+      rationale: Provides actionable insights into trading performance and strategy
+        effectiveness
+      priority: high
+      implementation_notes: Interactive charts with Chart.js, strategy performance
+        metrics, win/loss ratio calculations, risk management indicators
+      dependencies:
+        - Trade Journal
+      apis:
+        - Canvas API
+        - Web Workers
+      compliance:
+        - data_privacy
+        - performance_standards
+    - name: Tag Management
+      description: Organize trades and strategies with custom tags and categories
+      rationale: Enables efficient organization and categorization of trading data
+      priority: medium
+      implementation_notes: Custom tag creation and color coding, bulk tagging
+        operations, tag-based filtering and search, strategy grouping by tags
+      dependencies:
+        - Trade Journal
+      apis:
+        - IndexedDB
+        - Search API
+      compliance:
+        - data_privacy
+    - name: Offline Functionality
+      description: Full app functionality without internet connection
+      rationale: Critical for PWA compliance and uninterrupted trading journal access
+      priority: high
+      implementation_notes: Service worker caching, background sync, offline data persistence
+      dependencies: []
+      apis:
+        - Service Worker
+        - Cache API
+        - Background Sync
+      compliance:
+        - pwa_standards
+        - performance_standards
+  advanced:
+    - name: Data Export
+      description: Export trading data in multiple formats for analysis
+      rationale: Provides data portability and integration with external analysis tools
+      priority: medium
+      implementation_notes: CSV export for spreadsheet analysis, JSON backup for data
+        portability, PDF reports with charts, scheduled backup reminders
+      dependencies:
+        - Trade Journal
+        - Strategy Dashboard
+      apis:
+        - File API
+        - Web Share API
+      compliance:
+        - data_portability
+        - privacy_standards
+    - name: Push Notifications
+      description: Customizable notifications for trade reminders and market events
+      rationale: Keeps users engaged and informed about important trading activities
+      priority: low
+      implementation_notes: Market session alerts, trade review reminders, performance
+        milestone notifications
+      dependencies:
+        - Trade Journal
+      apis:
+        - Push API
+        - Notification API
+        - Service Worker
+      compliance:
+        - user_consent
+        - privacy_standards
+  premium:
+    - name: Advanced Analytics
+      description: Enhanced performance metrics and predictive insights
+      rationale: Provides professional-grade analysis capabilities for serious traders
+      priority: medium
+      implementation_notes: Risk-adjusted returns, drawdown analysis, correlation
+        matrices, performance attribution
+      dependencies:
+        - Strategy Dashboard
+      apis:
+        - Web Workers
+        - IndexedDB
+      compliance:
+        - data_privacy
+        - calculation_accuracy
+    - name: Cloud Backup
+      description: Encrypted cloud storage for data synchronization
+      rationale: Enables data backup and multi-device access while maintaining privacy
+      priority: medium
+      implementation_notes: End-to-end encryption, selective sync, conflict resolution
+      dependencies:
+        - Data Export
+      apis:
+        - Fetch API
+        - Crypto API
+      compliance:
+        - data_encryption
+        - privacy_standards
+        - gdpr
+  enterprise:
+    - name: Multi-Account Support
+      description: Manage multiple trading accounts within single application
+      rationale: Supports professional traders managing multiple portfolios
+      priority: low
+      implementation_notes: Account switching, consolidated reporting, separate data stores
+      dependencies:
+        - Trade Journal
+        - Strategy Dashboard
+      apis:
+        - IndexedDB
+        - Web Crypto API
+      compliance:
+        - data_isolation
+        - privacy_standards
+technical:
+  architecture: Progressive Web App with offline-first design using service
+    workers and IndexedDB
+  stack:
+    frontend: Next.js 15 with React 19 and TypeScript 5.5
+    styling: Tailwind CSS 4.0 with glassmorphism design system
+    data_visualization: Chart.js 4.4 for interactive charts
+    database: Dexie.js 4.0 for IndexedDB abstraction
+    pwa: Workbox 7.0 for service worker management
+    testing: Jest 29.7 and Playwright 1.45
+    linting: ESLint 9.0 and Prettier 3.3
+  integrations:
+    storage: IndexedDB for local data persistence
+    charts: Chart.js for performance visualization
+    export: Custom CSV/JSON/PDF generation
+    notifications: Web Push API for engagement
+  security:
+    encryption: AES-256 for sensitive trading data
+    storage: Client-side only with no server transmission
+    authentication: Local PIN/biometric authentication
+    data_protection: Encrypted local storage with secure key management
+  performance:
+    targets:
+      first_contentful_paint: under 1.5 seconds
+      largest_contentful_paint: under 2.5 seconds
+      time_to_interactive: under 3 seconds
+      cache_limit: 50MB maximum
+      offline_availability: 100% functionality
+    optimization: Code splitting, lazy loading, image optimization, service worker caching
+compliance:
+  requirements:
+    - PWA standards compliance with manifest and service worker
+    - GDPR compliance for European users
+    - Data privacy by design principles
+    - Accessibility standards (WCAG 2.1 AA)
+    - Performance budget adherence
+  measures:
+    data_privacy: No data collection or external transmission
+    user_consent: Explicit permissions for notifications and device features
+    security_standards: End-to-end encryption for all sensitive data
+    accessibility: Screen reader support, keyboard navigation, color contrast compliance
+    performance_monitoring: Lighthouse CI integration and Core Web Vitals tracking
+development:
+  phases:
+    - phase: 1
+      name: Core Foundation
+      duration: 4 weeks
+      deliverables:
+        - PWA setup
+        - trade journal
+        - basic UI/UX
+        - offline functionality
+    - phase: 2
+      name: Analytics & Visualization
+      duration: 3 weeks
+      deliverables:
+        - strategy dashboard
+        - chart integration
+        - performance metrics
+    - phase: 3
+      name: Organization & Export
+      duration: 2 weeks
+      deliverables:
+        - tag management
+        - data export
+        - search functionality
+    - phase: 4
+      name: Premium Features
+      duration: 3 weeks
+      deliverables:
+        - advanced analytics
+        - cloud backup
+        - notifications
+  team:
+    size: 3-4 developers
+    roles:
+      - Frontend Developer
+      - PWA Specialist
+      - UI/UX Designer
+      - QA Engineer
+quality:
+  testing:
+    unit_testing: Jest with 80%+ code coverage
+    integration_testing: Playwright for end-to-end scenarios
+    pwa_testing: Lighthouse audits and PWA compliance validation
+    performance_testing: Core Web Vitals monitoring
+    accessibility_testing: axe-core integration and manual testing
+  metrics:
+    code_coverage: minimum 80% for all modules
+    performance_score: Lighthouse score 90+ across all categories
+    accessibility_score: WCAG 2.1 AA compliance
+    pwa_compliance: 100% PWA checklist completion
+  monitoring:
+    error_tracking: Client-side error monitoring with local logging
+    performance_monitoring: Real User Monitoring for Core Web Vitals
+    usage_analytics: Privacy-preserving local analytics only
+    lighthouse_ci: Automated performance regression detection
+deployment:
+  environments:
+    development:
+      platform: Local development server with hot reload
+      features:
+        - debug mode
+        - test data
+        - development tools
+    staging:
+      platform: Vercel preview deployments
+      features:
+        - production build
+        - performance testing
+        - UAT
+    production:
+      platform: Vercel with PWA optimization and edge caching
+      features:
+        - full PWA capabilities
+        - performance monitoring
+        - analytics
+  ci_cd:
+    pipeline: GitHub Actions with automated testing and deployment
+    quality_gates:
+      - unit tests
+      - integration tests
+      - Lighthouse audits
+      - accessibility tests
+    deployment_strategy: Blue-green deployment with rollback capability
+  hosting:
+    primary: Vercel with PWA optimization and global CDN
+    alternatives:
+      - Netlify with edge functions
+      - self-hosted with Docker
+    cdn: Global edge caching for static assets and API responses
+    ssl: Automatic HTTPS with certificate management
+meta:
+  step: 1
+  version: "4.1"
+  timestamp: 2025-07-22T08:53:37.805Z
+  status: complete
+  checksum: 0f29f8f93a3ac88a2cb077cc714523616f77211768e4bebf413a7e0739436f90
+  batch_upgraded: true
+  upgrade_date: 2025-07-22T08:53:37.805Z
+  original_version: "1.0"

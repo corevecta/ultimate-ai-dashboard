@@ -1,0 +1,323 @@
+project:
+  name: Training log with pace, heart-rate, and distance charts
+  type: pwa-app
+  description: Privacy-first training log with device data, pace, heart-rate, and
+    distance charts
+  version: 1.0.0
+  category: fitness
+features:
+  core:
+    - name: Training Log Management
+      description: Record, view, and manage training sessions with detailed metrics
+      priority: high
+      rationale: Essential foundation for any training application - users need to log
+        and manage their workouts
+      dependencies: []
+      apis:
+        - IndexedDB
+        - Service Worker
+      compliance:
+        - GDPR - local storage only
+      technical_details:
+        - Training session CRUD operations
+        - Local IndexedDB storage
+        - Offline-first architecture
+        - Data export/import functionality
+    - name: Heart Rate Monitoring
+      description: Real-time heart rate tracking and visualization
+      priority: high
+      rationale: Critical health metric for training effectiveness and safety monitoring
+      dependencies:
+        - Training Log Management
+      apis:
+        - Chart.js
+        - IndexedDB
+      compliance:
+        - Health data protection
+      technical_details:
+        - Chart.js integration for heart rate charts
+        - Zone-based analysis
+        - Historical heart rate trends
+    - name: Pace Analysis
+      description: Track and analyze running pace over time and distance
+      priority: high
+      rationale: Essential for runners to track performance improvement and training zones
+      dependencies:
+        - Training Log Management
+      apis:
+        - Chart.js
+        - IndexedDB
+      compliance:
+        - Local data storage
+      technical_details:
+        - Pace calculation algorithms
+        - Split analysis visualization
+        - Pace zone classification
+    - name: Distance Tracking
+      description: Log and visualize distance metrics with interactive charts
+      priority: high
+      rationale: Fundamental metric for endurance training progress tracking
+      dependencies:
+        - Training Log Management
+      apis:
+        - Chart.js
+        - IndexedDB
+      compliance:
+        - Privacy-first design
+      technical_details:
+        - Cumulative distance tracking
+        - Distance goal setting
+        - Progress visualization
+  advanced:
+    - name: Data Sharing
+      description: Export and share training data while maintaining privacy
+      priority: medium
+      rationale: Users need to backup data and share achievements without compromising
+        privacy
+      dependencies:
+        - Training Log Management
+        - Heart Rate Monitoring
+        - Pace Analysis
+        - Distance Tracking
+      apis:
+        - File API
+        - Web Share API
+      compliance:
+        - Data portability
+        - Privacy protection
+      technical_details:
+        - CSV/JSON export functionality
+        - Shareable workout summaries
+        - No cloud dependency
+    - name: Offline Analytics Dashboard
+      description: Comprehensive analytics and insights from training data
+      priority: medium
+      rationale: Advanced users want detailed insights to optimize their training
+      dependencies:
+        - All core features
+      apis:
+        - Chart.js
+        - IndexedDB
+      compliance:
+        - Local processing only
+      implementation_notes: Generate insights without external API calls
+    - name: Custom Workout Templates
+      description: Create and reuse workout templates for consistent training
+      priority: medium
+      rationale: Structured training requires repeatable workout formats
+      dependencies:
+        - Training Log Management
+      apis:
+        - IndexedDB
+      compliance:
+        - Local storage
+  premium:
+    - name: Advanced Analytics
+      description: Detailed performance trends and predictive insights
+      priority: low
+      rationale: Premium users want sophisticated analysis tools
+      dependencies:
+        - Offline Analytics Dashboard
+      apis:
+        - Chart.js
+        - Web Workers
+      compliance:
+        - Local processing
+    - name: Cross-Device Data Sync
+      description: Sync training data across multiple devices
+      priority: low
+      rationale: Premium feature for users with multiple devices
+      dependencies:
+        - Data Sharing
+      apis:
+        - Encrypted cloud storage API
+      compliance:
+        - End-to-end encryption
+        - GDPR
+  enterprise:
+    - name: Team Training Management
+      description: Manage training for multiple athletes or team members
+      priority: low
+      rationale: Coaches and teams need multi-user management capabilities
+      dependencies:
+        - All premium features
+      apis:
+        - Multi-user storage
+        - Team management APIs
+      compliance:
+        - Team data privacy
+        - Access controls
+technical:
+  architecture: Progressive Web App with offline-first design using service
+    workers and IndexedDB
+  stack:
+    frontend:
+      - Next.js 15.0.0
+      - React 19.0.0
+      - TypeScript 5.5.0
+      - Tailwind CSS 4.0.0
+    data:
+      - IndexedDB via idb 8.0.0
+      - Service Worker caching
+    charts:
+      - Chart.js 4.4.0
+      - react-chartjs-2 5.2.0
+    build:
+      - Vite 5.4.0
+      - Workbox 7.0.0
+  integrations:
+    web_apis:
+      - Service Worker API
+      - IndexedDB API
+      - Web App Manifest
+      - File API
+      - Web Share API
+    external_services: []
+    device_features:
+      - Push Notifications
+      - Background Sync
+      - Install Prompts
+  security:
+    data_encryption: Client-side only
+    authentication: None required
+    privacy_measures:
+      - No data collection
+      - Local storage only
+      - No tracking
+    secure_storage: IndexedDB with encryption
+  performance:
+    caching_strategy: Service Worker with Workbox
+    offline_capability: 100% offline functionality
+    storage_optimization: Efficient IndexedDB usage
+    lazy_loading: Component and route-based code splitting
+compliance:
+  requirements:
+    - GDPR compliance through local-only data storage
+    - Health data protection standards
+    - PWA accessibility standards
+    - Privacy-first design principles
+  measures:
+    data_protection:
+      - Local storage only
+      - No external data transmission
+    user_rights:
+      - Data export
+      - Data deletion
+      - Full control
+    accessibility:
+      - WCAG 2.1 AA compliance
+      - Screen reader support
+    privacy:
+      - No cookies
+      - No tracking
+      - No analytics
+development:
+  phases:
+    - phase: Foundation Setup
+      duration: 2 weeks
+      deliverables:
+        - PWA configuration
+        - Basic UI framework
+        - IndexedDB setup
+      team_size: 2
+      roles:
+        - Frontend Developer
+        - PWA Specialist
+    - phase: Core Features
+      duration: 4 weeks
+      deliverables:
+        - Training log CRUD
+        - Heart rate tracking
+        - Pace analysis
+        - Distance tracking
+      team_size: 3
+      roles:
+        - Frontend Developer
+        - Data Visualization Specialist
+        - UX Designer
+    - phase: Advanced Features
+      duration: 3 weeks
+      deliverables:
+        - Data export
+        - Analytics dashboard
+        - Workout templates
+      team_size: 2
+      roles:
+        - Frontend Developer
+        - PWA Specialist
+    - phase: Polish and Testing
+      duration: 2 weeks
+      deliverables:
+        - Performance optimization
+        - Cross-device testing
+        - Accessibility audit
+      team_size: 3
+      roles:
+        - Frontend Developer
+        - QA Engineer
+        - Accessibility Specialist
+quality:
+  testing:
+    approaches:
+      - Unit testing with Jest
+      - Integration testing
+      - PWA testing
+      - Offline functionality testing
+    coverage_target: greater than 85%
+    performance_testing:
+      - Lighthouse audits
+      - Core Web Vitals monitoring
+  metrics:
+    performance:
+      - First Contentful Paint under 1.5s
+      - Largest Contentful Paint under 2.5s
+      - Time to Interactive under 3s
+    reliability:
+      - 100% offline functionality
+      - Cache storage under 50MB
+    user_experience:
+      - PWA installability
+      - Cross-browser compatibility
+  monitoring:
+    error_tracking: Client-side error logging
+    performance: Core Web Vitals tracking
+    usage_analytics: Privacy-respecting usage patterns
+deployment:
+  environments:
+    development:
+      - Local PWA server
+      - Hot reload
+      - Service worker debugging
+    staging:
+      - Netlify/Vercel preview
+      - Full PWA testing
+    production:
+      - Static hosting with PWA capabilities
+      - CDN distribution
+  ci_cd:
+    pipeline:
+      - GitHub Actions
+      - Automated testing
+      - Lighthouse CI
+      - PWA validation
+    deployment_strategy:
+      - Blue-green deployment
+      - Progressive rollout
+    quality_gates:
+      - Test coverage
+      - Performance thresholds
+      - PWA score
+  hosting:
+    platform: Static hosting (Vercel/Netlify)
+    cdn: Global CDN for PWA assets
+    ssl: HTTPS required for PWA functionality
+    monitoring: Uptime monitoring and performance tracking
+meta:
+  step: 1
+  version: "4.1"
+  timestamp: 2025-07-22T08:53:43.017Z
+  status: complete
+  checksum: 0f29f8f93a3ac88a2cb077cc714523616f77211768e4bebf413a7e0739436f90
+  batch_upgraded: true
+  upgrade_date: 2025-07-22T08:53:43.017Z
+  original_version: "1.0"

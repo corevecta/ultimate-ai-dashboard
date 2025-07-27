@@ -1,0 +1,84 @@
+{
+  "startTime": "2025-07-25T13:40:32.173Z",
+  "completedProjects": {
+    "cvp-api-service-emergency-service-finder": {
+      "detectedPlatform": "existing",
+      "status": "skipped",
+      "timestamp": "2025-07-25T13:40:32.198Z",
+      "wordCount": 3969
+    },
+    "cvp-api-service-city-service-reporter": {
+      "detectedPlatform": "unknown",
+      "status": "failed",
+      "timestamp": "2025-07-25T13:45:32.214Z",
+      "wordCount": 0
+    },
+    "cvp-api-service-customer-service-bot": {
+      "detectedPlatform": "web-app",
+      "status": "failed",
+      "timestamp": "2025-07-25T13:45:32.219Z",
+      "wordCount": 0
+    },
+    "cvp-api-service-gas-price-predictor-api": {
+      "detectedPlatform": "web-app",
+      "status": "failed",
+      "timestamp": "2025-07-25T13:45:32.220Z",
+      "wordCount": 0
+    },
+    "cvp-api-service-nft-authentication-service": {
+      "detectedPlatform": "web-app",
+      "status": "failed",
+      "timestamp": "2025-07-25T13:45:32.222Z",
+      "wordCount": 0
+    },
+    "cvp-api-service-service-quote-comparator": {
+      "detectedPlatform": "existing",
+      "status": "skipped",
+      "timestamp": "2025-07-25T13:45:34.220Z",
+      "wordCount": 7002
+    },
+    "cvp-api-service-optimistic-oracle-service": {
+      "detectedPlatform": "api-service",
+      "status": "failed",
+      "timestamp": "2025-07-25T13:45:34.226Z",
+      "wordCount": 0
+    },
+    "cvp-api-service-service-history-tracker": {
+      "detectedPlatform": "existing",
+      "status": "skipped",
+      "timestamp": "2025-07-25T13:54:54.206Z",
+      "wordCount": 2726
+    },
+    "cvp-api-service-spa-service-calculator": {
+      "detectedPlatform": "api-service",
+      "status": "failed",
+      "timestamp": "2025-07-25T13:57:54.229Z",
+      "wordCount": 0
+    },
+    "cvp-api-service-terms-of-service-builder": {
+      "detectedPlatform": "api-service",
+      "status": "failed",
+      "timestamp": "2025-07-25T13:57:54.732Z",
+      "wordCount": 0
+    },
+    "cvp-api-service-therapist-matching-ai": {
+      "detectedPlatform": "api-service",
+      "status": "failed",
+      "timestamp": "2025-07-25T14:00:54.750Z",
+      "wordCount": 0
+    },
+    "cvp-api-service-tide-prediction-api": {
+      "detectedPlatform": "api-service",
+      "status": "failed",
+      "timestamp": "2025-07-25T14:00:55.256Z",
+      "wordCount": 0
+    }
+  },
+  "processedCount": 12,
+  "stats": {
+    "totalSuccess": 0,
+    "totalFailed": 9,
+    "totalSkipped": 3,
+    "platformsDetected": {}
+  }
+}

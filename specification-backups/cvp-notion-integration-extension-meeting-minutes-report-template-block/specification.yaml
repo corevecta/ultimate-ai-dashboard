@@ -1,0 +1,85 @@
+project:
+  name: "Meeting Minutes Template Block"
+  type: "notion-integration"
+  description: "Privacy-first meeting minutes template with agenda, actions, and exportable outputs"
+  version: "1.0.0"
+
+branding:
+  company: "Corevecta"
+  vision: "Privacy by Default, Performance by Design"
+  style: "Professional privacy-first, dark theme, glassmorphism"
+  colors:
+    primary: "#f59e0b"
+    secondary: "#ea580c"
+    background: "gray-950"
+    surface: "gray-900"
+
+core_features:
+  - name: "Meeting Template Engine"
+    description: "Structured templates for agenda, attendees, action items, and decisions"
+    priority: "high"
+    technical_details:
+      - "Pre-built template blocks for different meeting types"
+      - "Real-time collaborative editing within Notion"
+      - "Auto-save functionality with local backup"
+      - "Template customization and organization"
+
+  - name: "Action Item Tracker"
+    description: "Automated action item extraction and assignment with due dates"
+    priority: "high"
+    technical_details:
+      - "Smart parsing of action items from meeting content"
+      - "Assignment to team members with notifications"
+      - "Progress tracking and status updates"
+      - "Integration with Notion task databases"
+
+  - name: "Multi-Format Export"
+    description: "Export meeting minutes to PDF, Word, markdown, and JSON formats"
+    priority: "medium"
+    technical_details:
+      - "PDF generation with corporate branding"
+      - "Word document export with proper formatting"
+      - "Markdown export for documentation systems"
+      - "JSON export for integration with other tools"
+
+technical:
+  architecture: "Notion Block Integration"
+  dependencies:
+    production:
+      - "@notionhq/client": "^2.2.15"
+      - "react": "^18.3.1"
+      - "typescript": "^5.5.4"
+      - "pdf-lib": "^1.17.1"
+      - "file-saver": "^2.0.5"
+    development:
+      - "vite": "^5.3.1"
+      - "@types/react": "^18.3.3"
+      - "eslint": "^9.6.0"
+      - "prettier": "^3.3.2"
+
+performance:
+  target_metrics:
+    - "Block load time: <500ms"
+    - "Export generation: <2s"
+    - "Template rendering: <200ms"
+    - "Memory usage: <50MB"
+
+privacy:
+  data_collection: "none"
+  tracking: false
+  storage: "local_only"
+  privacy_first: true
+
+deployment:
+  platforms:
+    - "Notion Workspace Integration"
+    - "Private workspace installation"
+    - "Team workspace deployment"
+
+monetization:
+  model: "Free"
+  free_tier: "Full core features forever"
+  paid_tiers:
+    - name: "Pro"
+      price: "$9/month"
+      features: ["Advanced templates", "Bulk export", "Team analytics"]

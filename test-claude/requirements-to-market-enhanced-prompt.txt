@@ -1,0 +1,18 @@
+# Extract market-enhanced specification from requirements.md
+
+Read the comprehensive requirements.md document and create a structured market-enhanced.yaml file.
+
+Extract and structure:
+1. Project metadata (name, type, description)
+2. Market analysis (TAM, SAM, SOM, competitors)
+3. All features with descriptions
+4. Technology stack details
+5. Monetization strategy and pricing
+6. Development timeline
+7. Success metrics
+
+Transform the narrative requirements into structured YAML format suitable for UI generation and project planning.
+
+Output as market-enhanced.yaml with all fields populated from the requirements document.
+
+Start creating market-enhanced.yaml now.

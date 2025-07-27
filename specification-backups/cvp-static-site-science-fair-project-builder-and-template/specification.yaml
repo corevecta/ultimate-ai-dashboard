@@ -1,0 +1,86 @@
+project:
+  name: "Science Fair Project Builder"
+  type: "static-site"
+  description: "Form-driven science fair project report builder with printable templates"
+  version: "1.0.0"
+
+branding:
+  company: "Corevecta"
+  vision: "Privacy by Default, Performance by Design"
+  style: "Professional privacy-first, dark theme, glassmorphism"
+  colors:
+    primary: "#22d3ee"
+    secondary: "#0ea5e9"
+    background: "gray-950"
+    surface: "gray-900"
+
+core_features:
+  - name: "Project Template Builder"
+    description: "Interactive form builder for science fair project components"
+    priority: high
+    technical_details:
+      - "Multi-step form with validation"
+      - "Dynamic section addition/removal"
+      - "Real-time preview generation"
+  - name: "Report Generator"
+    description: "Generate formatted project reports with proper scientific structure"
+    priority: high
+    technical_details:
+      - "Hypothesis, methodology, results, conclusion sections"
+      - "Data visualization charts integration"
+      - "Citation manager for sources"
+  - name: "Printable Templates"
+    description: "Professional print-ready layouts for presentation boards and reports"
+    priority: high
+    technical_details:
+      - "Multiple layout options (poster, report, presentation)"
+      - "CSS print optimization"
+      - "Export to PDF functionality"
+  - name: "Project Data Storage"
+    description: "Local storage of project drafts and completed reports"
+    priority: medium
+    technical_details:
+      - "IndexedDB for large project data"
+      - "Auto-save functionality"
+      - "Import/export project files"
+
+technical:
+  architecture: "Static Site Generator with client-side interactivity"
+  dependencies:
+    production:
+      - "astro": "^4.5.0"
+      - "typescript": "^5.5.0"
+      - "tailwindcss": "^4.0.0"
+      - "alpinejs": "^3.14.0"
+      - "jspdf": "^2.5.1"
+      - "chart.js": "^4.4.0"
+    development:
+      - "vite": "^5.0.0"
+      - "@astro/check": "^0.5.0"
+      - "prettier": "^3.2.0"
+
+performance:
+  target_metrics:
+    - "First Contentful Paint: <1.5s"
+    - "Largest Contentful Paint: <2.5s"
+    - "Cumulative Layout Shift: <0.1"
+    - "Time to Interactive: <3s"
+
+privacy:
+  data_collection: "none"
+  tracking: false
+  storage: "local_only"
+  privacy_first: true
+
+deployment:
+  platforms:
+    - platform: "Static hosting (Netlify, Vercel, GitHub Pages)"
+    - platform: "CDN distribution for global performance"
+
+monetization:
+  model: "Free"
+  free_tier: "Full core features forever"
+  paid_tiers:
+    - name: "Pro"
+      price: "$9/month"
+      features: ["Advanced templates", "Cloud sync", "Collaboration tools"]

@@ -1,0 +1,265 @@
+project:
+  name: Watermark Pro
+  type: pwa-app
+  description: Privacy-first batch watermarking and branding for photos and videos
+    with customizable themes, all local processing
+  version: 1.0.0
+  category: media-processing
+features:
+  core:
+    - name: Batch Watermark Processing
+      description: Apply watermarks to multiple photos and videos simultaneously with
+        drag-and-drop interface
+      priority: high
+      rationale: Core value proposition for efficiency and productivity
+      technical_details:
+        - Canvas API for image processing
+        - WebRTC for video processing
+        - Web Workers for background processing
+        - File System Access API for batch import
+      dependencies: []
+      apis:
+        - Canvas API
+        - Web Workers API
+        - File System Access API
+        - WebRTC API
+      compliance:
+        - data_privacy
+        - offline_first
+    - name: Custom Brand Templates
+      description: Create and save reusable watermark templates with logos, text, and
+        positioning
+      priority: high
+      rationale: Essential for brand consistency and user workflow efficiency
+      technical_details:
+        - Template editor with live preview
+        - IndexedDB storage for templates
+        - Drag-and-drop positioning
+        - Text styling and font options
+      dependencies: []
+      apis:
+        - IndexedDB
+        - Canvas API
+        - Drag and Drop API
+      compliance:
+        - data_privacy
+        - offline_storage
+    - name: Export Management
+      description: Export processed media in multiple formats with quality settings
+      priority: high
+      rationale: Critical for user workflow completion and format flexibility
+      technical_details:
+        - Multiple format support (JPEG, PNG, WebP, MP4)
+        - Quality compression options
+        - Batch download as ZIP
+        - FileSaver.js integration
+      dependencies:
+        - batch_watermark_processing
+      apis:
+        - File API
+        - Blob API
+      compliance:
+        - data_privacy
+        - offline_processing
+  advanced:
+    - name: Theme System
+      description: Multiple visual themes for watermarks with opacity and blend mode
+        controls
+      priority: medium
+      rationale: Enhances creative flexibility and professional output quality
+      technical_details:
+        - CSS filter effects
+        - Blend mode options
+        - Opacity controls
+        - Color overlay system
+      dependencies:
+        - custom_brand_templates
+      apis:
+        - Canvas API
+        - CSS Filter Effects
+      compliance:
+        - performance_optimization
+    - name: Offline Video Processing
+      description: Advanced video watermarking capabilities with offline processing
+      priority: medium
+      rationale: Extends core functionality to video content for comprehensive media
+        processing
+      technical_details:
+        - WebCodecs API for video manipulation
+        - Web Workers for heavy processing
+        - Progress tracking and cancellation
+        - Memory-efficient streaming
+      dependencies:
+        - batch_watermark_processing
+      apis:
+        - WebCodecs API
+        - Web Workers API
+        - Streams API
+      compliance:
+        - performance_optimization
+        - memory_management
+  premium:
+    - name: Cloud Template Sync
+      description: Synchronize templates across devices with encrypted cloud storage
+      priority: low
+      rationale: Enables workflow continuity across multiple devices
+      technical_details:
+        - End-to-end encryption
+        - Conflict resolution
+        - Offline-first sync strategy
+        - User authentication
+      dependencies:
+        - custom_brand_templates
+      apis:
+        - Fetch API
+        - Web Crypto API
+        - IndexedDB
+      compliance:
+        - data_encryption
+        - privacy_by_design
+    - name: Advanced Analytics
+      description: Processing performance metrics and usage insights
+      priority: low
+      rationale: Provides users with workflow optimization data
+      technical_details:
+        - Local analytics only
+        - Performance metrics collection
+        - Usage pattern analysis
+        - Export performance reports
+      dependencies: []
+      apis:
+        - Performance API
+        - IndexedDB
+      compliance:
+        - privacy_by_design
+        - local_only_analytics
+  enterprise:
+    - name: Team Collaboration
+      description: Shared template libraries and collaborative workflows
+      priority: low
+      rationale: Enables enterprise teams to maintain brand consistency at scale
+      technical_details:
+        - Team template sharing
+        - Access control and permissions
+        - Audit trail for changes
+        - Bulk user management
+      dependencies:
+        - cloud_template_sync
+        - custom_brand_templates
+      apis:
+        - Fetch API
+        - Web Crypto API
+        - IndexedDB
+      compliance:
+        - enterprise_security
+        - audit_compliance
+technical:
+  architecture: Client-side PWA with offline-first design and service worker caching
+  stack:
+    frontend: React 19 with TypeScript and Tailwind CSS
+    build: Vite 6 with PWA plugin and Workbox
+    storage: IndexedDB for templates and settings
+    processing: Canvas API and Web Workers for media manipulation
+  integrations:
+    - File System Access API for native file handling
+    - WebCodecs API for video processing
+    - Service Worker for offline functionality
+    - Web App Manifest for PWA installation
+  security:
+    - Client-side only processing
+    - No data transmission to servers
+    - Encrypted local storage for sensitive data
+    - Content Security Policy implementation
+  performance:
+    - Web Workers for non-blocking processing
+    - Progressive loading of large files
+    - Memory-efficient streaming for videos
+    - Lazy loading of UI components
+    - Service worker caching strategy
+compliance:
+  requirements:
+    - GDPR compliance through privacy-by-design
+    - No data collection or tracking
+    - Offline-first architecture
+    - Local-only processing and storage
+  measures:
+    - Privacy policy documentation
+    - Data processing transparency
+    - User consent mechanisms
+    - Regular privacy impact assessments
+development:
+  phases:
+    - phase: 1
+      name: Core MVP
+      duration: 8 weeks
+      deliverables:
+        - Basic watermark application
+        - Template creation and storage
+        - Image batch processing
+        - PWA installation capability
+    - phase: 2
+      name: Enhanced Features
+      duration: 6 weeks
+      deliverables:
+        - Video processing capabilities
+        - Advanced theme system
+        - Performance optimizations
+        - Comprehensive testing suite
+    - phase: 3
+      name: Premium Features
+      duration: 4 weeks
+      deliverables:
+        - Cloud sync functionality
+        - Analytics dashboard
+        - Enterprise collaboration tools
+        - Production deployment
+  team:
+    size: 4
+    roles:
+      - Frontend Developer (React/TypeScript)
+      - PWA Specialist (Service Workers/Performance)
+      - Media Processing Engineer (Canvas/WebCodecs)
+      - QA Engineer (Testing/Compliance)
+quality:
+  testing:
+    approaches:
+      - Unit testing with Vitest
+      - E2E testing with Playwright
+      - Performance testing with Lighthouse
+      - Cross-browser compatibility testing
+      - PWA audit and validation
+  metrics:
+    - First Contentful Paint under 1.5s
+    - Largest Contentful Paint under 2.5s
+    - Time to Interactive under 3s
+    - Cumulative Layout Shift under 0.1
+    - PWA audit score above 90
+  monitoring:
+    - Performance API for runtime metrics
+    - Error tracking and reporting
+    - User experience monitoring
+    - Service worker performance tracking
+deployment:
+  environments:
+    - development: Local development with hot reload
+    - staging: Preview deployment for testing
+    - production: CDN-hosted PWA with global distribution
+  ci_cd:
+    - Automated testing on pull requests
+    - Build validation and optimization
+    - Progressive deployment strategy
+    - Rollback capabilities
+  hosting:
+    - Static hosting with CDN (Cloudflare/Netlify)
+    - Service worker for offline functionality
+    - Web App Manifest for installation
+    - HTTPS enforcement for PWA requirements
+meta:
+  step: 1
+  version: "4.1"
+  timestamp: 2025-07-22T08:53:32.545Z
+  status: complete
+  checksum: 0f29f8f93a3ac88a2cb077cc714523616f77211768e4bebf413a7e0739436f90
+  batch_upgraded: true
+  upgrade_date: 2025-07-22T08:53:32.545Z
+  original_version: "1.0"

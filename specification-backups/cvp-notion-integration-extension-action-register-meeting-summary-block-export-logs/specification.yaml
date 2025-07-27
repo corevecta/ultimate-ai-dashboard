@@ -1,0 +1,88 @@
+project:
+  name: "Meeting Action Registry for Notion"
+  type: "notion-integration"
+  description: "Track meeting decisions, action items, and votes with exportable logs for workspace collaboration"
+  version: "1.0.0"
+
+branding:
+  company: "Corevecta"
+  vision: "Privacy by Default, Performance by Design"
+  style: "Professional privacy-first, dark theme, glassmorphism"
+  colors:
+    primary: "#f59e0b"
+    secondary: "#ea580c"
+    background: "gray-950"
+    surface: "gray-900"
+
+core_features:
+  - name: "Action Item Registry"
+    description: "Capture and track meeting action items with assignees and due dates"
+    priority: high
+    technical_details:
+      - "Notion block integration for real-time action item creation"
+      - "Automatic assignee notifications via Notion mentions"
+      - "Due date tracking with visual status indicators"
+  
+  - name: "Meeting Summary Generator"
+    description: "Auto-generate structured meeting summaries from Notion page content"
+    priority: high
+    technical_details:
+      - "Parse meeting notes and extract key decisions"
+      - "Generate formatted summary blocks with action items"
+      - "Template-based summary formatting"
+  
+  - name: "Decision Voting System"
+    description: "Enable team voting on decisions directly within Notion pages"
+    priority: medium
+    technical_details:
+      - "Embedded voting blocks with real-time results"
+      - "Anonymous and named voting options"
+      - "Vote history and audit trail"
+  
+  - name: "Export and Reporting"
+    description: "Export meeting data in multiple formats for external reporting"
+    priority: medium
+    technical_details:
+      - "JSON, CSV, and PDF export formats"
+      - "Filtered exports by date range or participants"
+      - "Automated report scheduling"
+
+technical:
+  architecture: "Notion API integration with local data persistence"
+  dependencies:
+    production:
+      - "@notionhq/client": "^2.2.3"
+      - "typescript": "^5.5.0"
+      - "node-cron": "^3.0.3"
+      - "file-saver": "^2.0.5"
+    development:
+      - "vite": "^5.3.0"
+      - "vitest": "^2.0.0"
+      - "@types/node": "^22.0.0"
+
+performance:
+  target_metrics:
+    - "API response time: <500ms"
+    - "Block render time: <200ms"
+    - "Export generation: <3s for 100 meetings"
+
+privacy:
+  data_collection: "none"
+  tracking: false
+  storage: "local_only"
+  privacy_first: true
+
+deployment:
+  platforms:
+    - platform: "Notion Integration"
+      details: "OAuth app submission to Notion marketplace"
+    - platform: "Self-hosted"
+      details: "Docker container for enterprise deployments"
+
+monetization:
+  model: "Free"
+  free_tier: "Full core features forever"
+  paid_tiers:
+    - name: "Pro"
+      price: "$9/month"
+      features: ["Advanced reporting", "Custom export templates", "API access"]

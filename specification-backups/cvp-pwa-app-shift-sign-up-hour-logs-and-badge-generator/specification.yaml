@@ -1,0 +1,95 @@
+project:
+  name: "Volunteer Shift Manager"
+  type: "pwa-app"
+  description: "Privacy-first PWA for volunteer shift sign-ups, hour logging, and badge generation with offline-first design"
+  version: "1.0.0"
+
+branding:
+  company: "Corevecta"
+  vision: "Privacy by Default, Performance by Design"
+  style: "Professional privacy-first, dark theme, glassmorphism"
+  colors:
+    primary: "#0891b2"
+    secondary: "#0284c7"
+    background: "gray-950"
+    surface: "gray-900"
+
+core_features:
+  - name: "Shift Sign-up System"
+    description: "Create and manage volunteer shifts with calendar integration and availability tracking"
+    priority: "high"
+    technical_details:
+      - "Calendar view with date/time selection"
+      - "Shift templates and recurring shifts"
+      - "Availability status tracking"
+      - "Conflict detection and notifications"
+
+  - name: "Hour Logging"
+    description: "Track volunteer hours with timer functionality and manual entry options"
+    priority: "high"
+    technical_details:
+      - "Start/stop timer with break tracking"
+      - "Manual hour entry with validation"
+      - "Activity categorization and notes"
+      - "Weekly/monthly hour summaries"
+
+  - name: "Badge Generator"
+    description: "Create printable volunteer badges with QR codes and custom designs"
+    priority: "high"
+    technical_details:
+      - "Customizable badge templates"
+      - "QR code generation for verification"
+      - "Photo upload and cropping"
+      - "Batch badge generation"
+
+  - name: "Export System"
+    description: "Export data in multiple formats for reporting and backup purposes"
+    priority: "medium"
+    technical_details:
+      - "PDF reports with charts and summaries"
+      - "CSV export for spreadsheet analysis"
+      - "JSON backup for data portability"
+      - "Print-optimized layouts"
+
+technical:
+  architecture: "Client-side PWA with offline-first design"
+  dependencies:
+    production:
+      - "@next/pwa": "^15.0.0"
+      - "react": "^19.0.0"
+      - "typescript": "^5.5.0"
+      - "tailwindcss": "^4.0.0"
+      - "jspdf": "^2.5.0"
+      - "qrcode": "^1.5.0"
+      - "date-fns": "^3.0.0"
+      - "idb": "^8.0.0"
+    development:
+      - "vite": "^5.0.0"
+      - "workbox-webpack-plugin": "^7.0.0"
+      - "@types/react": "^19.0.0"
+      - "eslint": "^8.0.0"
+
+performance:
+  target_metrics:
+    - "First Contentful Paint: <1.5s"
+    - "Time to Interactive: <2.5s"
+    - "Offline functionality: 100%"
+    - "Cache size: <10MB"
+
+privacy:
+  data_collection: "none"
+  tracking: false
+  storage: "local_only"
+  privacy_first: true
+
+deployment:
+  platforms:
+    - platform: "PWA with offline support and installable on all devices"
+
+monetization:
+  model: "Free"
+  free_tier: "Full core features forever"
+  paid_tiers:
+    - name: "Pro"
+      price: "$9/month"
+      features: ["Advanced reporting", "Multi-organization support", "Custom branding"]

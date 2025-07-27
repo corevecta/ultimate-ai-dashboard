@@ -1,0 +1,73 @@
+project:
+  name: "Meeting Notes Template Engine"
+  type: "obsidian-plugin"
+  description: "Smart templates adapting to meeting types for professionals"
+  version: "1.0.0"
+
+branding:
+  company: "Corevecta"
+  vision: "Privacy by Default, Performance by Design"
+  style: "Professional privacy-first, dark theme, glassmorphism"
+  colors:
+    primary: "#f59e0b"
+    secondary: "#ea580c"
+    background: "gray-950"
+    surface: "gray-900"
+
+core_features:
+  - name: "Smart Meeting Templates"
+    description: "Dynamic templates that adapt to different meeting types"
+    priority: "high"
+    technical_details:
+      - "Template engine with context awareness"
+      - "Meeting type detection and classification"
+      - "Auto-population of common fields"
+  - name: "Meeting Type Detection"
+    description: "Automatic detection of meeting types from titles and content"
+    priority: "high"
+    technical_details:
+      - "Pattern matching for meeting types"
+      - "Calendar integration hooks"
+      - "Custom type definitions"
+  - name: "Template Customization"
+    description: "User-defined templates for specific meeting scenarios"
+    priority: "medium"
+    technical_details:
+      - "Visual template builder"
+      - "Markdown-based template format"
+      - "Template sharing and import"
+
+technical:
+  architecture: "Obsidian plugin with TypeScript module system"
+  dependencies:
+    production:
+      - "obsidian": "^1.6.0"
+      - "typescript": "^5.5.0"
+    development:
+      - "esbuild": "^0.21.0"
+      - "@types/node": "^22.0.0"
+
+performance:
+  target_metrics:
+    - "Plugin load time: <500ms"
+    - "Template generation: <100ms"
+    - "Memory usage: <50MB"
+
+privacy:
+  data_collection: "none"
+  tracking: false
+  storage: "local_only"
+  privacy_first: true
+
+deployment:
+  platforms:
+    - platform: "Obsidian Community Plugins"
+      details: "Official plugin marketplace"
+
+monetization:
+  model: "Free"
+  free_tier: "Full core features forever"
+  paid_tiers:
+    - name: "Pro"
+      price: "$12/month"
+      features: ["Advanced template automation", "Meeting analytics", "Team template sharing"]

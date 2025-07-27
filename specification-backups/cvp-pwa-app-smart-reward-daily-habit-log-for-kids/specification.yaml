@@ -1,0 +1,348 @@
+project:
+  name: Smart reward/daily habit log for kids
+  type: pwa-app
+  description: Points/goals visual tracker, all device-side
+  version: 1.0.0
+  category: productivity
+features:
+  core:
+    - name: Smart Habit Tracking
+      description: Visual points and goals tracker for daily habits
+      rationale: Primary functionality for tracking child habits with immediate visual
+        feedback to encourage consistency
+      priority: high
+      dependencies: []
+      apis:
+        - Local Storage API
+        - IndexedDB API
+      compliance:
+        - COPPA
+        - Privacy by Design
+      implementation_notes:
+        - Real-time point calculation and display
+        - Interactive goal setting interface
+        - Progress visualization with charts
+        - Achievement badge system
+    - name: Reward System
+      description: Customizable reward mechanics for completed habits
+      rationale: Gamification element essential for child engagement and motivation
+      priority: high
+      dependencies:
+        - Smart Habit Tracking
+      apis:
+        - Notification API
+        - Web App Manifest
+      compliance:
+        - Child Safety Guidelines
+      implementation_notes:
+        - Configurable point values per habit
+        - Reward threshold management
+        - Visual reward unlock animations
+    - name: Kid-Friendly Interface
+      description: Child-optimized UI with large buttons and colorful design
+      rationale: Accessibility and usability critical for target age group
+      priority: high
+      dependencies: []
+      apis:
+        - Touch Events API
+        - Screen Orientation API
+      compliance:
+        - WCAG 2.1 AA
+        - Touch Accessibility
+      implementation_notes:
+        - Touch-friendly large button interfaces
+        - Colorful theme with animations
+        - Simple navigation patterns
+  advanced:
+    - name: Offline Data Sync
+      description: Full offline functionality with automatic sync when online
+      rationale: Ensures uninterrupted usage regardless of connectivity
+      priority: medium
+      dependencies:
+        - Smart Habit Tracking
+      apis:
+        - Service Worker API
+        - Background Sync API
+        - Cache API
+      compliance:
+        - Data Integrity Standards
+      implementation_notes:
+        - Service worker for offline caching
+        - Background sync for data consistency
+        - Conflict resolution for offline changes
+    - name: Multiple Child Profiles
+      description: Support for multiple children in one household
+      rationale: Family-friendly feature for households with multiple children
+      priority: medium
+      dependencies:
+        - Smart Habit Tracking
+        - Reward System
+      apis:
+        - Local Storage API
+        - IndexedDB API
+      compliance:
+        - COPPA
+        - Data Segregation
+      implementation_notes:
+        - Profile switching interface
+        - Individual progress tracking
+        - Separate reward systems per child
+  premium:
+    - name: Advanced Analytics
+      description: Detailed progress reports and trend analysis
+      rationale: Provides parents insight into habit formation patterns
+      priority: low
+      dependencies:
+        - Smart Habit Tracking
+      apis:
+        - Chart.js Integration
+        - Local Analytics
+      compliance:
+        - Privacy by Design
+        - Local Processing Only
+      implementation_notes:
+        - Weekly/monthly progress reports
+        - Habit completion trends
+        - Goal achievement statistics
+    - name: Custom Rewards
+      description: Parent-defined custom reward options
+      rationale: Allows personalization of rewards to match family values
+      priority: low
+      dependencies:
+        - Reward System
+      apis:
+        - Local Storage API
+      compliance:
+        - Parental Controls
+      implementation_notes:
+        - Custom reward creation interface
+        - Image upload for custom rewards
+        - Point value assignment
+  enterprise:
+    - name: School Integration
+      description: Optional integration with educational institutions
+      rationale: Extends habit tracking to educational environments
+      priority: low
+      dependencies:
+        - Multiple Child Profiles
+        - Advanced Analytics
+      apis:
+        - Web Share API
+        - Export APIs
+      compliance:
+        - FERPA
+        - School Privacy Policies
+      implementation_notes:
+        - Teacher dashboard interface
+        - Progress sharing with educators
+        - Classroom habit challenges
+technical:
+  architecture: Client-side PWA with offline-first design and progressive enhancement
+  stack:
+    frontend:
+      framework: React 19 with TypeScript
+      styling: Tailwind CSS 4.0 with custom animations
+      state: React Query for server state, Context for client state
+      routing: React Router DOM 6
+      build: Vite 5 with PWA plugin
+    backend: None - fully client-side application
+    database: IndexedDB with Dexie.js wrapper for complex queries
+    caching: Service Worker with Workbox for asset and data caching
+  integrations:
+    required:
+      - PWA Manifest for installability
+      - Service Worker for offline functionality
+      - Web App Manifest for app-like experience
+    optional:
+      - Web Share API for progress sharing
+      - Notification API for habit reminders
+      - File System Access API for data export
+  security:
+    measures:
+      - Content Security Policy implementation
+      - Input validation and sanitization
+      - Secure local storage practices
+      - XSS protection mechanisms
+    compliance:
+      - OWASP PWA Security Guidelines
+      - Child Safety Standards
+  performance:
+    targets:
+      load_time: under 2 seconds on 3G
+      response_time: under 100ms for interactions
+      offline_storage: up to 500MB local storage
+      memory_limit: 256MB maximum usage
+      lighthouse_score: 90+ in all categories
+    optimizations:
+      - Code splitting for faster initial load
+      - Image optimization with WebP format
+      - Service Worker caching strategy
+      - Lazy loading for non-critical components
+compliance:
+  requirements:
+    - name: COPPA Compliance
+      description: Children's Online Privacy Protection Act adherence
+      measures:
+        - No personal data collection
+        - Parental consent mechanisms
+        - Local-only data storage
+    - name: GDPR Compliance
+      description: General Data Protection Regulation adherence
+      measures:
+        - Data minimization principles
+        - Right to data portability
+        - Privacy by design implementation
+    - name: Accessibility Standards
+      description: WCAG 2.1 AA compliance for inclusive design
+      measures:
+        - Keyboard navigation support
+        - Screen reader compatibility
+        - High contrast mode support
+        - Touch-friendly interface design
+  measures:
+    privacy:
+      - Zero data collection policy
+      - Local-only storage implementation
+      - No third-party tracking
+      - Transparent privacy practices
+    security:
+      - Client-side encryption for sensitive data
+      - Secure coding practices
+      - Regular security audits
+      - Vulnerability management
+development:
+  phases:
+    - name: Foundation Phase
+      duration: 3 weeks
+      deliverables:
+        - Project setup and architecture
+        - Basic UI component library
+        - Core habit tracking functionality
+        - PWA manifest and service worker setup
+      team_requirements:
+        size: 3
+        roles:
+          - Frontend Developer
+          - UI/UX Designer
+          - Technical Lead
+    - name: Core Features Phase
+      duration: 4 weeks
+      deliverables:
+        - Complete reward system implementation
+        - Kid-friendly interface refinement
+        - Offline functionality integration
+        - Basic testing suite
+      team_requirements:
+        size: 4
+        roles:
+          - Frontend Developer
+          - UI/UX Designer
+          - QA Engineer
+          - Technical Lead
+    - name: Polish Phase
+      duration: 2 weeks
+      deliverables:
+        - Performance optimization
+        - Accessibility compliance testing
+        - Cross-platform compatibility
+        - Production deployment preparation
+      team_requirements:
+        size: 3
+        roles:
+          - Frontend Developer
+          - QA Engineer
+          - DevOps Engineer
+  total_duration: 9 weeks
+  team_size: 4
+  key_roles:
+    - Frontend Developer (React/TypeScript specialist)
+    - UI/UX Designer (child-focused design experience)
+    - QA Engineer (accessibility and cross-platform testing)
+    - Technical Lead (PWA and performance expertise)
+quality:
+  testing:
+    approaches:
+      - Unit testing with Vitest and React Testing Library
+      - Integration testing for critical user flows
+      - End-to-end testing with Playwright
+      - Accessibility testing with axe-core
+      - Performance testing with Lighthouse CI
+      - Cross-platform compatibility testing
+    coverage_target: 85% minimum code coverage
+    automation: Continuous integration with automated test runs
+  metrics:
+    performance:
+      - Lighthouse performance score: 90+ target
+      - Core Web Vitals compliance
+      - Bundle size monitoring
+      - Memory usage profiling
+    quality:
+      - Zero critical accessibility violations
+      - Cross-platform compatibility score
+      - User experience consistency metrics
+    reliability:
+      - Uptime monitoring for service worker
+      - Error tracking and reporting
+      - Offline functionality validation
+  monitoring:
+    tools:
+      - Performance monitoring with built-in metrics
+      - Error tracking with local logging
+      - User experience analytics (privacy-compliant)
+      - Accessibility monitoring
+    alerts:
+      - Performance degradation detection
+      - Critical error notifications
+      - Service worker update failures
+deployment:
+  environments:
+    development:
+      url: http://localhost:5173
+      purpose: Local development and testing
+      features:
+        - Hot reload
+        - Debug tools
+        - Mock data
+    staging:
+      url: https://staging-habits.corevecta.com
+      purpose: Pre-production testing and validation
+      features:
+        - Production-like environment
+        - Testing data
+    production:
+      url: https://habits.corevecta.com
+      purpose: Live application serving end users
+      features:
+        - Full PWA capabilities
+        - Service worker
+        - App store optimization
+  ci_cd:
+    pipeline:
+      - Source code checkout
+      - Dependency installation and caching
+      - Linting and code quality checks
+      - Unit and integration test execution
+      - Build optimization and bundling
+      - Security vulnerability scanning
+      - Performance audit with Lighthouse
+      - Deployment to target environment
+    automation: GitHub Actions with quality gates
+    deployment_strategy: Blue-green deployment with rollback capability
+  hosting:
+    platform: Vercel with global CDN
+    features:
+      - HTTPS by default
+      - Global edge caching
+      - Automatic PWA optimization
+      - Performance monitoring
+    scaling: Serverless architecture with automatic scaling
+    backup: Git-based version control with automated backups
+meta:
+  step: 1
+  version: "4.1"
+  timestamp: 2025-07-22T08:57:40.953Z
+  status: complete
+  checksum: 0f29f8f93a3ac88a2cb077cc714523616f77211768e4bebf413a7e0739436f90
+  batch_upgraded: true
+  upgrade_date: 2025-07-22T08:57:40.953Z
+  original_version: "1.0"

@@ -1,0 +1,65 @@
+project:
+  name: "Startup OS Template"
+  type: "notion-integration"
+  description: "Complete operating system for startups with 50+ integrations"
+  version: "1.0.0"
+
+branding:
+  company: "Corevecta"
+  vision: "Privacy by Default, Performance by Design"
+  style: "Professional privacy-first, dark theme, glassmorphism"
+  colors:
+    primary: "#F59E0B"
+    secondary: "#FB923C"
+    background: "gray-950"
+    surface: "gray-900"
+
+core_features:
+  - name: "Core Startup Functionality"
+    description: "Complete operating system with 50+ integrations"
+    priority: high
+    technical_details:
+      - "Notion API v2 integration"
+      - "Multi-workspace support"
+      - "Integration dashboard"
+      - "Template management system"
+      - "Real-time sync capabilities"
+
+technical:
+  architecture: "Notion integration with Node.js backend"
+  dependencies:
+    production:
+      - "@notionhq/client": "^2.2.15"
+      - "fastify": "^4.26.2"
+      - "typescript": "^5.5.4"
+      - "dotenv": "^16.4.5"
+      - "zod": "^3.23.8"
+    development:
+      - "@types/node": "^22.0.0"
+      - "tsx": "^4.16.2"
+      - "eslint": "^9.7.0"
+
+performance:
+  target_metrics:
+    - load_time: "< 2s"
+    - response_time: "< 100ms"
+    - memory_usage: "< 256MB"
+
+privacy:
+  data_collection: "none"
+  tracking: false
+  storage: "local_only"
+  privacy_first: true
+
+deployment:
+  platforms:
+    - platform: "Notion workspace integration"
+      details: "OAuth 2.0 authentication with workspace permissions"
+
+monetization:
+  model: "One-time purchase"
+  free_tier: "Basic template access"
+  paid_tiers:
+    - name: "Complete OS"
+      price: "$149 one-time"
+      features: ["50+ integrations", "Premium templates", "Priority support", "Lifetime updates"]

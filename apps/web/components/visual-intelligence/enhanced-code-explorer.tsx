@@ -1,13 +1,13 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import Editor from '@monaco-editor/react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
+import Editor from '@monaco-editor/react';
 import {
   FileText,
   Copy,
@@ -406,24 +406,26 @@ export function EnhancedCodeExplorer({ projectId, className }: EnhancedCodeExplo
               
               <TabsContent value="editor" className="flex-1 p-0 m-0">
                 {activeFile ? (
-                  <Editor
-                    height="100%"
-                    language={activeFile.language || 'javascript'}
-                    value={fileContents[activeFile.id] || activeFile.content || ''}
-                    onChange={(value) => {
-                      if (value !== undefined && activeFile) {
-                        setFileContents({
-                          ...fileContents,
-                          [activeFile.id]: value
-                        });
-                      }
-                    }}
-                    theme="vs-dark"
-                    options={editorOptions}
-                    onMount={(editor) => {
-                      editorRef.current = editor;
-                    }}
-                  />
+                  <div className="h-full">
+                    <Editor
+                      height="100%"
+                      language={activeFile.language || 'javascript'}
+                      value={fileContents[activeFile.id] || activeFile.content || ''}
+                      onChange={(value) => {
+                        if (value !== undefined && activeFile) {
+                          setFileContents({
+                            ...fileContents,
+                            [activeFile.id]: value
+                          });
+                        }
+                      }}
+                      theme="vs-dark"
+                      options={editorOptions}
+                      onMount={(editor) => {
+                        editorRef.current = editor;
+                      }}
+                    />
+                  </div>
                 ) : (
                   <div className="h-full flex items-center justify-center text-gray-500">
                     <div className="text-center">

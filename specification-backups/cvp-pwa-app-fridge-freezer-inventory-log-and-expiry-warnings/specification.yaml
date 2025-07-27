@@ -1,0 +1,293 @@
+project:
+  name: Fridge Inventory Tracker
+  type: pwa-app
+  description: Voice/scan entry fridge inventory with expiry warnings, fully offline
+  version: 1.0.0
+  category: productivity
+features:
+  core:
+    - name: Inventory Management
+      description: Add, edit, and track fridge/freezer items with voice or barcode scanning
+      priority: high
+      rationale: Essential for users to maintain accurate inventory of perishable items
+      dependencies: []
+      apis:
+        - Web Speech API
+        - MediaDevices API (camera access)
+        - Barcode Detection API
+      compliance:
+        - WCAG 2.1 AA accessibility standards
+        - Privacy by design principles
+      implementation_notes:
+        - Voice recognition for hands-free item entry
+        - Barcode scanning using device camera
+        - Manual item entry with auto-complete
+        - Item categorization and location tracking
+    - name: Expiry Tracking
+      description: Smart expiry date warnings and notifications
+      priority: high
+      rationale: Prevents food waste and ensures food safety through proactive alerts
+      dependencies:
+        - Inventory Management
+      apis:
+        - Notifications API
+        - Background Sync API
+        - Service Worker API
+      compliance:
+        - User notification consent requirements
+        - Local data retention policies
+      implementation_notes:
+        - Automatic expiry date calculation based on food type
+        - Push notifications for expiring items
+        - Visual indicators for item freshness status
+        - Custom reminder intervals
+    - name: Offline Operation
+      description: Complete functionality without internet connection
+      priority: high
+      rationale: Ensures app usability in all environments, crucial for kitchen use
+      dependencies:
+        - Inventory Management
+        - Expiry Tracking
+      apis:
+        - Service Worker API
+        - IndexedDB API
+        - Cache API
+        - Background Sync API
+      compliance:
+        - Offline data integrity requirements
+        - Local storage security standards
+      implementation_notes:
+        - Local data storage with IndexedDB
+        - Service worker for offline functionality
+        - Background sync for notifications
+        - Cached voice recognition models
+  advanced:
+    - name: Analytics Dashboard
+      description: Track inventory usage patterns and food waste statistics
+      priority: medium
+      rationale: Helps users optimize purchasing decisions and reduce waste
+      dependencies:
+        - Inventory Management
+        - Expiry Tracking
+      apis:
+        - Chart.js for data visualization
+        - Local storage for analytics data
+      compliance:
+        - Privacy-first analytics (no external tracking)
+        - User consent for data processing
+    - name: Recipe Integration
+      description: Suggest recipes based on available ingredients
+      priority: medium
+      rationale: Maximizes use of available inventory and reduces food waste
+      dependencies:
+        - Inventory Management
+      apis:
+        - Local recipe database
+        - Search and filtering APIs
+      compliance:
+        - Content licensing for recipe data
+        - Attribution requirements
+  premium:
+    - name: Shopping List Generation
+      description: Automatically generate shopping lists based on low inventory
+      priority: low
+      rationale: Streamlines grocery shopping and ensures essential items are restocked
+      dependencies:
+        - Inventory Management
+        - Expiry Tracking
+      apis:
+        - Local data processing
+        - Export functionality
+      compliance:
+        - Data export standards
+        - User data portability rights
+    - name: Advanced Analytics
+      description: Detailed insights into consumption patterns and cost analysis
+      priority: low
+      rationale: Provides valuable insights for budget-conscious users
+      dependencies:
+        - Analytics Dashboard
+      apis:
+        - Advanced charting libraries
+        - Data export capabilities
+      compliance:
+        - Financial data handling requirements
+        - User privacy for spending data
+  enterprise: []
+technical:
+  architecture: Client-side PWA with service workers and offline-first design
+  stack:
+    frontend:
+      framework: React 19.0.0
+      language: TypeScript 5.5.0
+      styling: Tailwind CSS 4.0.0
+      build_tool: Vite 5.0.0
+    backend:
+      type: none
+      rationale: Fully client-side application for privacy and offline operation
+    database:
+      primary: IndexedDB
+      rationale: Browser-native database for offline storage
+      orm: idb 8.0.0
+    infrastructure:
+      hosting: Static hosting (Netlify/Vercel)
+      cdn: Built-in with hosting provider
+      monitoring: Web Vitals API
+  integrations:
+    external_apis: []
+    third_party_services: []
+    payment_processors: []
+  security:
+    authentication: none
+    authorization: none
+    data_encryption: Browser-native encryption for IndexedDB
+    api_security: not_applicable
+    compliance_standards:
+      - GDPR
+      - CCPA
+  performance:
+    target_metrics:
+      - "First Contentful Paint: under 1.5 seconds"
+      - "Largest Contentful Paint: under 2.5 seconds"
+      - "Time to Interactive: under 3 seconds"
+      - "Cumulative Layout Shift: under 0.1"
+      - "App size: under 2MB"
+    optimization_strategies:
+      - Code splitting and lazy loading
+      - Service worker caching
+      - Image optimization and compression
+      - Bundle size analysis and tree shaking
+compliance:
+  requirements:
+    - GDPR compliance for EU users
+    - CCPA compliance for California users
+    - WCAG 2.1 AA accessibility standards
+    - PWA manifest requirements
+    - App store guidelines for PWA distribution
+  measures:
+    privacy:
+      - No external data transmission
+      - Local-only data storage
+      - No tracking or analytics cookies
+      - Clear privacy policy
+    accessibility:
+      - Screen reader compatibility
+      - Keyboard navigation support
+      - High contrast mode support
+      - Voice input alternatives
+    security:
+      - HTTPS-only operation
+      - Content Security Policy implementation
+      - Secure service worker configuration
+      - Input validation and sanitization
+development:
+  phases:
+    phase_1:
+      name: Core Foundation
+      duration: 4 weeks
+      deliverables:
+        - PWA setup with service worker
+        - Basic inventory management UI
+        - IndexedDB integration
+        - Voice input implementation
+    phase_2:
+      name: Advanced Features
+      duration: 3 weeks
+      deliverables:
+        - Barcode scanning functionality
+        - Expiry tracking system
+        - Notification system
+        - Offline synchronization
+    phase_3:
+      name: Polish and Testing
+      duration: 2 weeks
+      deliverables:
+        - Comprehensive testing suite
+        - Performance optimization
+        - Accessibility compliance
+        - PWA manifest and icons
+    phase_4:
+      name: Deployment and Launch
+      duration: 1 week
+      deliverables:
+        - Production deployment
+        - App store submissions
+        - Documentation
+        - Launch preparation
+  team:
+    size: 3-4 developers
+    roles:
+      - Frontend Developer (React/TypeScript)
+      - PWA Specialist
+      - UI/UX Designer
+      - QA Engineer
+quality:
+  testing:
+    approaches:
+      - Unit testing with Vitest
+      - Integration testing for offline functionality
+      - PWA testing across devices
+      - Accessibility testing with axe-core
+      - Performance testing with Lighthouse
+    coverage_target: 85% minimum
+    automation_level: high
+  metrics:
+    performance:
+      - Lighthouse scores above 90
+      - Web Vitals within targets
+      - Bundle size monitoring
+    user_experience:
+      - App installation rate
+      - Offline usage statistics
+      - Feature adoption rates
+    quality:
+      - Bug report frequency
+      - User satisfaction scores
+      - App store ratings
+  monitoring:
+    tools:
+      - Web Vitals API for performance
+      - Error boundary for crash reporting
+      - Usage analytics (privacy-compliant)
+    alerts:
+      - Performance degradation
+      - High error rates
+      - Failed service worker updates
+deployment:
+  environments:
+    development:
+      hosting: Local development server
+      domain: localhost
+      purpose: Feature development and testing
+    staging:
+      hosting: Netlify/Vercel preview
+      domain: staging subdomain
+      purpose: Pre-production testing and review
+    production:
+      hosting: Netlify/Vercel
+      domain: Custom domain with HTTPS
+      purpose: Live application serving users
+  ci_cd:
+    pipeline_tool: GitHub Actions
+    build_process:
+      - Automated testing on pull requests
+      - Bundle size analysis
+      - Lighthouse CI performance checks
+      - PWA manifest validation
+    deployment_strategy: Continuous deployment on main branch
+    rollback_strategy: Git-based rollback with immediate redeployment
+  hosting:
+    provider: Netlify or Vercel
+    rationale: Optimized for static sites and PWAs with global CDN
+    scalability: Auto-scaling with global edge locations
+    backup_strategy: Git repository serves as source of truth
+    monitoring: Built-in deployment monitoring and alerts
+meta:
+  step: 1
+  version: "4.1"
+  timestamp: 2025-07-22T09:06:40.026Z
+  status: complete
+  checksum: 0f29f8f93a3ac88a2cb077cc714523616f77211768e4bebf413a7e0739436f90
+  batch_upgraded: true
+  upgrade_date: 2025-07-22T09:06:40.026Z
+  original_version: "1.0"

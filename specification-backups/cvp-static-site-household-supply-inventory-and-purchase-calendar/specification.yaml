@@ -1,0 +1,297 @@
+project:
+  name: Household Supply Inventory and Purchase Calendar
+  type: static-site
+  description: Browser-based household supply tracking with purchase reminders and
+    print-friendly interface
+  version: 1.0.0
+  category: productivity
+  branding:
+    company: Corevecta
+    vision: Privacy by Default, Performance by Design
+    style: Professional privacy-first, dark theme, glassmorphism
+    colors:
+      primary: "#0891b2"
+      secondary: "#0e7490"
+      background: gray-950
+      surface: gray-900
+features:
+  core:
+    - name: Supply Inventory Management
+      description: Track household supplies with quantities, expiration dates, and
+        consumption patterns
+      rationale: Essential foundation for household supply management, enabling users
+        to maintain accurate inventory records
+      priority: high
+      dependencies: []
+      apis:
+        - IndexedDB
+        - Barcode Detection API
+      compliance:
+        - data-privacy
+        - offline-storage
+      implementation_notes:
+        - IndexedDB storage for offline persistence
+        - Barcode scanning integration for quick item entry
+        - Category-based organization system
+        - Stock level alerts and warnings
+    - name: Purchase Calendar & Reminders
+      description: Smart purchase scheduling based on consumption patterns and
+        inventory levels
+      rationale: Core value proposition - predictive purchasing prevents stockouts and
+        reduces waste
+      priority: high
+      dependencies:
+        - Supply Inventory Management
+      apis:
+        - Notification API
+        - Service Worker
+      compliance:
+        - notification-permissions
+      implementation_notes:
+        - Predictive purchase timing algorithms
+        - Browser notification system
+        - Recurring purchase pattern recognition
+        - Automated shopping list generation
+  advanced:
+    - name: Print-Friendly Interface
+      description: Optimized layouts for printing shopping lists and inventory reports
+      rationale: Bridges digital-physical gap for users who prefer printed shopping lists
+      priority: medium
+      dependencies:
+        - Purchase Calendar & Reminders
+      apis:
+        - Print API
+        - Canvas API
+      compliance:
+        - print-optimization
+      implementation_notes:
+        - CSS print stylesheets for clean formatting
+        - PDF export capability via jsPDF
+        - Barcode generation for shopping lists
+        - Compact layout options for mobile printing
+    - name: Pack Management System
+      description: Group related supplies into packs for bulk purchasing and organization
+      rationale: Enables bulk purchasing optimization and household organization
+        efficiency
+      priority: medium
+      dependencies:
+        - Supply Inventory Management
+      apis:
+        - IndexedDB
+      compliance:
+        - data-persistence
+      implementation_notes:
+        - Custom pack templates and configurations
+        - Bulk quantity tracking and alerts
+        - Pack-based reminder scheduling
+        - Cost optimization suggestions
+  premium:
+    - name: Advanced Analytics Dashboard
+      description: Detailed consumption analytics and spending insights
+      rationale: Provides data-driven insights for household budget optimization
+      priority: low
+      dependencies:
+        - Supply Inventory Management
+        - Purchase Calendar & Reminders
+      apis:
+        - Chart.js Integration
+      compliance:
+        - data-analytics
+    - name: Multi-Household Sync
+      description: Synchronize inventory across multiple household locations
+      rationale: Supports complex household arrangements and vacation homes
+      priority: low
+      dependencies:
+        - Supply Inventory Management
+      apis:
+        - WebRTC
+        - Encrypted Storage
+      compliance:
+        - data-encryption
+        - privacy-preservation
+  enterprise:
+    - name: API Integration Hub
+      description: Connect with grocery delivery services and smart home devices
+      rationale: Enterprise-level automation for large households or facilities
+      priority: low
+      dependencies:
+        - Purchase Calendar & Reminders
+      apis:
+        - External API Connectors
+      compliance:
+        - api-security
+        - data-integration
+technical:
+  architecture: Client-side SPA with offline-first design
+  stack:
+    frontend:
+      framework: React 19 with TypeScript
+      styling: Tailwind CSS 4.0 with glassmorphism components
+      state: React Context with useReducer for complex state
+      routing: React Router for SPA navigation
+    storage:
+      primary: IndexedDB via idb library
+      cache: Service Worker cache strategies
+      backup: JSON export/import functionality
+    build:
+      bundler: Vite 5.3 for fast development and optimized builds
+      deployment: Static site generation with PWA manifest
+  integrations:
+    apis:
+      - name: Barcode Detection API
+        purpose: Product identification and quick inventory entry
+        fallback: ZXing library for older browsers
+      - name: Notification API
+        purpose: Purchase reminders and low stock alerts
+        permissions: user-granted notification access
+      - name: Print API
+        purpose: Optimized shopping list and report printing
+        compliance: CSS print media queries
+    libraries:
+      - "date-fns: Date manipulation and formatting"
+      - "idb: IndexedDB wrapper for reliable storage"
+      - "jsPDF: Client-side PDF generation"
+  security:
+    data_protection: Client-side only, no server transmission
+    storage_encryption: Browser-native encryption where available
+    privacy_measures: No tracking, no analytics, no external requests
+    cors_policy: Strict same-origin policy
+  performance:
+    targets:
+      load_time: under 2 seconds on 3G
+      offline_storage: 500MB capacity for large inventories
+      memory_usage: under 256MB peak usage
+      print_generation: under 1 second for standard lists
+    optimization:
+      - Code splitting for feature-based loading
+      - Service Worker caching for offline performance
+      - Lazy loading for non-critical components
+      - Debounced search and filtering
+compliance:
+  requirements:
+    privacy:
+      - GDPR compliance through local-only data storage
+      - No third-party tracking or analytics
+      - User data never transmitted externally
+    accessibility:
+      - WCAG 2.1 AA compliance for inclusive design
+      - Keyboard navigation support
+      - Screen reader compatibility
+    browser_support:
+      - Modern browsers with IndexedDB support
+      - Progressive enhancement for older browsers
+      - Mobile-responsive design standards
+  measures:
+    data_governance:
+      - Local storage only policy implementation
+      - Data export functionality for user control
+      - Clear data deletion mechanisms
+    security_practices:
+      - Content Security Policy headers
+      - No external resource dependencies
+      - Secure coding practices throughout
+development:
+  phases:
+    phase1:
+      name: Core Foundation
+      duration: 4 weeks
+      deliverables:
+        - Basic inventory management system
+        - IndexedDB storage implementation
+        - Core UI components and routing
+        - Category-based organization
+    phase2:
+      name: Smart Features
+      duration: 3 weeks
+      deliverables:
+        - Purchase calendar and reminder system
+        - Consumption pattern tracking
+        - Notification system integration
+        - Shopping list generation
+    phase3:
+      name: Advanced Functionality
+      duration: 3 weeks
+      deliverables:
+        - Print-friendly interface and PDF export
+        - Pack management system
+        - Barcode scanning integration
+        - Advanced filtering and search
+    phase4:
+      name: Polish and Optimization
+      duration: 2 weeks
+      deliverables:
+        - Performance optimization
+        - PWA implementation
+        - Accessibility compliance
+        - Cross-browser testing
+  team:
+    size: 2-3 developers
+    roles:
+      - Frontend React Developer (TypeScript, Tailwind)
+      - UX/UI Designer (Glassmorphism, Print Design)
+      - DevOps Engineer (Static Deployment, PWA)
+    skills_required:
+      - Advanced React and TypeScript
+      - IndexedDB and offline-first development
+      - PWA and Service Worker implementation
+      - Print CSS and PDF generation
+quality:
+  testing:
+    approaches:
+      unit: Jest and React Testing Library for component testing
+      integration: Cypress for end-to-end user workflows
+      performance: Lighthouse CI for performance regression detection
+      accessibility: axe-core automated accessibility testing
+    coverage:
+      target: 85% code coverage minimum
+      critical_paths: 100% coverage for data persistence and notifications
+  metrics:
+    performance:
+      - Core Web Vitals monitoring
+      - Bundle size tracking under 500KB gzipped
+      - IndexedDB operation performance
+    user_experience:
+      - Task completion rate for core workflows
+      - Error rate tracking for data operations
+      - Offline functionality reliability
+  monitoring:
+    client_side: Error boundary implementation with local logging
+    performance: Performance Observer API for real-world metrics
+    usage_analytics: Privacy-preserving feature usage tracking
+deployment:
+  environments:
+    development:
+      platform: Local Vite dev server
+      features: Hot reload, debug tools, mock data
+    staging:
+      platform: Netlify preview deployments
+      features: Production build testing, feature previews
+    production:
+      platform: Multiple deployment targets
+      features: Optimized builds, PWA capabilities, CDN distribution
+  ci_cd:
+    pipeline: GitHub Actions workflow
+    stages:
+      - Automated testing and linting
+      - Build optimization and bundling
+      - Lighthouse performance testing
+      - Multi-platform deployment
+    deployment_triggers: Git tag releases and main branch commits
+  hosting:
+    primary: Netlify with PWA support and global CDN
+    alternatives:
+      - GitHub Pages for open-source hosting
+      - Self-hosted static bundle for local deployment
+    requirements:
+      - HTTPS for PWA and secure API access
+      - Global CDN for optimal loading performance
+      - Automatic deployment from repository
+meta:
+  step: 1
+  version: "4.1"
+  timestamp: 2025-07-22T08:45:02.022Z
+  status: complete
+  checksum: 0f29f8f93a3ac88a2cb077cc714523616f77211768e4bebf413a7e0739436f90
+  batch_upgraded: true
+  upgrade_date: 2025-07-22T08:45:02.022Z
+  original_version: "1.0"

@@ -1,0 +1,306 @@
+project:
+  name: Weekly shared grocery list + budget
+  type: pwa-app
+  description: Collaborative grocery planning with budget tracking, works offline,
+    exports to CSV
+  version: 1.0.0
+  category: productivity
+features:
+  core:
+    - name: Shared Grocery Lists
+      description: Create and manage collaborative weekly grocery lists with real-time sync
+      priority: high
+      rationale: Essential for multi-user grocery planning and coordination
+      dependencies: []
+      apis:
+        - WebRTC for real-time collaboration
+        - Web Storage API for local persistence
+        - Notification API for updates
+      compliance:
+        - GDPR compliance for shared data
+        - Privacy by design principles
+      implementation_notes:
+        - Real-time collaboration via WebRTC or local sync
+        - List categorization and smart suggestions
+        - Item quantity and unit management
+    - name: Budget Tracking
+      description: Track spending against weekly grocery budgets with cost estimation
+      priority: high
+      rationale: Core value proposition for budget-conscious shopping
+      dependencies:
+        - Shared Grocery Lists
+      apis:
+        - IndexedDB for price history storage
+        - Web Storage API for budget preferences
+      compliance:
+        - Financial data protection standards
+        - Local-only data storage requirements
+      implementation_notes:
+        - Price estimation database stored locally
+        - Budget vs actual spending comparison
+        - Cost alerts and notifications
+    - name: Offline-First Architecture
+      description: Full functionality without internet connection using service workers
+      priority: high
+      rationale: Essential for grocery shopping in areas with poor connectivity
+      dependencies: []
+      apis:
+        - Service Worker API
+        - Cache API
+        - Background Sync API
+        - IndexedDB API
+      compliance:
+        - Privacy by design with local-first approach
+        - Data sovereignty compliance
+      implementation_notes:
+        - Service worker for offline caching
+        - IndexedDB for local data persistence
+        - Background sync when connection restored
+  advanced:
+    - name: CSV Export
+      description: Export grocery lists and budget data to CSV format
+      priority: medium
+      rationale: Enables data portability and integration with external tools
+      dependencies:
+        - Shared Grocery Lists
+        - Budget Tracking
+      apis:
+        - File System Access API
+        - Blob API for file generation
+      compliance:
+        - Data portability requirements
+        - Export data validation
+      implementation_notes:
+        - Multiple export formats for lists, budgets, history
+        - Custom date range selection
+        - Automated weekly export scheduling
+    - name: Smart Suggestions
+      description: AI-powered grocery item suggestions based on purchase history
+      priority: medium
+      rationale: Improves user experience and shopping efficiency
+      dependencies:
+        - Shared Grocery Lists
+      apis:
+        - Local machine learning inference
+        - IndexedDB for history analysis
+      compliance:
+        - Privacy-preserving ML techniques
+        - Local-only processing
+      implementation_notes:
+        - Pattern recognition for recurring purchases
+        - Seasonal and promotional suggestions
+        - Category-based recommendations
+  premium:
+    - name: Premium Themes
+      description: Additional visual themes and customization options
+      priority: low
+      rationale: Monetization feature for enhanced user experience
+      dependencies: []
+      apis:
+        - CSS Custom Properties API
+        - Web Storage API for theme persistence
+      compliance:
+        - Accessibility standards compliance
+      implementation_notes:
+        - Multiple color schemes and layouts
+        - Custom branding options
+        - Theme persistence across devices
+    - name: Advanced Export Options
+      description: Enhanced export formats including PDF and Excel compatibility
+      priority: low
+      rationale: Professional users need sophisticated reporting capabilities
+      dependencies:
+        - CSV Export
+      apis:
+        - File System Access API
+        - Canvas API for PDF generation
+      compliance:
+        - Document format standards
+      implementation_notes:
+        - PDF generation with charts and analytics
+        - Excel-compatible XLSX format
+        - Custom report templates
+  enterprise:
+    - name: Multi-Household Management
+      description: Manage grocery lists and budgets across multiple households
+      priority: low
+      rationale: Scalability for family coordinators and commercial users
+      dependencies:
+        - Shared Grocery Lists
+        - Budget Tracking
+      apis:
+        - Enhanced sync mechanisms
+        - Role-based access control
+      compliance:
+        - Multi-tenant data isolation
+        - Administrative access controls
+      implementation_notes:
+        - Household-specific budgets and preferences
+        - Centralized reporting and analytics
+        - Role-based permissions system
+technical:
+  architecture: Progressive Web App with offline-first design using service
+    workers and IndexedDB
+  stack:
+    frontend:
+      framework: Next.js 15.0.0 with React 19.0.0
+      styling: Tailwind CSS 4.0.0 with glassmorphism design system
+      state_management: React Context with useReducer for offline-first state
+      build_tool: Vite 5.0.0 for development and build optimization
+    backend:
+      architecture: Serverless edge functions for optional cloud sync
+      database: IndexedDB for client-side storage with WebRTC for real-time sync
+      apis: RESTful endpoints for optional cloud backup and sync
+    mobile:
+      approach: PWA with native app-like experience via web manifest
+      installation: Add to home screen with app store optimization
+  integrations:
+    required:
+      - Service Worker for offline functionality
+      - IndexedDB for local data persistence
+      - WebRTC for real-time collaboration
+      - Web Push API for notifications
+    optional:
+      - Cloud sync service for cross-device synchronization
+      - Third-party price comparison APIs
+      - Recipe integration services
+  security:
+    measures:
+      - Client-side encryption for sensitive data
+      - HTTPS enforcement with security headers
+      - Content Security Policy implementation
+      - Input validation and sanitization
+    compliance:
+      - GDPR compliance for EU users
+      - Privacy by design principles
+      - Local-first data architecture
+  performance:
+    targets:
+      - "First Contentful Paint: under 1.5 seconds"
+      - "Largest Contentful Paint: under 2.5 seconds"
+      - "Time to Interactive: under 3 seconds"
+      - "Offline functionality: 100% feature availability"
+    optimization:
+      - Service worker caching strategies
+      - Code splitting and lazy loading
+      - Image optimization and compression
+      - Bundle size optimization
+compliance:
+  requirements:
+    - GDPR compliance for European users
+    - CCPA compliance for California users
+    - Accessibility standards (WCAG 2.1 AA)
+    - PWA manifest requirements
+    - App store guidelines compliance
+  measures:
+    - Privacy by design architecture
+    - Local-first data storage approach
+    - Transparent data handling policies
+    - User consent management system
+    - Regular security audits and updates
+development:
+  phases:
+    phase_1:
+      name: Core PWA Foundation
+      duration: 4-6 weeks
+      team_size: 3
+      roles:
+        - Frontend Developer
+        - UX Designer
+        - DevOps Engineer
+      deliverables:
+        - PWA shell with offline capabilities
+        - Basic list management functionality
+        - Service worker implementation
+        - IndexedDB data layer
+    phase_2:
+      name: Collaboration Features
+      duration: 3-4 weeks
+      team_size: 4
+      roles:
+        - Frontend Developer
+        - Backend Developer
+        - UX Designer
+        - QA Engineer
+      deliverables:
+        - Real-time sync implementation
+        - WebRTC collaboration features
+        - Budget tracking functionality
+        - Export capabilities
+    phase_3:
+      name: Enhancement and Polish
+      duration: 2-3 weeks
+      team_size: 3
+      roles:
+        - Frontend Developer
+        - UX Designer
+        - QA Engineer
+      deliverables:
+        - Premium features implementation
+        - UI/UX refinements
+        - Performance optimization
+        - Comprehensive testing
+quality:
+  testing:
+    approaches:
+      - Unit testing with Jest and React Testing Library
+      - Integration testing for PWA functionality
+      - End-to-end testing with Playwright
+      - Accessibility testing with axe-core
+      - Performance testing with Lighthouse CI
+      - Offline functionality testing
+    coverage_targets:
+      - "Unit test coverage: 85% minimum"
+      - "Integration test coverage: 70% minimum"
+      - "Critical user journey coverage: 100%"
+  metrics:
+    performance:
+      - Lighthouse PWA score above 95
+      - Core Web Vitals meeting Google standards
+      - Offline functionality verification
+    quality:
+      - Zero critical accessibility violations
+      - Cross-browser compatibility testing
+      - Mobile responsiveness verification
+  monitoring:
+    - Real User Monitoring for performance
+    - Error tracking and crash reporting
+    - Analytics for feature usage patterns
+    - A/B testing for UX improvements
+deployment:
+  environments:
+    development:
+      platform: Local development with Vite dev server
+      database: Local IndexedDB instance
+      features: Full feature set with debug tools
+    staging:
+      platform: Vercel preview deployment
+      database: Staging data with test scenarios
+      features: Production-like environment for testing
+    production:
+      platform: Vercel with global CDN distribution
+      database: Client-side IndexedDB with optional cloud backup
+      features: Full production feature set
+  ci_cd:
+    pipeline: GitHub Actions with automated testing and deployment
+    stages:
+      - Code quality checks and linting
+      - Unit and integration testing
+      - PWA compliance verification
+      - Performance testing with Lighthouse
+      - Automated deployment to staging
+      - Manual approval for production deployment
+  hosting:
+    primary: Vercel with edge function support for global performance
+    cdn: Built-in Vercel CDN for static asset optimization
+    monitoring: Vercel Analytics with custom performance metrics
+    backup: GitHub repository with automated backups
+meta:
+  step: 1
+  version: "4.1"
+  timestamp: 2025-07-22T08:53:41.679Z
+  status: complete
+  checksum: 0f29f8f93a3ac88a2cb077cc714523616f77211768e4bebf413a7e0739436f90
+  batch_upgraded: true
+  upgrade_date: 2025-07-22T08:53:41.679Z
+  original_version: "1.0"

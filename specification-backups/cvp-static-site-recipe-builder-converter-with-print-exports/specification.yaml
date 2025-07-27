@@ -1,0 +1,344 @@
+project:
+  name: Recipe Builder & Converter
+  type: static-site
+  description: Privacy-first recipe builder with measurement conversion and
+    print-optimized exports
+  version: 1.0.0
+  category: Food & Lifestyle
+features:
+  core:
+    - name: Recipe Builder
+      description: Create and edit recipes with ingredients, instructions, and metadata
+      priority: high
+      rationale: Core functionality for recipe management and creation workflow
+      dependencies: []
+      apis: []
+      compliance: []
+      technical_details:
+        - Drag-and-drop ingredient management
+        - Rich text editor for instructions
+        - Recipe categorization and tagging
+        - Nutritional information calculator
+      implementation_notes: Use React DnD for drag-drop, implement rich text editor
+        with controlled components
+    - name: Unit Converter
+      description: Convert between metric and imperial measurements automatically
+      priority: high
+      rationale: Essential for international audience and recipe accessibility
+      dependencies:
+        - Recipe Builder
+      apis: []
+      compliance: []
+      technical_details:
+        - Real-time measurement conversion
+        - Support for volume, weight, and temperature
+        - Recipe scaling functionality
+        - Custom unit definitions
+      implementation_notes: Implement conversion library with comprehensive unit
+        mappings and precision handling
+    - name: Print Export
+      description: Generate print-optimized recipe cards and collections
+      priority: high
+      rationale: Physical recipe cards remain popular for kitchen use
+      dependencies:
+        - Recipe Builder
+        - Unit Converter
+      apis: []
+      compliance: []
+      technical_details:
+        - PDF generation with custom layouts
+        - Print-friendly CSS optimization
+        - Recipe card templates
+        - Batch printing for collections
+      implementation_notes: Use jsPDF for client-side PDF generation, optimize CSS for
+        print media queries
+    - name: Local Storage
+      description: Client-side recipe storage with offline capability
+      priority: medium
+      rationale: Privacy-first approach eliminates server dependency and ensures user
+        data control
+      dependencies: []
+      apis: []
+      compliance:
+        - GDPR
+        - CCPA
+      technical_details:
+        - IndexedDB for large recipe collections
+        - Data import/export functionality
+        - Recipe backup and restore
+        - Search and filtering
+      implementation_notes: Use Dexie for IndexedDB abstraction, implement robust data validation
+  advanced:
+    - name: Recipe Sharing
+      description: Generate shareable recipe links without server storage
+      priority: medium
+      rationale: Enables recipe sharing while maintaining privacy principles
+      dependencies:
+        - Recipe Builder
+        - Local Storage
+      apis: []
+      compliance:
+        - GDPR
+      technical_details:
+        - URL-encoded recipe data compression
+        - QR code generation for mobile sharing
+        - Social media preview optimization
+      implementation_notes: Implement client-side compression and URL encoding for recipe data
+    - name: Nutritional Analysis
+      description: Calculate nutritional information for recipes and ingredients
+      priority: medium
+      rationale: Health-conscious users require nutritional visibility for meal planning
+      dependencies:
+        - Recipe Builder
+      apis:
+        - USDA FoodData Central API
+      compliance: []
+      technical_details:
+        - Ingredient nutritional database integration
+        - Per-serving calculation with scaling
+        - Dietary restriction highlighting
+        - Macro and micronutrient breakdown
+  premium:
+    - name: Premium Templates
+      description: Advanced recipe card designs and print layouts
+      priority: low
+      rationale: Monetization opportunity through enhanced visual presentation
+      dependencies:
+        - Print Export
+      apis: []
+      compliance: []
+      technical_details:
+        - Professional recipe card designs
+        - Custom branding options
+        - Multi-format export templates
+        - Typography and layout customization
+    - name: Cloud Sync
+      description: Optional cloud backup with end-to-end encryption
+      priority: low
+      rationale: Pro users may want backup despite privacy focus
+      dependencies:
+        - Local Storage
+      apis:
+        - Encrypted cloud storage API
+      compliance:
+        - GDPR
+        - CCPA
+        - SOC2
+      technical_details:
+        - Client-side encryption before upload
+        - Cross-device synchronization
+        - Conflict resolution for concurrent edits
+        - Zero-knowledge architecture
+  enterprise: []
+technical:
+  architecture: Static single-page application with client-side storage and
+    progressive web app capabilities
+  stack:
+    frontend:
+      framework: React 19 with TypeScript
+      styling: Tailwind CSS 4.0 with custom design system
+      build_tool: Vite 5.0 for fast development and optimized builds
+      state_management: React Context with useReducer for complex state
+      routing: React Router for SPA navigation
+    storage:
+      primary: IndexedDB via Dexie for structured recipe data
+      secondary: LocalStorage for user preferences and settings
+      backup: JSON export/import functionality
+    ui_components:
+      drag_drop: React DnD for ingredient management
+      rich_text: Custom controlled input components
+      pdf_generation: jsPDF for client-side PDF creation
+      icons: Lucide React for consistent iconography
+  integrations:
+    apis:
+      - name: USDA FoodData Central API
+        purpose: Nutritional information lookup
+        type: REST API
+        authentication: API key
+        rate_limits: 1000 requests per hour
+      - name: Recipe Import APIs
+        purpose: Import from popular recipe websites
+        type: Web scraping via CORS proxy
+        authentication: None
+        rate_limits: User-initiated only
+    third_party:
+      - service: Google Fonts
+        purpose: Typography enhancement
+        privacy_notes: Self-hosted font files to avoid tracking
+      - service: Recipe microdata standards
+        purpose: SEO and recipe sharing compatibility
+        privacy_notes: Client-side generation only
+  security:
+    data_protection:
+      - Client-side data encryption for sensitive information
+      - No server-side data storage or processing
+      - Content Security Policy implementation
+      - XSS protection through React's built-in sanitization
+    privacy_measures:
+      - No analytics or tracking scripts
+      - No external resource loading except essential APIs
+      - Local-first data architecture
+      - Optional telemetry with explicit user consent
+  performance:
+    optimization:
+      - Code splitting for feature-based lazy loading
+      - Service worker for offline functionality
+      - Efficient IndexedDB queries with proper indexing
+      - Image optimization and lazy loading
+    targets:
+      load_time: under 2 seconds on 3G networks
+      bundle_size: under 500KB gzipped
+      lighthouse_score: 95 or higher across all metrics
+      offline_capability: Full functionality without internet
+      storage_capacity: up to 500MB of recipe data
+compliance:
+  requirements:
+    - GDPR compliance through local-only data processing
+    - CCPA compliance through no data collection policy
+    - Accessibility compliance with WCAG 2.1 AA standards
+    - Progressive Web App standards for mobile experience
+  measures:
+    data_privacy:
+      - No server-side data storage or processing
+      - No tracking cookies or analytics
+      - No third-party data sharing
+      - User-controlled data export and deletion
+    accessibility:
+      - Semantic HTML structure
+      - Keyboard navigation support
+      - Screen reader compatibility
+      - High contrast mode support
+      - Scalable typography
+    security:
+      - Content Security Policy implementation
+      - Subresource Integrity for external resources
+      - HTTPS-only deployment
+      - Regular dependency security audits
+development:
+  phases:
+    phase_1:
+      name: Core Recipe Management
+      duration: 4 weeks
+      deliverables:
+        - Basic recipe CRUD operations
+        - Local storage implementation
+        - Unit conversion functionality
+        - Basic UI components and routing
+    phase_2:
+      name: Enhanced Features
+      duration: 3 weeks
+      deliverables:
+        - Print export functionality
+        - Advanced recipe builder with drag-drop
+        - Search and filtering capabilities
+        - Responsive design implementation
+    phase_3:
+      name: Premium Features & PWA
+      duration: 3 weeks
+      deliverables:
+        - Progressive Web App implementation
+        - Premium template system
+        - Nutritional analysis integration
+        - Performance optimization
+    phase_4:
+      name: Polish & Launch
+      duration: 2 weeks
+      deliverables:
+        - Comprehensive testing and bug fixes
+        - Accessibility audit and improvements
+        - Documentation and deployment
+        - Marketing site and launch preparation
+  team:
+    size: 3-4 developers
+    roles:
+      - Frontend Developer (React/TypeScript specialist)
+      - UI/UX Developer (Design system and accessibility focus)
+      - Full-Stack Developer (API integration and performance optimization)
+      - Optional: Technical Writer (Documentation and content)
+  methodology: Agile with 2-week sprints, emphasizing user feedback and iterative
+    improvement
+quality:
+  testing:
+    approaches:
+      - Unit testing with Jest and React Testing Library
+      - Integration testing for recipe workflows
+      - End-to-end testing with Playwright
+      - Performance testing with Lighthouse CI
+      - Accessibility testing with axe-core
+      - Cross-browser compatibility testing
+    coverage_targets:
+      unit_tests: 90% code coverage minimum
+      integration_tests: All critical user flows covered
+      e2e_tests: Primary use cases automated
+      accessibility_tests: WCAG 2.1 AA compliance verified
+  metrics:
+    performance:
+      - Core Web Vitals monitoring
+      - Bundle size tracking with size-limit
+      - Lighthouse score tracking in CI/CD
+      - Real User Monitoring for production insights
+    quality:
+      - Code quality with ESLint and TypeScript strict mode
+      - Design system consistency audits
+      - Accessibility score monitoring
+      - User experience metrics through privacy-respecting analytics
+  monitoring:
+    production:
+      - Error tracking with client-side error boundaries
+      - Performance monitoring through Web Vitals API
+      - Usage patterns through privacy-first analytics
+      - Uptime monitoring for static hosting
+deployment:
+  environments:
+    development:
+      hosting: Local development server with hot reload
+      database: Browser IndexedDB with dev data
+      apis: Mock APIs and development endpoints
+      monitoring: Console logging and React DevTools
+    staging:
+      hosting: Netlify deploy previews
+      database: Browser IndexedDB with test data
+      apis: Staging API endpoints with rate limiting
+      monitoring: Basic error tracking and performance metrics
+    production:
+      hosting: Netlify with global CDN
+      database: Browser IndexedDB with user data
+      apis: Production API endpoints with full authentication
+      monitoring: Comprehensive error tracking and analytics
+  ci_cd:
+    pipeline:
+      - Automated testing on pull requests
+      - Build optimization and bundle analysis
+      - Security vulnerability scanning
+      - Performance regression testing
+      - Automated deployment to staging and production
+    tools:
+      - GitHub Actions for CI/CD automation
+      - Netlify for deployment and hosting
+      - Dependabot for dependency updates
+      - CodeQL for security analysis
+  hosting:
+    primary: Netlify with automatic SSL and global CDN
+    alternatives:
+      - Vercel
+      - GitHub Pages
+      - AWS S3 with CloudFront
+    requirements:
+      - HTTPS enforcement
+      - Custom domain support
+      - Automatic builds from Git
+      - Environment variable management
+    scalability:
+      - CDN for global performance
+      - Efficient caching strategies
+      - Progressive loading for large datasets
+      - Offline-first architecture reduces server load
+meta:
+  step: 1
+  version: "4.1"
+  timestamp: 2025-07-22T08:38:12.054Z
+  status: complete
+  checksum: 0f29f8f93a3ac88a2cb077cc714523616f77211768e4bebf413a7e0739436f90
+  batch_upgraded: true
+  upgrade_date: 2025-07-22T08:38:12.054Z
+  original_version: "1.0"

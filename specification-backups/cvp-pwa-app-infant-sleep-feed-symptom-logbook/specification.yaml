@@ -1,0 +1,389 @@
+project:
+  name: Infant Sleep & Feed Tracker
+  type: pwa-app
+  description: Privacy-first infant care logbook with timeline charts and PDF exports
+  version: 1.0.0
+  category: healthcare
+features:
+  core:
+    - name: Sleep Tracking
+      description: Log sleep patterns with start/end times and quality notes
+      priority: high
+      rationale: Essential for infant care monitoring and establishing healthy sleep
+        patterns
+      dependencies:
+        - Timeline Charts
+        - Offline Mode
+      apis:
+        - Web Storage API
+        - Notification API
+        - Wake Lock API
+      compliance:
+        - HIPAA-ready data handling
+        - Local storage only
+      technical_details:
+        - Timeline visualization with D3.js charts
+        - Local IndexedDB storage with sync indicators
+        - Sleep duration calculations and analytics
+        - Pattern recognition for sleep quality insights
+      implementation_notes: Use Web Workers for background calculations to maintain UI responsiveness
+    - name: Feeding Logger
+      description: Track feeding times, amounts, and types (breast/bottle/solid)
+      priority: high
+      rationale: Critical for monitoring infant nutrition and identifying feeding patterns
+      dependencies:
+        - Timeline Charts
+        - PDF Export
+      apis:
+        - Web Storage API
+        - Camera API for photo logging
+      compliance:
+        - Data encryption at rest
+        - No cloud sync by default
+      technical_details:
+        - Quick-entry interface with preset amounts
+        - Feeding type categorization and tracking
+        - Growth pattern analysis charts
+        - Nutritional intake calculations
+      implementation_notes: Implement touch-friendly UI with large buttons for tired parents
+    - name: Symptom Tracker
+      description: Record symptoms, medications, and health observations
+      priority: high
+      rationale: Essential for healthcare provider communication and medical record
+        keeping
+      dependencies:
+        - PDF Export
+        - Timeline Charts
+      apis:
+        - Camera API
+        - File System Access API
+        - Web Storage API
+      compliance:
+        - Medical data privacy standards
+        - Secure local storage
+      technical_details:
+        - Symptom severity scale with visual indicators
+        - Photo attachment support for rashes/conditions
+        - Medication reminder system
+        - Temperature and vital sign logging
+    - name: Timeline Charts
+      description: Interactive timeline visualization of all logged data
+      priority: high
+      rationale: Visual representation helps identify patterns and correlations in
+        infant care data
+      dependencies: []
+      apis:
+        - Canvas API
+        - Web Workers API
+      compliance:
+        - Client-side rendering only
+        - No data transmission
+      technical_details:
+        - 24-hour and weekly timeline views
+        - Pattern recognition highlighting
+        - Overlay multiple data types for correlation analysis
+        - Touch-responsive chart interactions
+    - name: Offline Mode
+      description: Full functionality without internet connection
+      priority: high
+      rationale: Parents need reliable access to tracking tools regardless of connectivity
+      dependencies: []
+      apis:
+        - Service Worker API
+        - Cache API
+        - Background Sync API
+      compliance:
+        - Local data persistence
+        - No external data transmission
+      technical_details:
+        - Service worker implementation for offline caching
+        - Background sync when connection restored
+        - Local data persistence with 500MB storage limit
+        - Progressive loading strategies
+  advanced:
+    - name: PDF Export
+      description: Generate comprehensive reports for healthcare providers
+      priority: medium
+      rationale: Healthcare providers need formatted reports for medical consultations
+      dependencies:
+        - Timeline Charts
+      apis:
+        - File System Access API
+        - Web Share API
+      compliance:
+        - HIPAA-compliant report generation
+        - Local processing only
+      technical_details:
+        - Professional medical report formatting
+        - Date range selection for targeted reports
+        - Chart and graph inclusion in exports
+        - Customizable report templates
+    - name: Data Backup & Restore
+      description: Secure local backup and device migration capabilities
+      priority: medium
+      rationale: Parents need data protection and device transfer capabilities
+      dependencies:
+        - Offline Mode
+      apis:
+        - File System Access API
+        - Web Crypto API
+      compliance:
+        - End-to-end encryption
+        - User-controlled data export
+      technical_details:
+        - Encrypted local backups
+        - QR code device transfer
+        - Selective data restoration
+  premium:
+    - name: Advanced Analytics
+      description: Deep insights into sleep, feeding, and growth patterns
+      priority: low
+      rationale: Power users benefit from detailed pattern analysis and predictions
+      dependencies:
+        - Timeline Charts
+        - Sleep Tracking
+        - Feeding Logger
+      apis:
+        - Web Workers API for ML processing
+      compliance:
+        - Client-side ML processing only
+      technical_details:
+        - Sleep quality prediction models
+        - Growth trajectory analysis
+        - Feeding optimization recommendations
+    - name: Multiple Child Profiles
+      description: Support for tracking multiple children simultaneously
+      priority: low
+      rationale: Families with multiple infants need consolidated tracking
+      dependencies:
+        - All core features
+      apis:
+        - Web Storage API with partitioning
+      compliance:
+        - Data isolation between profiles
+      technical_details:
+        - Profile switching interface
+        - Separate data storage per child
+        - Comparative analytics across children
+  enterprise:
+    - name: Healthcare Provider Sharing
+      description: Secure sharing of reports with medical professionals
+      priority: low
+      rationale: Medical integration improves care coordination
+      dependencies:
+        - PDF Export
+        - Data Backup & Restore
+      apis:
+        - Web Share API
+        - Web Crypto API
+      compliance:
+        - HIPAA compliance
+        - Audit trail logging
+      technical_details:
+        - Encrypted report sharing
+        - Access control and expiration
+        - Healthcare provider portal integration
+technical:
+  architecture: PWA with offline-first design using service workers and IndexedDB
+  stack:
+    frontend: Next.js 15.0.0 with React 19.0.0 and TypeScript 5.5.0
+    styling: Tailwind CSS with glassmorphism components
+    data_visualization: D3.js 7.8.0 for interactive charts
+    storage: IndexedDB via idb 8.0.0
+    pwa: Workbox 7.0.0 for service worker management
+    pdf_generation: jsPDF 2.5.0 for client-side PDF creation
+    build_tools: Vite 5.0.0, ESLint 9.0.0, Prettier 3.0.0
+  integrations:
+    - name: PWA Standards
+      description: Full Progressive Web App compliance with manifest and service workers
+    - name: Device APIs
+      description: Camera, notifications, and file system access for native-like experience
+    - name: Offline-First Architecture
+      description: Complete functionality without internet connectivity
+  security:
+    - Client-side encryption for sensitive data
+    - Content Security Policy implementation
+    - No external API dependencies for core functionality
+    - Secure local storage with encryption at rest
+  performance:
+    targets:
+      - "First Contentful Paint: under 1.5s"
+      - "Largest Contentful Paint: under 2.5s"
+      - "Time to Interactive: under 3s"
+      - "Cumulative Layout Shift: under 0.1"
+      - "Bundle size: under 200KB gzipped"
+    optimizations:
+      - Code splitting for feature-based loading
+      - Image optimization with WebP/AVIF support
+      - Service worker caching strategies
+      - Virtual scrolling for large datasets
+compliance:
+  requirements:
+    - HIPAA-ready data handling practices
+    - GDPR compliance for EU users
+    - CCPA compliance for California users
+    - Accessibility WCAG 2.1 AA compliance
+    - PWA standards compliance
+  measures:
+    - Local-only data storage by default
+    - End-to-end encryption for sensitive data
+    - User consent management system
+    - Audit trail for data access and modifications
+    - Screen reader compatibility
+    - Keyboard navigation support
+development:
+  phases:
+    - phase: 1
+      name: Core PWA Infrastructure
+      duration: 2-3 weeks
+      deliverables:
+        - PWA shell with offline capability
+        - Basic data entry interfaces
+        - Local storage implementation
+        - Service worker setup
+      team_requirements:
+        size: 2
+        roles:
+          - Frontend Developer
+          - PWA Specialist
+    - phase: 2
+      name: Core Tracking Features
+      duration: 3-4 weeks
+      deliverables:
+        - Sleep tracking with timeline visualization
+        - Feeding logger with quick-entry UI
+        - Symptom tracker with photo support
+        - Basic chart implementations
+      team_requirements:
+        size: 3
+        roles:
+          - Frontend Developer
+          - UI/UX Developer
+          - Data Visualization Developer
+    - phase: 3
+      name: Analytics and Export
+      duration: 2-3 weeks
+      deliverables:
+        - Interactive timeline charts
+        - PDF export functionality
+        - Pattern recognition features
+        - Advanced analytics dashboard
+      team_requirements:
+        size: 2
+        roles:
+          - Frontend Developer
+          - Data Analytics Developer
+    - phase: 4
+      name: Polish and Premium Features
+      duration: 2-3 weeks
+      deliverables:
+        - Multiple child profiles
+        - Advanced analytics
+        - Performance optimizations
+        - Accessibility improvements
+      team_requirements:
+        size: 3
+        roles:
+          - Frontend Developer
+          - QA Engineer
+          - Accessibility Specialist
+quality:
+  testing:
+    approaches:
+      - Unit testing with Jest and React Testing Library
+      - Integration testing for PWA functionality
+      - End-to-end testing with Playwright
+      - Performance testing with Lighthouse CI
+      - Accessibility testing with axe-core
+      - Manual testing on various devices and browsers
+    coverage_targets:
+      - "Unit test coverage: 90% or higher"
+      - "Integration test coverage: 80% or higher"
+      - "Critical path coverage: 100%"
+  metrics:
+    performance:
+      - Core Web Vitals monitoring
+      - "PWA score: 90 or higher"
+      - "Lighthouse performance score: 90 or higher"
+      - Bundle size tracking and alerts
+    reliability:
+      - Offline functionality testing
+      - Data persistence verification
+      - Cross-browser compatibility testing
+    usability:
+      - "Task completion rate: 95% or higher"
+      - "User error rate: under 5%"
+      - Accessibility compliance verification
+  monitoring:
+    - Real User Monitoring for performance metrics
+    - Error tracking with client-side logging
+    - Usage analytics for feature adoption
+    - PWA installation and engagement metrics
+deployment:
+  environments:
+    development:
+      platform: Local development with Vite hot reload
+      features:
+        - Hot module replacement
+        - Development tools
+        - Mock data
+    staging:
+      platform: Vercel preview deployment
+      features:
+        - Production build
+        - PWA testing
+        - Performance monitoring
+    production:
+      platform: Vercel with CDN and edge caching
+      features:
+        - Global CDN
+        - Automatic HTTPS
+        - Service worker optimization
+  ci_cd:
+    pipeline:
+      - Automated testing on pull requests
+      - Lighthouse CI performance checks
+      - Security scanning with npm audit
+      - PWA compliance verification
+      - Automated deployment to staging/production
+    tools:
+      - GitHub Actions
+      - Vercel CLI
+      - Lighthouse CI
+  hosting:
+    primary:
+      - platform: Vercel
+        features:
+          - Global CDN
+          - Automatic scaling
+          - PWA optimization
+        cost: Free tier for personal use
+    alternatives:
+      - platform: Netlify
+        features:
+          - Edge functions
+          - Form handling
+          - Analytics
+      - platform: Self-hosted Docker
+        features:
+          - Full control
+          - On-premises deployment
+          - Custom domain
+    app_stores:
+      - platform: Google Play Store via PWABuilder
+        features:
+          - Native app experience
+          - Play Store discovery
+      - platform: Apple App Store via PWABuilder
+        features:
+          - iOS native integration
+          - App Store distribution
+meta:
+  step: 1
+  version: "4.1"
+  timestamp: 2025-07-22T09:04:21.878Z
+  status: complete
+  checksum: 0f29f8f93a3ac88a2cb077cc714523616f77211768e4bebf413a7e0739436f90
+  batch_upgraded: true
+  upgrade_date: 2025-07-22T09:04:21.879Z
+  original_version: "1.0"

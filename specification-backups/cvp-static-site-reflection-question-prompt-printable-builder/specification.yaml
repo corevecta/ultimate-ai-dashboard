@@ -1,0 +1,312 @@
+project:
+  name: Reflection Question Prompt Builder
+  type: static-site
+  description: Drag-and-drop builder for creating printable reflection prompts
+    with export functionality
+  version: 1.0.0
+  category: productivity-tools
+features:
+  core:
+    - name: Drag-and-Drop Prompt Builder
+      description: Visual interface for creating reflection questions with
+        drag-and-drop components
+      priority: high
+      rationale: Core user interaction enabling intuitive prompt creation without
+        technical knowledge
+      implementation_notes:
+        - React DnD for drag-and-drop functionality
+        - Modular prompt components (text, questions, spacers)
+        - Real-time preview of printable layout
+        - Session-based prompt packs organization
+      dependencies: []
+      apis: []
+      compliance:
+        - accessibility: WCAG 2.1 AA compliant drag-and-drop
+        - privacy: Client-side only processing
+    - name: Print-Optimized Export
+      description: Export prompts to PDF and print-ready formats
+      priority: high
+      rationale: Essential output functionality for physical use of digital prompts
+      implementation_notes:
+        - PDF generation with print margins
+        - Multiple export formats (PDF, PNG, HTML)
+        - Print preview with page breaks
+        - Customizable page layouts
+      dependencies:
+        - Drag-and-Drop Prompt Builder
+      apis:
+        - jsPDF
+        - html2canvas
+        - FileSaver
+      compliance:
+        - accessibility: Screen reader compatible export options
+        - privacy: Local processing only, no data transmission
+    - name: Offline-First Storage
+      description: Local data persistence with no external dependencies
+      priority: medium
+      rationale: Privacy-first approach with full offline functionality
+      implementation_notes:
+        - IndexedDB for prompt storage
+        - Template library management
+        - Import/export session data
+        - Browser-only functionality
+      dependencies: []
+      apis:
+        - IndexedDB
+      compliance:
+        - privacy: No external data transmission
+        - security: Client-side encryption for sensitive prompts
+  advanced:
+    - name: Template Library
+      description: Pre-built reflection prompt templates for common use cases
+      priority: medium
+      rationale: Accelerates user productivity with professionally designed templates
+      implementation_notes:
+        - Categorized template collection
+        - Template preview and customization
+        - User template creation and sharing
+      dependencies:
+        - Offline-First Storage
+      apis: []
+      compliance:
+        - content: Educational and therapeutic best practices
+    - name: Batch Export
+      description: Export multiple prompt sets in various formats simultaneously
+      priority: low
+      rationale: Efficiency feature for power users managing multiple prompt collections
+      implementation_notes:
+        - Multi-selection interface
+        - Batch processing with progress indicators
+        - Zip file generation for bulk downloads
+      dependencies:
+        - Print-Optimized Export
+        - Offline-First Storage
+      apis:
+        - JSZip
+      compliance:
+        - performance: Efficient memory usage for large batches
+  premium:
+    - name: Advanced Layout Engine
+      description: Professional typography and layout customization options
+      priority: medium
+      rationale: Premium value through enhanced visual design capabilities
+      implementation_notes:
+        - Custom font selection
+        - Advanced spacing controls
+        - Professional print layouts
+      dependencies:
+        - Print-Optimized Export
+      apis:
+        - Web Fonts API
+      compliance:
+        - accessibility: High contrast and readable typography options
+    - name: Cloud Sync
+      description: Optional encrypted cloud synchronization for cross-device access
+      priority: low
+      rationale: Premium convenience feature while maintaining privacy focus
+      implementation_notes:
+        - End-to-end encryption
+        - Selective sync options
+        - Conflict resolution
+      dependencies:
+        - Offline-First Storage
+      apis:
+        - Encrypted Cloud Storage API
+      compliance:
+        - privacy: Zero-knowledge encryption
+        - security: AES-256 encryption
+  enterprise:
+    - name: Team Collaboration
+      description: Shared prompt libraries and collaborative editing for organizations
+      priority: low
+      rationale: Enterprise value through team productivity and standardization
+      implementation_notes:
+        - Role-based access control
+        - Version history and comments
+        - Team template libraries
+      dependencies:
+        - Cloud Sync
+        - Template Library
+      apis:
+        - WebRTC
+        - Conflict Resolution API
+      compliance:
+        - security: Enterprise-grade access controls
+        - audit: Full activity logging
+technical:
+  architecture:
+    type: Static Site Generator
+    pattern: Client-side SPA with offline-first design
+    data_flow: Browser → IndexedDB → Local Processing → Export
+  stack:
+    frontend:
+      framework: Astro
+      version: 4.5.0
+      ui_library: React
+      styling: Tailwind CSS
+      typescript: true
+    build_tools:
+      bundler: Vite
+      package_manager: npm
+    storage:
+      primary: IndexedDB
+      backup: LocalStorage
+    export:
+      pdf: jsPDF
+      image: html2canvas
+      file_handling: FileSaver
+  integrations:
+    required: []
+    optional:
+      - name: Web Fonts API
+        purpose: Custom typography for premium features
+      - name: Print API
+        purpose: Native browser printing optimization
+  security:
+    authentication: none
+    authorization: none
+    data_encryption: Client-side for sensitive content
+    privacy_measures:
+      - No external API calls for core functionality
+      - Local-only data processing
+      - No analytics or tracking
+      - Optional telemetry with explicit consent
+  performance:
+    targets:
+      load_time: under 2 seconds
+      bundle_size: under 500KB
+      lighthouse_score: 95 or higher
+      core_web_vitals: All metrics pass
+    optimization:
+      - Code splitting by feature
+      - Lazy loading of non-critical components
+      - Service worker for offline functionality
+      - Efficient IndexedDB queries
+compliance:
+  requirements:
+    accessibility:
+      standard: WCAG 2.1 AA
+      testing: Automated and manual accessibility testing
+    privacy:
+      framework: Privacy by Design
+      data_handling: Local processing only
+    security:
+      encryption: AES-256 for sensitive data
+      vulnerability_scanning: Regular dependency audits
+  measures:
+    - Regular accessibility audits using axe-core
+    - Privacy impact assessments for new features
+    - Security dependency scanning with npm audit
+    - Code quality gates with ESLint and TypeScript
+development:
+  phases:
+    phase_1:
+      name: Core Builder Implementation
+      duration: 4 weeks
+      team_size: 2
+      roles:
+        - Frontend Developer
+        - UX Designer
+      deliverables:
+        - Drag-and-drop interface
+        - Basic prompt components
+        - Local storage implementation
+        - Print preview functionality
+    phase_2:
+      name: Export and Enhancement
+      duration: 3 weeks
+      team_size: 2
+      roles:
+        - Frontend Developer
+        - Quality Assurance
+      deliverables:
+        - PDF export functionality
+        - Template library
+        - Batch operations
+        - Cross-browser testing
+    phase_3:
+      name: Polish and Deployment
+      duration: 2 weeks
+      team_size: 3
+      roles:
+        - Frontend Developer
+        - DevOps Engineer
+        - Quality Assurance
+      deliverables:
+        - Performance optimization
+        - Accessibility compliance
+        - Deployment pipeline
+        - Documentation
+quality:
+  testing:
+    approaches:
+      - Unit testing with Vitest
+      - Integration testing with Testing Library
+      - End-to-end testing with Playwright
+      - Accessibility testing with axe-core
+      - Performance testing with Lighthouse CI
+    coverage_target: 90% code coverage
+    automation: Automated testing on all pull requests
+  metrics:
+    performance:
+      - Page load time monitoring
+      - Bundle size tracking
+      - Core Web Vitals measurement
+    quality:
+      - Code quality scores
+      - Accessibility compliance scores
+      - User experience metrics
+  monitoring:
+    errors: Client-side error reporting with privacy-first approach
+    performance: Real User Monitoring without personal data collection
+    uptime: Static site availability monitoring
+deployment:
+  environments:
+    development:
+      url: localhost:4321
+      purpose: Local development and testing
+    staging:
+      url: staging.reflectionbuilder.com
+      purpose: Pre-production testing and client preview
+    production:
+      url: app.reflectionbuilder.com
+      purpose: Live application serving users
+  ci_cd:
+    platform: GitHub Actions
+    pipeline:
+      - Code quality checks (ESLint, TypeScript)
+      - Automated testing suite
+      - Accessibility testing
+      - Security scanning
+      - Build optimization
+      - Deployment to staging
+      - Production deployment on approval
+    deployment_strategy: Blue-green deployment for zero downtime
+  hosting:
+    primary:
+      platform: Netlify
+      features:
+        - Global CDN distribution
+        - Automatic HTTPS
+        - Branch previews for testing
+        - Form handling for contact features
+    alternatives:
+      - platform: Vercel
+        features:
+          - Edge deployment
+          - Built-in analytics
+          - Preview deployments
+      - platform: GitHub Pages
+        features:
+          - Free hosting
+          - Custom domains
+          - GitHub integration
+meta:
+  step: 1
+  version: "4.1"
+  timestamp: 2025-07-22T08:38:00.165Z
+  status: complete
+  checksum: 0f29f8f93a3ac88a2cb077cc714523616f77211768e4bebf413a7e0739436f90
+  batch_upgraded: true
+  upgrade_date: 2025-07-22T08:38:00.165Z
+  original_version: "1.0"

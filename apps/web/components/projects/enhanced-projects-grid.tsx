@@ -47,6 +47,13 @@ import {
 } from '@/components/ui/collapsible'
 import { cn } from '@/lib/utils'
 import debounce from 'lodash/debounce'
+import dynamic from 'next/dynamic'
+
+// Dynamically import the pipeline executor to avoid SSR issues
+const PipelineExecutor = dynamic(
+  () => import('@/components/projects/pipeline-executor'),
+  { ssr: false }
+)
 
 interface Project {
   id: string
@@ -127,6 +134,10 @@ export function EnhancedProjectsGrid() {
   const [stats, setStats] = useState({ total: 0, withSpecification: 0, withMarketEnhanced: 0 })
   const [showAdvancedFilters, setShowAdvancedFilters] = useState(false)
   const [selectedProjects, setSelectedProjects] = useState<Set<string>>(new Set())
+  
+  // Pipeline executor states
+  const [showPipelineExecutor, setShowPipelineExecutor] = useState(false)
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
 
   // Debounced search function
   const debouncedFetch = useCallback(
@@ -185,27 +196,9 @@ export function EnhancedProjectsGrid() {
     }
   }
 
-  async function runPipeline(projectId: string) {
-    try {
-      const response = await fetch('/api/workflows', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          projectId: projectId,
-          name: `Generate ${projectId}`,
-          description: `Run pipeline steps 2-8 for ${projectId}`,
-          type: 'pipeline-execution'
-        })
-      })
-      
-      if (response.ok) {
-        const workflow = await response.json()
-        // TODO: Show success notification and redirect to workflow detail
-        console.log('Pipeline started:', workflow)
-      }
-    } catch (error) {
-      console.error('Failed to start pipeline:', error)
-    }
+  async function runPipeline(project: Project) {
+    setSelectedProject(project)
+    setShowPipelineExecutor(true)
   }
 
   const activeFiltersCount = useMemo(() => {
@@ -577,7 +570,7 @@ export function EnhancedProjectsGrid() {
                           <MoreVertical className="h-4 w-4" />
                         </Button>
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end">
+                      <DropdownMenuContent align="end" className="bg-gray-900 border-white/10 z-50">
                         <DropdownMenuItem>View Details</DropdownMenuItem>
                         <DropdownMenuItem>Edit Project</DropdownMenuItem>
                         <DropdownMenuSeparator />
@@ -625,26 +618,14 @@ export function EnhancedProjectsGrid() {
 
                     {/* Action Button */}
                     <div className="pt-2">
-                      {project.hasSpecification ? (
-                        <Button
-                          size="sm"
-                          className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
-                          onClick={() => runPipeline(project.id)}
-                        >
-                          <Play className="w-4 h-4 mr-2" />
-                          Run Pipeline
-                        </Button>
-                      ) : (
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          className="w-full border-white/10"
-                          disabled
-                        >
-                          <Clock className="w-4 h-4 mr-2" />
-                          Pending Specification
-                        </Button>
-                      )}
+                      <Button
+                        size="sm"
+                        className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+                        onClick={() => runPipeline(project)}
+                      >
+                        <Play className="w-4 h-4 mr-2" />
+                        Run Pipeline
+                      </Button>
                     </div>
                   </div>
                 </div>
@@ -735,6 +716,25 @@ export function EnhancedProjectsGrid() {
           </Button>
         </div>
       </div>
+      
+      {/* Pipeline Executor Modal */}
+      {showPipelineExecutor && selectedProject && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-gray-900 rounded-2xl border border-gray-800 w-full max-w-6xl max-h-[90vh] overflow-y-auto">
+            <div className="p-6">
+              <PipelineExecutor
+                projectId={selectedProject.id}
+                projectName={selectedProject.name}
+                projectType={selectedProject.type}
+                onClose={() => {
+                  setShowPipelineExecutor(false)
+                  setSelectedProject(null)
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

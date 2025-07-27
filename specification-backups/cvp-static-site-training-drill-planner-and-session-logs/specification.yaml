@@ -1,0 +1,111 @@
+project:
+  name: "Training Drill Planner"
+  type: "static-site"
+  description: "Offline training drill planner with session logs and printable reports"
+  version: "1.0.0"
+
+branding:
+  company: "Corevecta"
+  vision: "Privacy by Default, Performance by Design"
+  style: "Professional privacy-first, dark theme, glassmorphism"
+  colors:
+    primary: "#10b981"
+    secondary: "#059669"
+    background: "gray-950"
+    surface: "gray-900"
+    gradient: "from-emerald-600 to-green-600"
+
+core_features:
+  - name: "Drill Library Management"
+    description: "Create, edit, and organize training drills with detailed instructions"
+    priority: high
+    technical_details:
+      - "CRUD operations for drill templates"
+      - "Category and tag-based organization"
+      - "Drill difficulty and duration tracking"
+      - "Equipment requirements specification"
+
+  - name: "Training Session Planner"
+    description: "Build complete training sessions by combining drills"
+    priority: high
+    technical_details:
+      - "Drag-and-drop session builder"
+      - "Time allocation and scheduling"
+      - "Warm-up, main, and cool-down phases"
+      - "Session template saving and reuse"
+
+  - name: "Session Execution & Logging"
+    description: "Real-time session tracking with performance notes"
+    priority: high
+    technical_details:
+      - "Timer integration for drill phases"
+      - "Attendance tracking"
+      - "Performance notes per player/team"
+      - "Photo and video attachment support"
+
+  - name: "Printable Reports"
+    description: "Generate formatted reports for training documentation"
+    priority: high
+    technical_details:
+      - "PDF generation for session plans"
+      - "Print-optimized layouts"
+      - "Progress tracking reports"
+      - "Attendance and performance summaries"
+
+  - name: "Offline Mode"
+    description: "Full functionality without internet connection"
+    priority: high
+    technical_details:
+      - "Service worker implementation"
+      - "IndexedDB data persistence"
+      - "Cache API for assets"
+      - "Background sync when online"
+
+technical:
+  architecture: "Static site with PWA capabilities"
+  dependencies:
+    production:
+      - "react: ^19.0.0"
+      - "typescript: ^5.5.0"
+      - "tailwindcss: ^4.0.0"
+      - "vite: ^5.0.0"
+      - "workbox-vite: ^7.0.0"
+      - "idb: ^8.0.0"
+      - "jspdf: ^2.5.0"
+      - "html2canvas: ^1.4.0"
+    development:
+      - "vite: ^5.0.0"
+      - "@types/react: ^19.0.0"
+      - "eslint: ^9.0.0"
+      - "prettier: ^3.0.0"
+
+performance:
+  target_metrics:
+    - "First Contentful Paint: <1.5s"
+    - "Largest Contentful Paint: <2.5s"
+    - "Time to Interactive: <3s"
+    - "Bundle size: <500KB gzipped"
+    - "Offline capability: 100%"
+
+privacy:
+  data_collection: "none"
+  tracking: false
+  storage: "local_only"
+  privacy_first: true
+
+deployment:
+  platforms:
+    - platform: "Static hosting (Netlify/Vercel)"
+      details: "Build output deployed to CDN"
+    - platform: "GitHub Pages"
+      details: "Direct deployment from repository"
+    - platform: "Self-hosted"
+      details: "Single HTML bundle for local use"
+
+monetization:
+  model: "Free"
+  free_tier: "Full core features forever"
+  paid_tiers:
+    - name: "Pro"
+      price: "$9/month"
+      features: ["Cloud sync", "Team collaboration", "Advanced analytics"]

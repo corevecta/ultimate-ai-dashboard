@@ -1,0 +1,341 @@
+project:
+  name: Printable Playbook Builder and Drill Log
+  type: static-site
+  description: Privacy-first drag-and-drop playbook builder with printable drill
+    logs, all browser-side
+  version: 1.0.0
+  category: productivity
+  branding:
+    company: Corevecta
+    vision: Privacy by Default, Performance by Design
+    style: Professional privacy-first, dark theme, glassmorphism
+    colors:
+      primary: "#06b6d4"
+      secondary: "#0891b2"
+      background: gray-950
+      surface: gray-900
+features:
+  core:
+    - name: Drag-and-Drop Playbook Builder
+      description: Visual drag-and-drop interface for creating sports playbooks with
+        custom shapes and annotations
+      priority: high
+      rationale: Essential for user productivity and core value proposition
+      implementation_notes: Canvas-based drawing with HTML5 Canvas API for performance
+      dependencies:
+        - fabric.js
+        - local storage
+      apis:
+        - HTML5 Canvas API
+        - File API
+        - Drag and Drop API
+      compliance:
+        - privacy-first design
+        - no data transmission
+      technical_details:
+        - Canvas-based drawing with HTML5 Canvas API
+        - Real-time preview and editing
+        - Custom shape library for sports diagrams
+        - Layer management and grouping
+    - name: Drill Log Management
+      description: Comprehensive drill tracking and logging system with customizable
+        templates
+      priority: high
+      rationale: Core functionality for sports teams and coaches
+      implementation_notes: Template-driven approach for flexibility
+      dependencies:
+        - IndexedDB
+        - local storage
+      apis:
+        - IndexedDB API
+        - Local Storage API
+      compliance:
+        - offline-first
+        - local data only
+      technical_details:
+        - Template-based drill creation
+        - Time tracking and performance metrics
+        - Progress visualization
+        - Notes and annotations support
+    - name: Print-Optimized Output
+      description: Professional print layouts with custom formatting and page breaks
+      priority: high
+      rationale: Physical documentation is essential for sports training
+      implementation_notes: CSS print queries and PDF generation for reliability
+      dependencies:
+        - jsPDF
+        - CSS print media
+      apis:
+        - jsPDF API
+        - CSS Print API
+      compliance:
+        - offline printing
+        - no server dependency
+      technical_details:
+        - CSS print media queries
+        - PDF generation with jsPDF
+        - Custom page layouts and margins
+        - High-resolution export options
+  advanced:
+    - name: Offline-First Storage
+      description: Complete offline functionality with local data persistence
+      priority: medium
+      rationale: Ensures availability in field conditions without internet
+      implementation_notes: Service worker for caching and offline capability
+      dependencies:
+        - service worker
+        - IndexedDB
+        - Dexie
+      apis:
+        - Service Worker API
+        - IndexedDB API
+        - Cache API
+      compliance:
+        - privacy compliance
+        - no cloud dependency
+    - name: Progressive Web App Features
+      description: Installable PWA with native-like experience
+      priority: medium
+      rationale: Mobile-first usage for coaches and athletes
+      implementation_notes: Web app manifest and service worker implementation
+      dependencies:
+        - service worker
+        - web app manifest
+      apis:
+        - Web App Manifest
+        - Service Worker API
+        - Push API
+      compliance:
+        - offline capability
+        - local installation
+  premium:
+    - name: Advanced Templates Library
+      description: Extended collection of professional playbook templates
+      priority: low
+      rationale: Monetization opportunity and professional value
+      implementation_notes: Template marketplace with local storage
+      dependencies:
+        - template system
+        - licensing
+      apis:
+        - Local Storage API
+        - Import/Export API
+      compliance:
+        - license management
+        - offline access
+    - name: Team Collaboration Tools
+      description: Share and collaborate on playbooks with team members
+      priority: low
+      rationale: Team coordination and communication enhancement
+      implementation_notes: File-based sharing without server dependency
+      dependencies:
+        - export system
+        - file handling
+      apis:
+        - File API
+        - Web Share API
+      compliance:
+        - privacy-first sharing
+        - no central storage
+  enterprise:
+    - name: Custom Branding Options
+      description: White-label customization for organizations
+      priority: low
+      rationale: Enterprise sales opportunity
+      implementation_notes: CSS custom properties for theming
+      dependencies:
+        - theming system
+        - configuration
+      apis:
+        - CSS Custom Properties API
+      compliance:
+        - brand compliance
+        - customization rights
+technical:
+  architecture: Static single-page application with client-side rendering
+  stack:
+    frontend: Astro with TypeScript
+    styling: Tailwind CSS v4
+    canvas: Fabric.js
+    storage: IndexedDB with Dexie
+    pdf: jsPDF
+  integrations:
+    internal:
+      - service worker
+      - web app manifest
+      - offline storage
+    external:
+      - none - fully offline
+    apis:
+      - HTML5 Canvas
+      - IndexedDB
+      - File API
+      - Print API
+  security:
+    measures:
+      - CSP headers
+      - no external requests
+      - local-only storage
+    privacy:
+      - no tracking
+      - no analytics
+      - no external dependencies
+    data_protection:
+      - client-side encryption
+      - local storage only
+  performance:
+    targets:
+      - "First Contentful Paint: under 1.5s"
+      - "Largest Contentful Paint: under 2.5s"
+      - "Time to Interactive: under 3s"
+      - "Bundle size: under 500KB gzipped"
+    optimizations:
+      - code splitting
+      - lazy loading
+      - service worker caching
+    monitoring:
+      - Core Web Vitals
+      - bundle analysis
+      - performance audits
+compliance:
+  requirements:
+    - GDPR compliance through privacy-by-design
+    - No data collection or tracking
+    - Offline-first architecture
+    - Local storage only
+  measures:
+    - Privacy policy for local-only processing
+    - No cookies or tracking scripts
+    - Client-side data encryption
+    - Transparent data handling
+development:
+  phases:
+    phase_1:
+      name: Core MVP
+      duration: 4-6 weeks
+      team_size: 2
+      deliverables:
+        - Basic playbook builder
+        - Simple drill logging
+        - Print functionality
+        - Local storage
+    phase_2:
+      name: Enhanced Features
+      duration: 3-4 weeks
+      team_size: 2
+      deliverables:
+        - Advanced canvas tools
+        - Template system
+        - PWA features
+        - Offline capability
+    phase_3:
+      name: Polish and Optimization
+      duration: 2-3 weeks
+      team_size: 2
+      deliverables:
+        - Performance optimization
+        - UI/UX refinement
+        - Testing completion
+        - Documentation
+  team:
+    roles:
+      - Frontend Developer (TypeScript/Astro)
+      - UI/UX Designer
+      - QA Engineer (part-time)
+    skills:
+      - TypeScript
+      - Astro
+      - Canvas API
+      - PWA development
+quality:
+  testing:
+    approaches:
+      - Unit testing with Vitest
+      - Integration testing for canvas operations
+      - Cross-browser compatibility testing
+      - Print output validation
+      - Offline functionality testing
+    coverage_target: 85%
+    tools:
+      - Vitest
+      - Playwright
+      - Lighthouse
+  metrics:
+    performance:
+      - Core Web Vitals
+      - bundle size
+      - load times
+    quality:
+      - test coverage
+      - code quality
+      - accessibility
+    user_experience:
+      - print quality
+      - offline capability
+      - responsiveness
+  monitoring:
+    tools:
+      - Lighthouse CI
+      - Bundle analyzer
+      - Performance budgets
+    alerts:
+      - Bundle size threshold
+      - performance regression
+deployment:
+  environments:
+    development:
+      url: localhost:4321
+      features:
+        - hot reload
+        - debug tools
+        - test data
+    staging:
+      url: staging.playbook-builder.com
+      features:
+        - production build
+        - test deployment
+        - QA testing
+    production:
+      url: app.playbook-builder.com
+      features:
+        - CDN distribution
+        - PWA installation
+        - performance monitoring
+  ci_cd:
+    pipeline:
+      - build
+      - test
+      - lighthouse audit
+      - deploy
+    tools:
+      - GitHub Actions
+      - Netlify Build
+      - Lighthouse CI
+    automation:
+      - automated testing
+      - performance budgets
+      - security scanning
+  hosting:
+    primary: Netlify with CDN
+    alternatives:
+      - Vercel
+      - GitHub Pages
+      - AWS S3
+    requirements:
+      - static hosting
+      - CDN support
+      - HTTPS
+      - PWA support
+    scalability:
+      - global CDN
+      - edge caching
+      - automatic scaling
+meta:
+  step: 1
+  version: "4.1"
+  timestamp: 2025-07-22T08:40:16.985Z
+  status: complete
+  checksum: 0f29f8f93a3ac88a2cb077cc714523616f77211768e4bebf413a7e0739436f90
+  batch_upgraded: true
+  upgrade_date: 2025-07-22T08:40:16.985Z
+  original_version: "1.0"

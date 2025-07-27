@@ -26,6 +26,7 @@ import {
 
 interface OrchestratorStep0Request {
   // Basic info from UI
+  projectId?: string  // Optional - only present when running from pipeline executor
   name: string
   type: string
   description: string

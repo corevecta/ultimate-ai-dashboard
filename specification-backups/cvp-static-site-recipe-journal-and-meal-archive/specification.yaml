@@ -1,0 +1,97 @@
+project:
+  name: "Recipe Journal & Meal Archive"
+  type: "static-site"
+  description: "Privacy-first family recipe collection with local storage and printable cookbooks"
+  version: "1.0.0"
+
+branding:
+  company: "Corevecta"
+  vision: "Privacy by Default, Performance by Design"
+  style: "Professional privacy-first, dark theme, glassmorphism"
+  colors:
+    primary: "#06b6d4"
+    secondary: "#0284c7"
+    background: "gray-950"
+    surface: "gray-900"
+
+core_features:
+  - name: "Recipe Management"
+    description: "Add, edit, organize and search family recipes with categories and tags"
+    priority: "high"
+    technical_details:
+      - "Local IndexedDB storage for offline access"
+      - "Full-text search across ingredients and instructions"
+      - "Image upload and storage for recipe photos"
+      - "Recipe import/export in JSON format"
+
+  - name: "Meal Archive System"
+    description: "Track cooking history and meal planning with calendar integration"
+    priority: "high"
+    technical_details:
+      - "Calendar view for meal planning and history"
+      - "Recipe rating and notes system"
+      - "Cooking frequency tracking"
+      - "Favorite recipes quick access"
+
+  - name: "Printable Cookbook Generator"
+    description: "Generate beautifully formatted PDF cookbooks from recipe collections"
+    priority: "medium"
+    technical_details:
+      - "Custom cookbook templates with family branding"
+      - "Recipe categorization and sorting options"
+      - "Print-optimized layouts with ingredient scaling"
+      - "Table of contents and index generation"
+
+  - name: "Recipe Sharing"
+    description: "Share individual recipes or collections via secure links"
+    priority: "low"
+    technical_details:
+      - "Generate shareable recipe cards"
+      - "QR code generation for easy mobile sharing"
+      - "Export to popular recipe formats"
+      - "Family cookbook collaboration features"
+
+technical:
+  architecture: "Static site with client-side data persistence"
+  dependencies:
+    production:
+      - "astro": "^4.5.0"
+      - "typescript": "^5.5.0"
+      - "tailwindcss": "^4.0.0"
+      - "dexie": "^4.0.0"
+      - "jspdf": "^2.5.0"
+      - "date-fns": "^3.0.0"
+    development:
+      - "vite": "^5.0.0"
+      - "vitest": "^2.0.0"
+      - "eslint": "^9.0.0"
+      - "prettier": "^3.0.0"
+
+performance:
+  target_metrics:
+    - "First Contentful Paint: <1.5s"
+    - "Largest Contentful Paint: <2.5s"
+    - "Cumulative Layout Shift: <0.1"
+    - "Bundle size: <200KB gzipped"
+    - "Offline functionality: 100%"
+
+privacy:
+  data_collection: "none"
+  tracking: false
+  storage: "local_only"
+  privacy_first: true
+
+deployment:
+  platforms:
+    - "netlify": "Static hosting with form handling"
+    - "vercel": "Edge deployment with analytics"
+    - "github-pages": "Free hosting option"
+    - "self-hosted": "Docker container available"
+
+monetization:
+  model: "Free"
+  free_tier: "Full core features forever"
+  paid_tiers:
+    - name: "Family Pro"
+      price: "$9/month"
+      features: ["Advanced cookbook templates", "Recipe nutrition analysis", "Meal planning automation", "Family sharing groups"]

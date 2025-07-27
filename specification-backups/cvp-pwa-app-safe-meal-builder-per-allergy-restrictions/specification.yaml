@@ -1,0 +1,294 @@
+project:
+  name: Safe Meal Builder
+  type: pwa-app
+  description: Privacy-first meal planning with allergy restrictions and
+    ingredient substitutions
+  version: 1.0.0
+  category: Health & Fitness
+features:
+  core:
+    - name: Allergy Profile Manager
+      description: Create and manage detailed allergy and dietary restriction profiles
+      priority: high
+      rationale: Essential for personalized meal safety and user trust
+      implementation_notes:
+        - Local storage with AES-256 encryption
+        - Import/export functionality with secure backup
+        - Multiple profile support for families
+        - Biometric authentication integration
+      dependencies: []
+      apis:
+        - Web Crypto API for encryption
+        - File System Access API for import/export
+        - Web Authentication API for biometrics
+      compliance:
+        - GDPR data minimization
+        - HIPAA-level security for health data
+        - Accessibility standards (WCAG 2.1 AA)
+    - name: Ingredient Substitute Engine
+      description: Real-time ingredient substitution recommendations based on restrictions
+      priority: high
+      rationale: Core differentiator providing immediate value to users with dietary
+        restrictions
+      implementation_notes:
+        - Offline-first ingredient database with 50,000+ items
+        - Machine learning for nutritional equivalence matching
+        - Allergen cross-reference validation with confidence scoring
+        - Custom substitution rules engine
+      dependencies:
+        - Allergy Profile Manager
+      apis:
+        - IndexedDB for offline storage
+        - Web Workers for heavy computations
+        - Barcode Scanner API for ingredient identification
+      compliance:
+        - FDA nutritional accuracy standards
+        - Allergen labeling compliance
+        - Data accuracy verification protocols
+    - name: Meal Safety Analyzer
+      description: Analyze recipes and meals for safety based on user restrictions
+      priority: high
+      rationale: Critical safety feature that builds user confidence and prevents
+        adverse reactions
+      implementation_notes:
+        - Natural language processing for recipe parsing
+        - Multi-layered safety scoring algorithm
+        - Visual safety indicators with color-blind accessibility
+        - Batch analysis for meal planning
+      dependencies:
+        - Allergy Profile Manager
+        - Ingredient Substitute Engine
+      apis:
+        - Camera API for recipe photo analysis
+        - OCR capabilities via Web Assembly
+        - Push Notifications for safety alerts
+      compliance:
+        - Medical device software guidelines
+        - Safety-critical system standards
+        - International allergen classification standards
+  advanced:
+    - name: Recipe Builder
+      description: Build safe recipes with guided ingredient selection
+      priority: medium
+      rationale: Empowers users to create custom meals while maintaining safety
+      implementation_notes:
+        - Drag-and-drop interface with touch optimization
+        - Real-time safety validation during composition
+        - Nutritional calculation with macro tracking
+        - Recipe scaling and portion management
+      dependencies:
+        - Meal Safety Analyzer
+        - Ingredient Substitute Engine
+      apis:
+        - Drag and Drop API
+        - Canvas API for visual recipe building
+        - Web Share API for recipe sharing
+      compliance:
+        - Nutritional accuracy standards
+        - Recipe attribution guidelines
+  premium:
+    - name: Advanced Nutritional Analysis
+      description: Comprehensive nutritional breakdown with macro and micronutrient tracking
+      priority: low
+      rationale: Premium feature for health-conscious users requiring detailed
+        nutritional insights
+      implementation_notes:
+        - Integration with nutrition databases
+        - Custom dietary goal setting
+        - Progress tracking and analytics
+        - Export to health apps
+      dependencies:
+        - Recipe Builder
+      apis:
+        - Health Connect API
+        - HealthKit integration
+        - Google Fit API
+      compliance:
+        - Health data privacy regulations
+        - Nutritional claims compliance
+  enterprise:
+    - name: Multi-User Management
+      description: Family and organization profile management with role-based access
+      priority: low
+      rationale: Scales solution for families and institutional use cases
+      implementation_notes:
+        - Role-based access control
+        - Shared recipe libraries
+        - Administrative dashboards
+        - Usage analytics
+      dependencies:
+        - Allergy Profile Manager
+      apis:
+        - Web Authentication API
+        - Credential Management API
+      compliance:
+        - Multi-tenant security standards
+        - Family privacy protection
+technical:
+  architecture: Client-side PWA with offline-first design using service workers
+    and local data encryption
+  stack:
+    frontend:
+      - Next.js 15 with App Router
+      - React 19 with Server Components
+      - TypeScript 5.5 for type safety
+      - Tailwind CSS with custom design system
+      - Framer Motion for animations
+    backend:
+      - Edge functions for API routes
+      - Serverless architecture
+      - Local-first data architecture
+    database:
+      - IndexedDB for offline storage
+      - SQLite WASM for complex queries
+      - Encrypted local storage
+    pwa:
+      - Workbox for service worker management
+      - Web App Manifest for installation
+      - Background sync for offline actions
+  integrations:
+    - name: Nutrition Database APIs
+      purpose: Ingredient and nutritional data
+      provider: USDA FoodData Central
+    - name: Barcode Scanning
+      purpose: Product identification
+      provider: Web-based ML models
+    - name: Health App Integration
+      purpose: Sync with fitness trackers
+      provider: Health Connect/HealthKit
+  security:
+    - End-to-end encryption for all user data
+    - Zero-knowledge architecture
+    - Biometric authentication support
+    - Secure offline storage with IndexedDB encryption
+    - Content Security Policy implementation
+    - Subresource Integrity for all assets
+  performance:
+    targets:
+      - "First Contentful Paint: under 1.5 seconds"
+      - "Largest Contentful Paint: under 2.5 seconds"
+      - "Cumulative Layout Shift: under 0.1"
+      - "Time to Interactive: under 3 seconds"
+      - "Offline functionality: 100% core features"
+    optimization:
+      - Code splitting and lazy loading
+      - Image optimization with WebP/AVIF
+      - Service worker caching strategies
+      - Bundle size optimization under 500KB
+compliance:
+  requirements:
+    - GDPR compliance for EU users
+    - CCPA compliance for California users
+    - HIPAA-level security for health data
+    - WCAG 2.1 AA accessibility standards
+    - FDA guidelines for nutrition claims
+    - International allergen labeling standards
+  measures:
+    - Privacy by design implementation
+    - Regular security audits
+    - Accessibility testing automation
+    - Data minimization practices
+    - User consent management
+    - Incident response procedures
+development:
+  phases:
+    - name: Foundation
+      duration: 4 weeks
+      deliverables:
+        - PWA shell with offline capabilities
+        - Core UI components and design system
+        - Allergy Profile Manager
+        - Basic security implementation
+    - name: Core Features
+      duration: 6 weeks
+      deliverables:
+        - Ingredient Substitute Engine
+        - Meal Safety Analyzer
+        - Offline ingredient database
+        - Advanced security features
+    - name: Advanced Features
+      duration: 4 weeks
+      deliverables:
+        - Recipe Builder
+        - Nutritional analysis
+        - Enhanced user experience
+        - Performance optimization
+    - name: Polish & Launch
+      duration: 2 weeks
+      deliverables:
+        - Final testing and bug fixes
+        - App store preparation
+        - Marketing materials
+        - Launch preparation
+  team:
+    size: 4-5 developers
+    roles:
+      - Full-stack React/TypeScript developer (2)
+      - PWA/Service Worker specialist (1)
+      - UI/UX developer with accessibility focus (1)
+      - Security and privacy specialist (1)
+quality:
+  testing:
+    approaches:
+      - Unit testing with Jest and React Testing Library
+      - Integration testing for PWA features
+      - End-to-end testing with Playwright
+      - Accessibility testing with axe-core
+      - Performance testing with Lighthouse CI
+      - Security testing with OWASP guidelines
+      - Offline functionality testing
+    coverage_target: 90% or higher
+  metrics:
+    performance:
+      - Core Web Vitals monitoring
+      - Real User Monitoring (RUM)
+      - Synthetic testing
+    reliability:
+      - Error tracking with crash analytics
+      - Uptime monitoring for API dependencies
+      - Service worker update success rates
+    user_experience:
+      - User satisfaction surveys
+      - Feature usage analytics
+      - Accessibility compliance scores
+  monitoring:
+    - Real-time performance monitoring
+    - Error tracking and alerting
+    - User behavior analytics (privacy-compliant)
+    - Security monitoring and threat detection
+deployment:
+  environments:
+    - name: development
+      purpose: Feature development and testing
+      url: https://dev-safemeal.app
+    - name: staging
+      purpose: Pre-production testing and QA
+      url: https://staging-safemeal.app
+    - name: production
+      purpose: Live application
+      url: https://safemeal.app
+  ci_cd:
+    platform: GitHub Actions
+    pipeline:
+      - Automated testing on pull requests
+      - Security scanning and dependency checks
+      - Performance auditing with Lighthouse
+      - Accessibility testing
+      - Progressive deployment with rollback capability
+  hosting:
+    primary: Vercel with global CDN
+    backup: Netlify for redundancy
+    features:
+      - Edge computing for optimal performance
+      - Automatic HTTPS and security headers
+      - Global CDN for fast content delivery
+      - Analytics and monitoring integration
+meta:
+  step: 1
+  version: "4.1"
+  timestamp: 2025-07-22T08:57:03.838Z
+  status: complete
+  checksum: 0f29f8f93a3ac88a2cb077cc714523616f77211768e4bebf413a7e0739436f90
+  batch_upgraded: true
+  upgrade_date: 2025-07-22T08:57:03.838Z
+  original_version: "1.0"

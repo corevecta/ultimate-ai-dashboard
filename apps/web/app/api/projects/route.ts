@@ -77,9 +77,16 @@ export async function GET(request: Request) {
             const aiGenPath = path.join(projectPath, 'ai-generated');
             
             // Check if project has specifications
-            const hasSpec = await fs.access(path.join(aiGenPath, 'specification.yaml'))
+            // Check for specification in both root and ai-generated directories
+            const hasSpecInRoot = await fs.access(path.join(projectPath, 'specification.yaml'))
               .then(() => true)
               .catch(() => false);
+            
+            const hasSpecInAiGen = await fs.access(path.join(aiGenPath, 'specification.yaml'))
+              .then(() => true)
+              .catch(() => false);
+            
+            const hasSpec = hasSpecInRoot || hasSpecInAiGen;
             
             const hasMarketEnhanced = await fs.access(path.join(aiGenPath, 'specification-market-enhanced-v2.yaml'))
               .then(() => true)
@@ -103,9 +110,14 @@ export async function GET(request: Request) {
             // Try to read specification for more details
             if (hasSpec) {
               try {
-                const specPath = hasMarketEnhanced 
-                  ? path.join(aiGenPath, 'specification-market-enhanced-v2.yaml')
-                  : path.join(aiGenPath, 'specification.yaml');
+                let specPath;
+                if (hasMarketEnhanced) {
+                  specPath = path.join(aiGenPath, 'specification-market-enhanced-v2.yaml');
+                } else if (hasSpecInRoot) {
+                  specPath = path.join(projectPath, 'specification.yaml');
+                } else {
+                  specPath = path.join(aiGenPath, 'specification.yaml');
+                }
                 
                 const specContent = await fs.readFile(specPath, 'utf-8');
                 const spec = yaml.load(specContent) as ProjectSpecification;

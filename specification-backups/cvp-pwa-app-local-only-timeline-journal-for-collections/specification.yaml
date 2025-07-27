@@ -1,0 +1,265 @@
+project:
+  name: Local-only timeline/journal for collections
+  type: pwa-app
+  description: Privacy-first collection management for stamps, coins, art with
+    photo tagging and export capabilities
+  version: 1.0.0
+  category: productivity
+features:
+  core:
+    - name: Collection Timeline
+      description: Chronological view of all collection items with photos and metadata
+      rationale: Essential for tracking collection growth and organizing items by
+        acquisition date
+      priority: high
+      dependencies: []
+      apis:
+        - IndexedDB
+        - Canvas API
+        - File API
+      compliance:
+        - GDPR privacy by design
+      implementation_notes:
+        - React virtualization for large datasets
+        - IndexedDB for offline storage
+        - Image compression and thumbnails
+        - Search and filter capabilities
+    - name: Photo Management
+      description: Upload, tag, and organize photos of collection items
+      rationale: Visual documentation is crucial for collection management and
+        authentication
+      priority: high
+      dependencies:
+        - Collection Timeline
+      apis:
+        - Canvas API
+        - File API
+        - Blob API
+      compliance:
+        - Local storage only
+        - No cloud uploads
+      implementation_notes:
+        - Canvas API for image processing
+        - EXIF data extraction
+        - Custom tagging system
+        - Multiple photo support per item
+    - name: Offline Sync
+      description: Full offline functionality with service worker caching
+      rationale: Ensures application works without internet connection for privacy and
+        reliability
+      priority: high
+      dependencies: []
+      apis:
+        - Service Worker
+        - Cache API
+        - Background Sync
+      compliance:
+        - Offline-first architecture
+      implementation_notes:
+        - Service worker implementation
+        - Cache API for assets
+        - Background sync
+        - Offline indicators
+  advanced:
+    - name: Data Export
+      description: Export collection data in multiple formats (JSON, CSV, PDF)
+      rationale: Enables data portability and backup without cloud dependency
+      priority: medium
+      dependencies:
+        - Collection Timeline
+        - Photo Management
+      apis:
+        - File System Access API
+        - Blob API
+      compliance:
+        - Data portability rights
+      implementation_notes:
+        - FileSaver.js integration
+        - PDF generation with jsPDF
+        - CSV export with photos
+        - Backup and restore functionality
+    - name: Advanced Search
+      description: Full-text search across all metadata and tags
+      rationale: Critical for large collections to find specific items quickly
+      priority: medium
+      dependencies:
+        - Collection Timeline
+        - Photo Management
+      apis:
+        - IndexedDB full-text search
+      compliance:
+        - Local search only
+      implementation_notes:
+        - Fuzzy search implementation
+        - Tag-based filtering
+        - Date range searches
+  premium: []
+  enterprise: []
+technical:
+  architecture: Client-side PWA with offline-first design
+  stack:
+    frontend: React 18 with TypeScript
+    styling: Tailwind CSS 4.0
+    database: IndexedDB
+    build_tool: Vite 5.3
+    pwa: Workbox with Vite PWA plugin
+  integrations:
+    apis:
+      - name: IndexedDB
+        purpose: Local data storage
+        implementation: idb wrapper library
+      - name: Service Worker
+        purpose: Offline functionality
+        implementation: Workbox strategies
+      - name: Canvas API
+        purpose: Image processing
+        implementation: Native browser API
+  security:
+    measures:
+      - No external API calls
+      - Local-only data storage
+      - CSP headers implementation
+      - Input sanitization
+    authentication: not_required
+    encryption: browser_native
+  performance:
+    targets:
+      - metric: First Contentful Paint
+        value: under 1.5s
+      - metric: Largest Contentful Paint
+        value: under 2.5s
+      - metric: Time to Interactive
+        value: under 3s
+      - metric: Offline storage capacity
+        value: 500MB
+      - metric: Image compression quality
+        value: 80%
+    optimization:
+      - React virtualization for large lists
+      - Image compression and thumbnails
+      - Code splitting and lazy loading
+      - Service worker caching
+compliance:
+  requirements:
+    - GDPR compliance through privacy by design
+    - No data collection or tracking
+    - Local-only storage requirement
+    - Offline-first functionality
+  measures:
+    privacy:
+      - Zero data collection
+      - No external tracking scripts
+      - Local-only storage
+      - No cloud synchronization
+    security:
+      - Content Security Policy implementation
+      - Input validation and sanitization
+      - Secure local storage practices
+    accessibility:
+      - WCAG 2.1 AA compliance
+      - Keyboard navigation support
+      - Screen reader compatibility
+development:
+  phases:
+    - name: Foundation
+      duration: 2 weeks
+      deliverables:
+        - PWA setup with Vite and TypeScript
+        - Basic UI components with Tailwind
+        - IndexedDB integration
+        - Service worker implementation
+    - name: Core Features
+      duration: 4 weeks
+      deliverables:
+        - Collection timeline implementation
+        - Photo upload and management
+        - Basic search and filtering
+        - Offline functionality
+    - name: Advanced Features
+      duration: 3 weeks
+      deliverables:
+        - Data export functionality
+        - Advanced search implementation
+        - Performance optimizations
+        - PWA installation prompts
+    - name: Polish & Testing
+      duration: 2 weeks
+      deliverables:
+        - UI/UX refinements
+        - Comprehensive testing
+        - Accessibility improvements
+        - Documentation
+  team:
+    size: 2
+    roles:
+      - Frontend Developer (React/TypeScript)
+      - UX Designer
+quality:
+  testing:
+    approaches:
+      - Unit testing with Vitest
+      - Component testing with React Testing Library
+      - E2E testing with Playwright
+      - PWA functionality testing
+      - Offline scenario testing
+    coverage_target: 85%
+    performance_testing:
+      - Lighthouse CI integration
+      - Core Web Vitals monitoring
+      - Large dataset performance testing
+  metrics:
+    code_quality:
+      - ESLint compliance
+      - TypeScript strict mode
+      - Prettier formatting
+    user_experience:
+      - PWA audit scores above 90
+      - Accessibility score above 95
+      - Performance score above 90
+  monitoring:
+    - Service worker error tracking
+    - Performance monitoring
+    - Offline usage analytics (local only)
+deployment:
+  environments:
+    development:
+      url: localhost:3000
+      features:
+        - Hot reload
+        - Debug tools
+    staging:
+      url: staging.collections-app.com
+      features:
+        - Production build
+        - PWA testing
+    production:
+      url: collections-app.com
+      features:
+        - Full PWA
+        - Service worker
+        - Install prompts
+  ci_cd:
+    platform: GitHub Actions
+    pipeline:
+      - Lint and type checking
+      - Unit and integration tests
+      - Build optimization
+      - PWA validation
+      - Lighthouse performance audit
+      - Deploy to hosting
+  hosting:
+    primary: GitHub Pages
+    backup: Netlify
+    requirements:
+      - HTTPS support
+      - Service worker support
+      - Custom domain support
+meta:
+  step: 1
+  version: "4.1"
+  timestamp: 2025-07-22T09:01:13.074Z
+  status: complete
+  checksum: 0f29f8f93a3ac88a2cb077cc714523616f77211768e4bebf413a7e0739436f90
+  batch_upgraded: true
+  upgrade_date: 2025-07-22T09:01:13.074Z
+  original_version: "1.0"

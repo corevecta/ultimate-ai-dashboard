@@ -1,0 +1,365 @@
+project:
+  name: Local Music Player PWA
+  type: pwa-app
+  description: Privacy-first Spotify-like music player for local files with
+    offline-first architecture, featuring advanced audio processing, smart music
+    discovery, and professional-grade playback capabilities
+  version: 1.0.0
+  category: multimedia
+features:
+  core:
+    - name: Local File Library Management
+      description: Comprehensive local music library with metadata extraction,
+        organization, and recursive directory scanning
+      rationale: Foundation for all music player functionality - users need to import
+        and organize their music collections
+      apis:
+        - File System Access API
+        - Web Audio API
+        - IndexedDB API
+      implementation_notes: Directory scanning with recursive file discovery,
+        ID3/FLAC/MP3 metadata parsing, efficient IndexedDB storage schema with
+        optimized queries
+      compliance: []
+    - name: High-Quality Audio Playback
+      description: Professional-grade audio engine with gapless playback, crossfading,
+        and advanced playback controls
+      rationale: Core listening experience must match or exceed desktop music players
+        to satisfy audiophile requirements
+      apis:
+        - Web Audio API
+        - Media Session API
+        - Service Worker API
+      implementation_notes: Web Audio API with AudioBuffer management, crossfade
+        algorithms for seamless track transitions, background audio support with
+        media session integration
+      compliance: []
+    - name: Offline-First Architecture
+      description: Complete functionality without internet connection using service
+        workers, intelligent caching, and local data persistence
+      rationale: Essential for PWA experience and privacy-first approach, ensuring
+        uninterrupted music playback
+      apis:
+        - Service Worker API
+        - Cache API
+        - IndexedDB API
+      implementation_notes: Workbox integration for intelligent caching strategies,
+        offline queue management, and progressive enhancement patterns
+      compliance: []
+    - name: Smart Music Discovery
+      description: AI-powered recommendations and advanced search within local library
+        using machine learning algorithms
+      rationale: Helps users discover forgotten music in their collection and creates
+        personalized listening experiences
+      apis:
+        - Web Workers API
+        - IndexedDB API
+      implementation_notes: Full-text search with fuzzy matching, genre classification
+        algorithms, listening pattern analysis with temporal weighting
+      compliance: []
+    - name: Playlist Management System
+      description: Create, edit, and organize custom playlists with smart playlist
+        generation and advanced sorting options
+      rationale: Essential music organization feature expected by users for managing
+        large music collections
+      apis:
+        - IndexedDB API
+        - Drag and Drop API
+      implementation_notes: Dynamic playlist updates with real-time synchronization,
+        playlist export/import functionality, smart playlist rules engine
+      compliance: []
+  advanced:
+    - name: Advanced Audio Effects
+      description: Professional EQ, reverb, compression, and audio enhancement suite
+        with real-time processing
+      rationale: Differentiates from basic players and appeals to audiophiles who want
+        professional audio control
+      apis:
+        - Web Audio API
+        - AudioWorklet API
+      implementation_notes: Custom AudioWorklet processors for low-latency effects,
+        real-time effect chain processing, preset management with user
+        customization
+      compliance: []
+    - name: Music Visualization
+      description: Real-time audio visualization with customizable themes, frequency
+        analysis, and multiple display modes
+      rationale: Enhanced visual experience adds entertainment value and helps users
+        connect with their music visually
+      apis:
+        - Canvas API
+        - Web Audio API
+        - WebGL API
+      implementation_notes: FFT analysis for frequency visualization,
+        WebGL-accelerated rendering, multiple visualization modes with
+        performance optimization
+      compliance: []
+    - name: Cross-Device Sync
+      description: Synchronize playlists, preferences, and playback state across
+        devices via encrypted cloud storage
+      rationale: Modern users expect seamless multi-device experiences for their music
+        libraries
+      apis:
+        - Crypto API
+        - Fetch API
+        - Cloud Storage APIs
+      implementation_notes: End-to-end encryption with AES-256, conflict resolution
+        algorithms, selective sync options for bandwidth management
+      compliance:
+        - GDPR
+    - name: Advanced Library Analytics
+      description: Detailed listening statistics, music library insights, and
+        personalized listening reports
+      rationale: Power users want comprehensive analytics about their listening habits
+        and library composition
+      apis:
+        - IndexedDB API
+        - Web Workers API
+        - Chart.js API
+      implementation_notes: Listening session tracking with privacy preservation,
+        genre distribution analysis, temporal listening pattern detection
+      compliance: []
+  premium:
+    - name: High-Resolution Audio Support
+      description: Support for FLAC, DSD, and other high-resolution audio formats with
+        bit-perfect playback
+      rationale: Audiophile market segment willing to pay premium for high-quality
+        audio reproduction
+      apis:
+        - Web Audio API
+        - File API
+        - AudioWorklet API
+      implementation_notes: Native high-res decoding up to 192kHz/32-bit, bit-perfect
+        playback path, format conversion capabilities
+      compliance: []
+    - name: Advanced Playlist Intelligence
+      description: AI-generated playlists based on mood detection, activity
+        recognition, and advanced listening pattern analysis
+      rationale: Premium feature providing unique value through sophisticated
+        recommendation algorithms
+      apis:
+        - Web Workers API
+        - Machine Learning APIs
+        - TensorFlow.js
+      implementation_notes: Mood detection algorithms using audio feature analysis,
+        activity-based recommendations, temporal playlist generation with
+        context awareness
+      compliance: []
+    - name: Cloud Library Backup
+      description: Encrypted backup of music library metadata, playlists, and user
+        preferences with incremental sync
+      rationale: Premium users need comprehensive data protection and seamless device
+        migration capabilities
+      apis:
+        - Crypto API
+        - Cloud Storage APIs
+        - IndexedDB API
+      implementation_notes: Incremental backup system with deduplication,
+        metadata-only backup for privacy compliance, automated restore
+        functionality
+      compliance:
+        - GDPR
+        - CCPA
+    - name: Advanced Audio Processing
+      description: Room correction, loudness normalization, dynamic range processing,
+        and professional mastering tools
+      rationale: Professional-grade features targeting serious audiophiles and audio
+        professionals
+      apis:
+        - Web Audio API
+        - AudioWorklet API
+        - Microphone API
+      implementation_notes: Room acoustic modeling with impulse response processing,
+        ReplayGain implementation, dynamic range compression with transparency
+      compliance: []
+  enterprise:
+    - name: Multi-User Management
+      description: Support for multiple user profiles with isolated libraries,
+        preferences, and administrative controls
+      rationale: Family and shared device scenarios in enterprise environments require
+        user separation and management
+      apis:
+        - IndexedDB API
+        - Crypto API
+        - Web Authentication API
+      implementation_notes: Role-based access control system, isolated data storage
+        with encryption per user, comprehensive permission management
+      compliance:
+        - GDPR
+        - SOC2
+    - name: Enterprise Security Features
+      description: Advanced encryption, comprehensive audit logging, compliance
+        reporting, and security monitoring
+      rationale: Enterprise customers require enhanced security posture and regulatory
+        compliance capabilities
+      apis:
+        - Crypto API
+        - File System Access API
+        - Performance Observer API
+      implementation_notes: AES-256 encryption for all data at rest, comprehensive
+        audit trails with tamper detection, automated compliance dashboard
+        generation
+      compliance:
+        - SOC2
+        - GDPR
+        - HIPAA
+    - name: Advanced Analytics Dashboard
+      description: Enterprise-grade analytics with usage reporting, performance
+        metrics, and business intelligence features
+      rationale: Enterprise users need detailed insights into system usage and
+        performance for business decisions
+      apis:
+        - IndexedDB API
+        - Web Workers API
+        - Performance Observer API
+      implementation_notes: Real-time analytics processing, customizable reporting
+        engine, data export capabilities with multiple formats
+      compliance:
+        - SOC2
+        - GDPR
+technical:
+  architecture:
+    type: Progressive Web App with MVC pattern and offline-first design
+    components:
+      - Audio Engine
+      - Library Manager
+      - UI Components
+      - Service Worker
+      - Database Layer
+      - Analytics Engine
+    patterns:
+      - Observer
+      - Strategy
+      - Factory
+      - Command
+      - Module
+  stack:
+    frontend: Next.js 15 with React 19, TypeScript 5.5, Tailwind CSS 4, and PWA
+      optimization
+    backend: Service Worker-based offline architecture with background sync capabilities
+    database: IndexedDB with Dexie.js wrapper for efficient local data management
+    infrastructure: Static hosting with PWA manifest, service workers, and CDN distribution
+  integrations:
+    - Web Audio API for professional audio processing
+    - File System Access API for local file management
+    - Media Session API for system integration
+    - IndexedDB for local data persistence
+    - Service Worker API for offline functionality
+    - Crypto API for data encryption
+    - Canvas API and WebGL for visualizations
+    - TensorFlow.js for AI recommendations
+    - Cloud Storage APIs for sync functionality
+  security:
+    - Content Security Policy with strict directives
+    - Subresource Integrity for all external resources
+    - HTTPS enforcement with HSTS headers
+    - Local data encryption with AES-256
+    - Secure random key generation
+    - Input validation and sanitization
+    - XSS protection mechanisms
+    - Audit logging for security events
+  performance:
+    - Audio buffer optimization with memory management
+    - Lazy loading for large music libraries
+    - Virtual scrolling for performance at scale
+    - Service worker caching with intelligent strategies
+    - Web Workers for CPU-intensive processing
+    - IndexedDB query optimization
+    - Image and asset compression
+    - Code splitting and tree shaking
+    - Performance monitoring and optimization
+compliance:
+  requirements:
+    - GDPR for EU user data protection
+    - CCPA for California privacy rights
+    - SOC2 for enterprise security standards
+  measures:
+    - Local-only data storage by default
+    - No third-party tracking or analytics
+    - Transparent privacy policy with clear consent
+    - User control over data collection
+    - Right to data portability and deletion
+    - Regular security audits and penetration testing
+development:
+  phases:
+    - name: Phase 1 - Core Foundation
+      duration: 6 weeks
+      deliverables:
+        - Local file library management system
+        - Basic audio playback with Web Audio API
+        - Offline functionality with service workers
+        - Essential playlist management
+        - Basic UI components and navigation
+    - name: Phase 2 - Enhanced Features
+      duration: 4 weeks
+      deliverables:
+        - Smart music discovery and search
+        - Advanced audio effects suite
+        - Music visualization components
+        - Enhanced UI with advanced controls
+        - Performance optimizations
+    - name: Phase 3 - Premium Features
+      duration: 4 weeks
+      deliverables:
+        - High-resolution audio support
+        - AI-powered playlist generation
+        - Cloud sync functionality
+        - Advanced analytics dashboard
+        - Multi-user support foundation
+    - name: Phase 4 - Polish & Launch
+      duration: 2 weeks
+      deliverables:
+        - Performance optimization and testing
+        - Bug fixes and stability improvements
+        - Comprehensive documentation
+        - PWA store submission and deployment
+        - Security audit and compliance verification
+  team:
+    size: 3-4 developers
+    roles:
+      - Senior Frontend Developer with React/Next.js expertise
+      - Audio Engineer/Specialist with Web Audio API experience
+      - UX/UI Designer with PWA and mobile design skills
+      - QA Engineer with audio testing and PWA expertise
+quality:
+  testing:
+    - Unit tests with Vitest and React Testing Library
+    - Integration tests for audio pipeline
+    - End-to-end tests with Playwright
+    - Manual audio quality testing across devices
+    - Cross-browser compatibility testing
+    - PWA functionality testing
+    - Performance regression testing
+  metrics:
+    - 90% code coverage minimum
+    - First Contentful Paint under 1.5 seconds
+    - Audio latency under 50 milliseconds
+    - Library scan performance of 1000 files per minute
+    - Lighthouse PWA score above 90
+    - Core Web Vitals in green range
+  monitoring:
+    - Error tracking with Sentry integration
+    - Performance monitoring with Core Web Vitals
+    - User analytics with privacy-compliant tracking
+    - Audio quality metrics and latency monitoring
+    - Service worker performance tracking
+    - Offline functionality monitoring
+deployment:
+  environments:
+    - development
+    - staging
+    - production
+  ci_cd: GitHub Actions pipeline with automated testing, PWA optimization,
+    security scanning, and progressive deployment with rollback capabilities
+  hosting: Static hosting on Vercel with global CDN distribution, automatic HTTPS,
+    PWA manifest serving, and service worker optimization for offline
+    functionality
+meta:
+  step: 1
+  version: "4.1"
+  timestamp: 2025-07-21T20:37:39.447Z
+  status: complete
+  checksum: e9c32e411e8d10362166ad7e8dc6a1818e4c3241475bb5f26161b703ace05749
+  batch_upgraded: true
+  upgrade_date: 2025-07-21T20:37:39.447Z
+  original_version: "4.0"

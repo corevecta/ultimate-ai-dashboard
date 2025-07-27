@@ -1,0 +1,92 @@
+project:
+  name: "Fund/Cap Table Manager with Transaction Logs"
+  type: "notion-integration"
+  description: "Privacy-first fund and cap table manager with transaction logs, visualizations, and export capabilities integrated into Notion"
+  version: "1.0.0"
+
+branding:
+  company: "Corevecta"
+  vision: "Privacy by Default, Performance by Design"
+  style: "Professional privacy-first, dark theme, glassmorphism"
+  colors:
+    primary: "#f59e0b"
+    secondary: "#ea580c"
+    background: "gray-950"
+    surface: "gray-900"
+
+core_features:
+  - name: "Cap Table Management"
+    description: "Comprehensive cap table tracking with shareholder management and equity calculations"
+    priority: "high"
+    technical_details:
+      - "Real-time equity percentage calculations"
+      - "Shareholder database with contact information"
+      - "Vesting schedule tracking and cliff handling"
+      - "Round-based equity dilution modeling"
+
+  - name: "Transaction Logging"
+    description: "Complete audit trail of all funding transactions and equity changes"
+    priority: "high"
+    technical_details:
+      - "Immutable transaction history with timestamps"
+      - "Investment round tracking with valuation data"
+      - "Automated equity recalculation on new transactions"
+      - "Compliance-ready audit logs"
+
+  - name: "Data Visualization"
+    description: "Interactive charts and graphs for funding data within Notion"
+    priority: "medium"
+    technical_details:
+      - "Ownership pie charts with dynamic updates"
+      - "Funding round timeline visualization"
+      - "Valuation trend analysis over time"
+      - "Responsive charts optimized for Notion interface"
+
+  - name: "Export & Reporting"
+    description: "Multi-format data export with customizable reports"
+    priority: "medium"
+    technical_details:
+      - "CSV/Excel export for spreadsheet compatibility"
+      - "PDF report generation with company branding"
+      - "Automated compliance report generation"
+      - "Custom date range filtering for exports"
+
+technical:
+  architecture: "Client-side Notion integration with local data persistence"
+  dependencies:
+    production:
+      - "@notionhq/client": "^2.2.0"
+      - "chart.js": "^4.4.0"
+      - "jspdf": "^2.5.0"
+      - "papaparse": "^5.4.0"
+    development:
+      - "typescript": "^5.5.0"
+      - "vite": "^5.3.0"
+      - "@types/node": "^22.0.0"
+      - "vitest": "^2.0.0"
+
+performance:
+  target_metrics:
+    - "Initial load: <500ms"
+    - "Chart rendering: <200ms"
+    - "Export generation: <2s for 1000 records"
+    - "Memory usage: <50MB"
+
+privacy:
+  data_collection: "none"
+  tracking: false
+  storage: "local_only"
+  privacy_first: true
+
+deployment:
+  platforms:
+    - platform: "Notion Integration"
+      details: "OAuth-based integration with Notion workspace permissions"
+
+monetization:
+  model: "Free"
+  free_tier: "Full core features forever"
+  paid_tiers:
+    - name: "Pro"
+      price: "$9/month"
+      features: ["Advanced reporting templates", "Bulk data import", "Priority support"]

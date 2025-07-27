@@ -1,0 +1,301 @@
+project:
+  name: Grammar Drill Scheduler & Worksheet Generator
+  type: pwa-app
+  description: Privacy-first PWA for scheduling grammar drills and generating
+    printable worksheets with complete offline functionality
+  version: 1.0.0
+  category: Education & Productivity
+features:
+  core:
+    - name: Grammar Drill Scheduler
+      description: Create and schedule grammar exercises with spaced repetition algorithms
+      priority: high
+      rationale: Essential for maintaining consistent learning habits and optimizing
+        retention through scientifically-proven spaced repetition
+      dependencies:
+        - service_worker
+        - indexeddb_storage
+      apis:
+        - Notifications API
+        - Background Sync API
+        - IndexedDB
+      compliance:
+        - COPPA
+        - Student Data Privacy
+      implementation_notes:
+        - Local IndexedDB storage for drill data
+        - Service worker notifications for scheduled drills
+        - Offline-first progressive enhancement
+        - Customizable drill types and difficulty levels
+    - name: Worksheet Generator
+      description: Generate printable PDF worksheets with answer keys
+      priority: high
+      rationale: Provides tangible learning materials that can be used offline and
+        shared with parents/teachers
+      dependencies:
+        - pdf_generation
+        - template_engine
+      apis:
+        - File System Access API
+        - Print API
+      compliance:
+        - Accessibility Guidelines
+        - Print Standards
+      implementation_notes:
+        - Client-side PDF generation using jsPDF
+        - Template-based worksheet layouts
+        - Print optimization with CSS @media print
+        - Export to multiple formats (PDF, HTML)
+    - name: Progress Tracking
+      description: Track student performance and learning analytics
+      priority: medium
+      rationale: Enables data-driven learning optimization while maintaining privacy
+        through local-only analytics
+      dependencies:
+        - local_analytics
+        - chart_visualization
+      apis:
+        - IndexedDB
+        - Canvas API
+      compliance:
+        - Data Privacy
+        - Student Records Protection
+      implementation_notes:
+        - Local analytics dashboard
+        - Performance metrics visualization
+        - Export progress reports
+        - Mastery tracking per grammar concept
+  advanced:
+    - name: Adaptive Learning Engine
+      description: AI-powered difficulty adjustment based on user performance
+      priority: medium
+      rationale: Personalizes learning experience to optimize challenge level and
+        engagement
+      dependencies:
+        - progress_tracking
+        - machine_learning_models
+      apis:
+        - Web Workers API
+        - IndexedDB
+      compliance:
+        - Algorithm Transparency
+        - Educational Standards
+    - name: Collaborative Features
+      description: Share worksheets and progress with teachers/parents via secure links
+      priority: low
+      rationale: Enhances educational collaboration while maintaining privacy controls
+      dependencies:
+        - encryption
+        - secure_sharing
+      apis:
+        - Web Share API
+        - Crypto API
+      compliance:
+        - FERPA
+        - Data Sharing Agreements
+  premium:
+    - name: Advanced Templates
+      description: Professional worksheet templates with custom branding
+      priority: medium
+      rationale: Provides differentiation for educational institutions and tutoring
+        businesses
+      dependencies:
+        - template_engine
+        - branding_system
+      apis:
+        - Canvas API
+        - File System Access API
+      compliance:
+        - Copyright
+        - Trademark Guidelines
+    - name: Bulk Operations
+      description: Generate and export multiple worksheets simultaneously
+      priority: low
+      rationale: Increases efficiency for educators managing multiple students or classes
+      dependencies:
+        - worksheet_generator
+        - export_system
+      apis:
+        - File System Access API
+        - Web Workers API
+      compliance:
+        - Performance Standards
+        - Resource Management
+  enterprise:
+    - name: Institution Dashboard
+      description: Multi-student management and analytics for schools
+      priority: low
+      rationale: Scales solution for institutional deployment while maintaining
+        privacy standards
+      dependencies:
+        - multi_user_system
+        - advanced_analytics
+      apis:
+        - IndexedDB
+        - Web Workers API
+      compliance:
+        - FERPA
+        - Institutional Privacy Policies
+technical:
+  architecture: Client-side PWA with offline-first design using service workers
+    and IndexedDB for data persistence
+  stack:
+    frontend:
+      framework: Next.js 15 with React 19
+      styling: Tailwind CSS 4.0 with glassmorphism design system
+      state_management: React Context with useReducer
+      offline: Workbox service worker with background sync
+      database: Dexie.js wrapper for IndexedDB
+      pdf_generation: jsPDF with custom templates
+      charts: Chart.js for analytics visualization
+    build_tools:
+      bundler: Next.js built-in webpack
+      typescript: TypeScript 5.5
+      linting: ESLint 9.0
+      formatting: Prettier 3.0
+      testing: Jest 29.0 and Playwright 1.40
+  integrations:
+    notification_system: Service Worker Push API
+    file_handling: File System Access API for exports
+    sharing: Web Share API for collaborative features
+    encryption: Web Crypto API for secure data handling
+  security:
+    data_protection: Client-side encryption for sensitive data
+    authentication: Local device-based authentication
+    privacy: Zero server data collection, local-only storage
+    content_security: CSP headers and XSS protection
+  performance:
+    caching_strategy: Service worker with cache-first for static assets
+    data_optimization: IndexedDB with compression for large datasets
+    code_splitting: Route-based code splitting with Next.js
+    lazy_loading: Component lazy loading and image optimization
+    offline_capability: Complete offline functionality with sync when online
+compliance:
+  requirements:
+    privacy:
+      - COPPA compliance for users under 13
+      - GDPR compliance for EU users
+      - Student data privacy protection
+    accessibility:
+      - WCAG 2.1 AA compliance
+      - Screen reader compatibility
+      - Keyboard navigation support
+    security:
+      - Client-side data encryption
+      - Secure local storage practices
+      - No external data transmission
+  measures:
+    privacy_by_design: All data processing occurs locally
+    data_minimization: Only collect necessary performance metrics
+    consent_management: Clear privacy controls and settings
+    audit_trail: Local logging of data access and modifications
+development:
+  phases:
+    phase_1:
+      name: Core PWA Foundation
+      duration: 4 weeks
+      deliverables:
+        - PWA setup with service worker
+        - Basic UI with Tailwind and glassmorphism
+        - IndexedDB data layer with Dexie
+        - Grammar drill creation interface
+      team_size: 3 developers
+      roles:
+        - Frontend Developer
+        - PWA Specialist
+        - UI/UX Designer
+    phase_2:
+      name: Scheduling and Notifications
+      duration: 3 weeks
+      deliverables:
+        - Spaced repetition algorithm
+        - Service worker notifications
+        - Drill scheduling interface
+        - Offline sync capabilities
+      team_size: 2 developers
+      roles:
+        - Frontend Developer
+        - PWA Specialist
+    phase_3:
+      name: Worksheet Generation
+      duration: 3 weeks
+      deliverables:
+        - PDF generation with jsPDF
+        - Template system for worksheets
+        - Print optimization
+        - Export functionality
+      team_size: 2 developers
+      roles:
+        - Frontend Developer
+        - PDF Specialist
+    phase_4:
+      name: Analytics and Polish
+      duration: 2 weeks
+      deliverables:
+        - Progress tracking dashboard
+        - Chart.js visualizations
+        - Performance optimizations
+        - Final testing and deployment
+      team_size: 3 developers
+      roles:
+        - Frontend Developer
+        - Analytics Specialist
+        - QA Engineer
+quality:
+  testing:
+    approaches:
+      unit_testing: Jest for component and utility testing
+      integration_testing: Playwright for PWA functionality
+      offline_testing: Service worker offline scenario testing
+      performance_testing: Lighthouse CI for PWA metrics
+      accessibility_testing: axe-core automated testing
+    metrics:
+      code_coverage: minimum 80% for critical paths
+      performance_budget: First Contentful Paint under 1.5s
+      accessibility_score: WCAG 2.1 AA compliance
+      offline_functionality: 100% feature availability offline
+  monitoring:
+    performance_tracking: Local analytics with Chart.js
+    error_reporting: Client-side error logging to IndexedDB
+    usage_analytics: Privacy-preserving local usage metrics
+    quality_gates: Automated testing in development workflow
+deployment:
+  environments:
+    development:
+      hosting: Local development server
+      database: Local IndexedDB
+      features: Hot reload and debugging tools
+    staging:
+      hosting: Vercel preview deployments
+      testing: Full PWA functionality testing
+      validation: Performance and accessibility audits
+    production:
+      hosting: Vercel with global CDN
+      optimization: Static optimization and compression
+      monitoring: Client-side performance monitoring
+  ci_cd:
+    pipeline:
+      - Code quality checks with ESLint and Prettier
+      - TypeScript compilation and type checking
+      - Unit and integration test execution
+      - Lighthouse performance auditing
+      - PWA manifest and service worker validation
+      - Automated deployment to staging and production
+    tools:
+      version_control: Git with GitHub
+      ci_platform: GitHub Actions
+      deployment: Vercel with automatic deployments
+  hosting:
+    primary: Vercel with global CDN and edge optimization
+    pwa_features: Service worker caching and offline support
+    ssl: Automatic HTTPS with Vercel certificates
+    performance: HTTP/2, compression, and asset optimization
+meta:
+  step: 1
+  version: "4.1"
+  timestamp: 2025-07-22T09:06:36.069Z
+  status: complete
+  checksum: 0f29f8f93a3ac88a2cb077cc714523616f77211768e4bebf413a7e0739436f90
+  batch_upgraded: true
+  upgrade_date: 2025-07-22T09:06:36.069Z
+  original_version: "1.0"

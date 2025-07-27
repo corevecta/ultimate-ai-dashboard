@@ -1,0 +1,315 @@
+project:
+  name: Custom Birthday & Holiday Planner
+  type: static-site
+  description: Privacy-first browser-based card designer and event planner with
+    exportable printable cards
+  version: 1.0.0
+  category: productivity
+  branding:
+    company: Corevecta
+    vision: Privacy by Default, Performance by Design
+    style: Professional privacy-first, dark theme, glassmorphism
+    colors:
+      primary: "#06b6d4"
+      secondary: "#0284c7"
+      background: gray-950
+      surface: gray-900
+features:
+  core:
+    - name: Card Designer
+      description: Visual drag-and-drop interface for creating custom birthday and
+        holiday cards
+      priority: high
+      rationale: Core value proposition - enables users to create personalized cards
+        without design expertise
+      implementation_notes: Canvas-based editor with layers, templates, and design elements
+      dependencies:
+        - fabric.js
+        - local storage
+      apis:
+        - File API
+        - Canvas API
+        - Drag & Drop API
+      compliance:
+        - accessibility
+        - privacy
+    - name: Event Planner
+      description: Calendar-based planning for birthdays and holidays with reminders
+      priority: high
+      rationale: Differentiates from simple card makers by adding planning functionality
+      implementation_notes: Interactive calendar with event management and notifications
+      dependencies:
+        - date-fns
+        - browser notifications
+      apis:
+        - Notification API
+        - Web Storage API
+      compliance:
+        - accessibility
+        - privacy
+    - name: Export System
+      description: Export cards as high-quality PDFs optimized for printing
+      priority: high
+      rationale: Essential for users to obtain physical cards - key workflow completion
+      implementation_notes: PDF generation with print-ready quality and multiple formats
+      dependencies:
+        - jspdf
+        - canvas
+      apis:
+        - File API
+        - Blob API
+      compliance:
+        - accessibility
+  advanced:
+    - name: Template Library
+      description: Extensive collection of professionally designed card templates
+      priority: medium
+      rationale: Reduces barrier to entry for users lacking design skills
+      implementation_notes: JSON-based template storage with preview thumbnails
+      dependencies:
+        - template assets
+      apis:
+        - Fetch API
+      compliance:
+        - copyright
+        - accessibility
+    - name: Batch Operations
+      description: Create and export multiple cards simultaneously
+      priority: medium
+      rationale: Efficiency feature for users managing multiple events
+      implementation_notes: Queue-based processing with progress indicators
+      dependencies:
+        - core export system
+      apis:
+        - Web Workers API
+      compliance:
+        - performance
+        - accessibility
+  premium:
+    - name: Advanced Design Tools
+      description: Professional design features including custom fonts, advanced image
+        editing, and layer effects
+      priority: low
+      rationale: Revenue generation through advanced creative capabilities
+      implementation_notes: Extended canvas tools with professional-grade features
+      dependencies:
+        - font loading
+        - image processing
+      apis:
+        - Font Loading API
+        - Canvas API
+      compliance:
+        - licensing
+        - accessibility
+    - name: Cloud Backup
+      description: Optional cloud storage for designs and events with end-to-end encryption
+      priority: low
+      rationale: Premium convenience feature while maintaining privacy principles
+      implementation_notes: Client-side encryption before cloud storage
+      dependencies:
+        - encryption library
+      apis:
+        - Fetch API
+        - Crypto API
+      compliance:
+        - privacy
+        - encryption
+        - gdpr
+  enterprise:
+    - name: Team Collaboration
+      description: Share designs and events within organization with role-based access
+      priority: low
+      rationale: Addresses organizational use cases for event planning teams
+      implementation_notes: Shared workspace with permission management
+      dependencies:
+        - authentication system
+      apis:
+        - Fetch API
+        - Authentication API
+      compliance:
+        - privacy
+        - security
+        - access_control
+technical:
+  architecture:
+    type: Client-side SPA
+    pattern: Component-based with local-first storage
+    data_flow: Unidirectional with local state management
+    offline_support: true
+  stack:
+    frontend:
+      framework: React 19
+      language: TypeScript 5.5
+      styling: Tailwind CSS 4.0
+      build_tool: Vite 5.0
+    graphics:
+      canvas_library: Fabric.js 6.0
+      pdf_generation: jsPDF 2.5
+    utilities:
+      date_handling: date-fns 3.0
+    testing:
+      unit: Vitest 1.0
+      linting: ESLint 8.0
+  integrations:
+    browser_apis:
+      - File API for image uploads
+      - Canvas API for design rendering
+      - Notification API for event reminders
+      - Web Storage API for local persistence
+      - Drag & Drop API for design interface
+    external_services: []
+    third_party_libraries:
+      - Fabric.js for canvas manipulation
+      - jsPDF for PDF generation
+      - date-fns for date calculations
+  security:
+    data_protection:
+      - All data stored locally in browser
+      - No external data transmission
+      - Client-side encryption for premium cloud features
+    privacy_measures:
+      - No tracking or analytics
+      - No external API calls for core functionality
+      - Local-only operation by default
+    access_control:
+      - Browser-based session management
+      - No authentication required for core features
+  performance:
+    targets:
+      load_time: under 2 seconds
+      first_contentful_paint: under 1 second
+      bundle_size: under 500KB gzipped
+      lighthouse_score: 90 or higher
+      canvas_operations: 60 FPS during design
+    optimizations:
+      - Code splitting by feature
+      - Lazy loading of templates
+      - Canvas rendering optimization
+      - Progressive loading of design tools
+compliance:
+  requirements:
+    accessibility:
+      - WCAG 2.1 AA compliance
+      - Keyboard navigation support
+      - Screen reader compatibility
+      - High contrast mode support
+    privacy:
+      - No personal data collection
+      - Local-only data storage
+      - No third-party tracking
+      - Privacy-by-design architecture
+    legal:
+      - Clear terms of service
+      - Copyright compliance for templates
+      - Open source license compatibility
+  measures:
+    - Regular accessibility audits
+    - Privacy impact assessments
+    - Security vulnerability scanning
+    - Performance monitoring
+development:
+  phases:
+    - phase: 1
+      name: Core Foundation
+      duration: 4 weeks
+      deliverables:
+        - Basic card designer interface
+        - Local storage implementation
+        - Template system foundation
+        - Export functionality
+    - phase: 2
+      name: Event Planning
+      duration: 3 weeks
+      deliverables:
+        - Calendar interface
+        - Event creation and management
+        - Notification system
+        - Recurring events support
+    - phase: 3
+      name: Polish & Optimization
+      duration: 2 weeks
+      deliverables:
+        - Performance optimization
+        - Accessibility improvements
+        - Cross-browser testing
+        - Documentation
+  team:
+    size: 2-3 developers
+    roles:
+      - Frontend Developer (React/TypeScript)
+      - UI/UX Designer
+      - QA Engineer (part-time)
+    skills_required:
+      - React and TypeScript expertise
+      - Canvas API experience
+      - Accessibility knowledge
+      - Performance optimization
+quality:
+  testing:
+    approaches:
+      unit_testing: Component and utility function testing with Vitest
+      integration_testing: Canvas operations and export functionality testing
+      e2e_testing: User workflow validation with Playwright
+      accessibility_testing: Automated and manual accessibility checks
+      performance_testing: Load time and runtime performance validation
+  metrics:
+    code_coverage: 85% or higher
+    performance_budget: Bundle size under 500KB
+    accessibility_score: WCAG 2.1 AA compliance
+    user_satisfaction: 4.5+ star rating target
+  monitoring:
+    - Core Web Vitals tracking
+    - Error boundary reporting
+    - Canvas performance metrics
+    - User interaction analytics (privacy-compliant)
+deployment:
+  environments:
+    development:
+      platform: Local development server
+      url: http://localhost:5173
+      features:
+        - hot reload
+        - source maps
+        - debug tools
+    staging:
+      platform: Netlify preview deploys
+      url: https://staging-birthday-planner.netlify.app
+      features:
+        - preview builds
+        - testing environment
+    production:
+      platform: Static hosting (Netlify/Vercel/GitHub Pages)
+      url: https://birthday-planner.corevecta.com
+      features:
+        - CDN
+        - automatic HTTPS
+        - performance optimization
+  ci_cd:
+    pipeline:
+      - Automated testing on pull requests
+      - Build optimization and bundling
+      - Accessibility and performance audits
+      - Automated deployment on merge to main
+    tools:
+      - GitHub Actions
+      - Netlify Build
+      - Lighthouse CI
+  hosting:
+    requirements:
+      - Static file hosting capability
+      - HTTPS support
+      - CDN for global performance
+      - Custom domain support
+    recommended_providers:
+      - Netlify (primary)
+      - Vercel (alternative)
+      - GitHub Pages (backup)
+meta:
+  step: 1
+  version: "4.1"
+  timestamp: 2025-07-22T08:49:55.943Z
+  status: complete
+  checksum: 0f29f8f93a3ac88a2cb077cc714523616f77211768e4bebf413a7e0739436f90
+  batch_upgraded: true
+  upgrade_date: 2025-07-22T08:49:55.943Z
+  original_version: "1.0"

@@ -1,0 +1,24 @@
+# Generate requirements.md for ${projectId}
+
+You are generating requirements for a WEB APPLICATION project.
+
+Read specification.yaml and create requirements.md (min 2000 words).
+
+Project: ${projectId.split('-').slice(3).join(' ').replace(/-/g, ' ').toUpperCase()}
+
+Include:
+1. Web Application Overview (SaaS/PWA)
+2. 8-12 features with:
+   - User workflows and UI
+   - Frontend components
+   - Backend API integration
+   - Real-time features
+   - User management
+3. Technical Architecture (frontend/backend stack)
+4. Web-specific requirements (SEO, performance, accessibility)
+5. Development Guidelines
+6. Testing Strategy (E2E, cross-browser, performance)
+
+Focus on web application specifics.
+
+Start writing requirements.md now.

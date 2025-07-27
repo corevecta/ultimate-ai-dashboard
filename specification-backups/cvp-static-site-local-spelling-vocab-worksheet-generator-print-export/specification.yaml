@@ -1,0 +1,316 @@
+project:
+  name: Local Spelling & Vocab Worksheet Generator
+  type: static-site
+  description: Generate, customize, and print spelling/vocabulary worksheets
+    entirely in-browser
+  version: 1.0.0
+  category: educational-tools
+features:
+  core:
+    - name: Word List Management
+      description: Create, edit, and organize custom vocabulary and spelling word lists
+      priority: high
+      rationale: Foundation feature enabling all worksheet generation functionality
+      dependencies: []
+      apis:
+        - IndexedDB API
+        - File API
+      compliance:
+        - COPPA
+        - student-privacy
+      implementation_notes:
+        - Local storage with IndexedDB for persistence
+        - Import/export word lists in JSON/CSV formats
+        - Categorization and tagging system
+        - Offline-first architecture
+    - name: Worksheet Generator
+      description: Generate customizable worksheets from word lists with multiple formats
+      priority: high
+      rationale: Primary value proposition for educators and parents
+      dependencies:
+        - Word List Management
+      apis:
+        - Canvas API
+        - Print API
+      compliance:
+        - accessibility-wcag
+      implementation_notes:
+        - Multiple worksheet types (fill-in-blank, word search, matching,
+          crossword)
+        - Customizable difficulty levels and layouts
+        - Print-optimized CSS with proper page breaks
+        - Real-time preview functionality
+    - name: Interactive Testing
+      description: In-browser practice tests and quizzes for vocabulary mastery
+      priority: high
+      rationale: Enhances learning outcomes with immediate feedback
+      dependencies:
+        - Word List Management
+      apis:
+        - Web Audio API
+        - Local Storage API
+      compliance:
+        - student-privacy
+        - accessibility-wcag
+      implementation_notes:
+        - Multiple choice and typing test formats
+        - Progress tracking with local analytics
+        - Immediate feedback with explanations
+        - Audio pronunciation support
+    - name: Print & Export
+      description: Export worksheets as PDF or print directly from browser
+      priority: high
+      rationale: Essential for classroom and home use
+      dependencies:
+        - Worksheet Generator
+      apis:
+        - jsPDF
+        - Print API
+        - File System Access API
+      compliance:
+        - print-accessibility
+      implementation_notes:
+        - CSS print optimization with proper margins
+        - PDF generation with vector graphics
+        - Multiple page layouts and orientations
+        - Batch export capabilities
+  advanced:
+    - name: Template Library
+      description: Pre-built worksheet templates for common subjects and grade levels
+      priority: medium
+      rationale: Reduces setup time for educators
+      dependencies:
+        - Worksheet Generator
+      apis:
+        - IndexedDB API
+      compliance:
+        - educational-standards
+      implementation_notes:
+        - Grade-appropriate template collections
+        - Subject-specific formatting
+        - Template sharing and community features
+        - Customizable template parameters
+    - name: Adaptive Difficulty
+      description: AI-powered difficulty adjustment based on student performance
+      priority: medium
+      rationale: Personalizes learning experience
+      dependencies:
+        - Interactive Testing
+      apis:
+        - Web Workers API
+      compliance:
+        - student-privacy
+        - algorithmic-transparency
+      implementation_notes:
+        - Local machine learning models
+        - Performance pattern recognition
+        - Automatic difficulty scaling
+        - Privacy-preserving analytics
+  premium:
+    - name: Advanced Analytics
+      description: Detailed progress tracking and learning insights
+      priority: low
+      rationale: Valuable for educators monitoring student progress
+      dependencies:
+        - Interactive Testing
+      apis:
+        - Chart.js
+        - Local Storage API
+      compliance:
+        - student-privacy
+        - data-portability
+      implementation_notes:
+        - Comprehensive learning analytics
+        - Visual progress reports
+        - Export capabilities for gradebooks
+        - Trend analysis and predictions
+  enterprise:
+    - name: Bulk Operations
+      description: Mass import/export and batch worksheet generation
+      priority: low
+      rationale: Efficiency for large educational institutions
+      dependencies:
+        - Word List Management
+        - Worksheet Generator
+      apis:
+        - Web Workers API
+        - File System Access API
+      compliance:
+        - institutional-privacy
+        - bulk-data-handling
+      implementation_notes:
+        - CSV/Excel bulk import
+        - Batch worksheet generation
+        - Multi-user data management
+        - Administrative controls
+technical:
+  architecture: Client-side single-page application with progressive web app capabilities
+  stack:
+    frontend:
+      framework: Astro 4.5.0
+      language: TypeScript 5.5.0
+      styling: Tailwind CSS 4.0.0
+      state: Nanostores
+    backend:
+      type: client-side-only
+      storage: IndexedDB with IDB wrapper
+    build:
+      bundler: Vite 5.0.0
+      optimization: Asset bundling, code splitting, tree shaking
+  integrations:
+    storage:
+      - name: IndexedDB
+        purpose: Local data persistence
+        implementation: IDB wrapper library
+    pdf_generation:
+      - name: jsPDF
+        purpose: Client-side PDF creation
+        implementation: Vector-based worksheet export
+    audio:
+      - name: Web Audio API
+        purpose: Pronunciation support
+        implementation: Text-to-speech integration
+  security:
+    data_protection: All data stored locally, no server transmission
+    content_security: Strict CSP headers, XSS protection
+    privacy: No tracking, no analytics, no third-party requests
+  performance:
+    optimization: Code splitting, lazy loading, service worker caching
+    targets:
+      - "First Contentful Paint: under 1.5 seconds"
+      - "Largest Contentful Paint: under 2.5 seconds"
+      - "Cumulative Layout Shift: under 0.1"
+      - "First Input Delay: under 100ms"
+    monitoring: Web Vitals tracking, performance budgets
+compliance:
+  requirements:
+    - name: COPPA
+      description: Children's Online Privacy Protection Act compliance
+      measures:
+        - No data collection
+        - Local-only storage
+        - Parental controls
+    - name: WCAG 2.1 AA
+      description: Web Content Accessibility Guidelines compliance
+      measures:
+        - Screen reader support
+        - Keyboard navigation
+        - Color contrast
+        - Focus management
+    - name: Student Privacy
+      description: Educational privacy standards
+      measures:
+        - Local data storage
+        - No tracking
+        - Transparent data handling
+development:
+  phases:
+    phase_1:
+      name: Foundation & Core Features
+      duration: 4 weeks
+      team_size: 2
+      roles:
+        - Frontend Developer
+        - UI/UX Designer
+      deliverables:
+        - Project setup and build pipeline
+        - Word list management system
+        - Basic worksheet generator
+        - Print functionality
+    phase_2:
+      name: Interactive Features
+      duration: 3 weeks
+      team_size: 2
+      roles:
+        - Frontend Developer
+        - QA Tester
+      deliverables:
+        - Interactive testing module
+        - Progress tracking
+        - Audio pronunciation support
+        - Accessibility enhancements
+    phase_3:
+      name: Advanced Features & Polish
+      duration: 3 weeks
+      team_size: 3
+      roles:
+        - Frontend Developer
+        - UI/UX Designer
+        - QA Tester
+      deliverables:
+        - Template library
+        - PDF export enhancement
+        - Performance optimization
+        - Cross-browser testing
+quality:
+  testing:
+    approaches:
+      - Unit testing with Vitest
+      - Integration testing for workflow scenarios
+      - Cross-browser compatibility testing
+      - Accessibility testing with axe-core
+      - Performance testing with Lighthouse
+    coverage_targets:
+      - "Code coverage: 85% minimum"
+      - "Feature coverage: 100% of core features"
+      - "Browser coverage: Chrome, Firefox, Safari, Edge"
+    automation:
+      - CI/CD pipeline with GitHub Actions
+      - Automated accessibility audits
+      - Performance regression testing
+  metrics:
+    user_experience:
+      - "Task completion rate: 95% or higher"
+      - "Time to first worksheet: under 2 minutes"
+      - "Error rate: under 2%"
+    technical:
+      - "Bundle size: under 500KB gzipped"
+      - "Lighthouse score: 90+ across all categories"
+      - "Core Web Vitals: all metrics in green"
+    business:
+      - "User engagement: 80% return usage rate"
+      - "Feature adoption: 70% of users try interactive tests"
+  monitoring:
+    performance: Real User Monitoring with web-vitals library
+    errors: Client-side error tracking with local logging
+    usage: Privacy-respecting usage analytics
+deployment:
+  environments:
+    development:
+      url: localhost:4321
+      purpose: Local development and testing
+    staging:
+      url: staging.spelling-worksheets.com
+      purpose: Pre-production testing and stakeholder review
+    production:
+      url: spelling-worksheets.com
+      purpose: Public release
+  ci_cd:
+    pipeline: GitHub Actions
+    stages:
+      - Code quality checks (ESLint, TypeScript)
+      - Automated testing (unit, integration)
+      - Build optimization and bundling
+      - Accessibility and performance audits
+      - Deployment to staging/production
+    deployment_strategy: Blue-green deployment with rollback capability
+  hosting:
+    primary: Netlify with CDN distribution
+    alternatives:
+      - Vercel
+      - GitHub Pages
+      - AWS S3 + CloudFront
+    requirements:
+      - HTTPS enforcement
+      - Custom domain support
+      - Static site optimization
+      - Global CDN coverage
+meta:
+  step: 1
+  version: "4.1"
+  timestamp: 2025-07-22T08:41:51.175Z
+  status: complete
+  checksum: 0f29f8f93a3ac88a2cb077cc714523616f77211768e4bebf413a7e0739436f90
+  batch_upgraded: true
+  upgrade_date: 2025-07-22T08:41:51.175Z
+  original_version: "1.0"

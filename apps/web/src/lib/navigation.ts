@@ -44,6 +44,7 @@ import {
   RefreshCw,
   Gauge,
   Filter,
+  Eye,
 } from 'lucide-react';
 
 export interface NavItem {
@@ -243,6 +244,13 @@ export const navigationItems: NavItem[] = [
     ],
   },
   // Other existing pages
+  {
+    title: 'Visual Intelligence',
+    href: '/visual-intelligence',
+    icon: Eye,
+    description: 'Live code preview and exploration',
+    badge: 'New',
+  },
   {
     title: 'AI Studio',
     href: '/ai-studio',

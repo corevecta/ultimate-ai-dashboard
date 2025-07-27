@@ -1,0 +1,228 @@
+project:
+  name: Custom Study Group Organizer with Note Sync
+  type: pwa-app
+  description: Peer-to-peer study group organizer with QR code linking and note
+    synchronization, no central server required
+  version: 1.0.0
+  category: Education & Productivity
+features:
+  core:
+    - name: QR Code Group Creation
+      description: Generate QR codes to create and join study groups instantly
+      priority: high
+      rationale: Eliminates friction in group formation and enables instant peer
+        discovery without account creation
+      dependencies: []
+      apis:
+        - WebRTC API
+        - Camera API
+        - Canvas API
+      compliance:
+        - Privacy by design (no server storage)
+        - Local data processing only
+      implementation_notes:
+        - QR code generation and scanning using device camera
+        - Peer-to-peer connection establishment via WebRTC
+        - Group metadata encoding in QR payload
+    - name: Real-time Note Synchronization
+      description: Sync notes across group members in real-time without servers
+      priority: high
+      rationale: Core value proposition enabling collaborative learning without
+        privacy compromise
+      dependencies:
+        - QR Code Group Creation
+      apis:
+        - WebRTC Data Channel API
+        - IndexedDB API
+        - Broadcast Channel API
+      compliance:
+        - End-to-end encryption
+        - No data transmission to servers
+        - GDPR compliant by design
+      implementation_notes:
+        - Conflict-free replicated data types (CRDTs) for note merging
+        - WebRTC data channels for peer-to-peer sync
+        - Offline-first with local IndexedDB storage
+    - name: Study Session Management
+      description: Organize and schedule study sessions with group members
+      priority: medium
+      rationale: Provides structure and accountability for study groups
+      dependencies:
+        - Real-time Note Synchronization
+      apis:
+        - Notification API
+        - Calendar API (optional)
+        - Background Sync API
+      compliance:
+        - Local scheduling data only
+        - User consent for notifications
+      implementation_notes:
+        - Session scheduling with local notifications
+        - Participant availability tracking
+        - Session history and analytics
+  advanced:
+    - name: Offline Study Mode
+      description: Full functionality when disconnected from internet
+      priority: medium
+      rationale: Ensures continuity of study sessions regardless of connectivity
+      dependencies:
+        - Real-time Note Synchronization
+      apis:
+        - Service Worker API
+        - Cache API
+        - Background Sync API
+      compliance:
+        - Local data persistence standards
+    - name: Rich Text Note Editor
+      description: Advanced formatting options for collaborative notes
+      priority: medium
+      rationale: Enhances note-taking experience with better formatting and multimedia
+        support
+      dependencies:
+        - Real-time Note Synchronization
+      apis:
+        - File System Access API
+        - Web Share API
+        - Clipboard API
+      compliance:
+        - File handling permissions
+  premium: []
+  enterprise: []
+technical:
+  architecture: Progressive Web App with peer-to-peer networking and offline-first design
+  stack:
+    frontend:
+      framework: React 19
+      language: TypeScript 5.5
+      styling: Tailwind CSS 4.0
+      state_management: React Context + useReducer
+      build_tool: Vite 5.0
+    backend: None (peer-to-peer architecture)
+    database: IndexedDB with Dexie.js wrapper
+    pwa:
+      service_worker: Workbox 7.0
+      manifest: PWA manifest with installability
+      caching: Cache-first with network fallback
+  integrations:
+    - name: WebRTC
+      purpose: Peer-to-peer communication
+      type: Browser API
+    - name: QR Code Generation
+      purpose: Group creation and joining
+      type: Client library
+    - name: Yjs CRDT
+      purpose: Conflict-free note synchronization
+      type: JavaScript library
+  security:
+    - End-to-end encryption for all peer communications
+    - No server-side data storage or processing
+    - Local-only user data with IndexedDB encryption
+    - Secure QR code generation with cryptographic randomness
+    - Content Security Policy implementation
+  performance:
+    targets:
+      - "First Contentful Paint: under 1.5s"
+      - "Largest Contentful Paint: under 2.5s"
+      - "Time to Interactive: under 3s"
+      - "Cumulative Layout Shift: under 0.1"
+    optimizations:
+      - Code splitting and lazy loading
+      - Aggressive caching with service workers
+      - Minimal bundle size with tree shaking
+      - WebP image formats with fallbacks
+compliance:
+  requirements:
+    - GDPR compliance through privacy by design
+    - No data collection or tracking
+    - Local-only data processing
+    - User consent for device permissions (camera, notifications)
+    - Accessibility compliance (WCAG 2.1 AA)
+  measures:
+    - Privacy policy stating no data collection
+    - Transparent permission requests
+    - Keyboard navigation support
+    - Screen reader compatibility
+    - High contrast mode support
+development:
+  phases:
+    - name: Core MVP
+      duration: 6 weeks
+      deliverables:
+        - QR code generation and scanning
+        - Basic peer-to-peer connections
+        - Simple note synchronization
+        - PWA installation capability
+    - name: Enhanced Features
+      duration: 4 weeks
+      deliverables:
+        - Advanced note editor
+        - Session management
+        - Offline functionality
+        - Performance optimizations
+    - name: Polish & Launch
+      duration: 2 weeks
+      deliverables:
+        - UI/UX refinements
+        - Accessibility improvements
+        - Cross-browser testing
+        - Documentation and guides
+  team:
+    size: 3-4 developers
+    roles:
+      - Frontend Developer (React/TypeScript specialist)
+      - PWA Engineer (Service Worker/WebRTC expert)
+      - UI/UX Designer
+      - QA Engineer (part-time)
+quality:
+  testing:
+    approaches:
+      - Unit testing with Vitest
+      - Integration testing for P2P connections
+      - PWA functionality testing across browsers
+      - Performance testing with Lighthouse
+      - Accessibility testing with axe-core
+    coverage_target: 85% or higher
+  metrics:
+    - Core Web Vitals monitoring
+    - PWA install rates
+    - Peer connection success rates
+    - Note synchronization reliability
+    - User engagement analytics (local only)
+  monitoring:
+    - Client-side error tracking
+    - Performance monitoring
+    - PWA installation analytics
+    - Feature usage metrics (anonymized)
+deployment:
+  environments:
+    - name: Development
+      url: localhost:5173
+      purpose: Local development and testing
+    - name: Staging
+      url: staging.study-organizer.app
+      purpose: Pre-production testing
+    - name: Production
+      url: study-organizer.app
+      purpose: Live application
+  ci_cd:
+    platform: GitHub Actions
+    pipeline:
+      - Automated testing on pull requests
+      - Lighthouse performance checks
+      - Bundle size analysis
+      - Accessibility testing
+      - Multi-browser compatibility tests
+  hosting:
+    primary: Netlify (static hosting with PWA support)
+    cdn: Built-in Netlify CDN
+    ssl: Automatic HTTPS certificates
+    deployment: Git-based continuous deployment
+meta:
+  step: 1
+  version: "4.1"
+  timestamp: 2025-07-22T09:06:28.997Z
+  status: complete
+  checksum: 0f29f8f93a3ac88a2cb077cc714523616f77211768e4bebf413a7e0739436f90
+  batch_upgraded: true
+  upgrade_date: 2025-07-22T09:06:28.997Z
+  original_version: "1.0"

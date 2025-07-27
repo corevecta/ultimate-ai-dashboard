@@ -44,7 +44,7 @@ import {
   ChevronDown
 } from 'lucide-react';
 import { ClaudeAIAssistant } from './claude-ai-assistant';
-import { TerminalComponent } from './terminal-component';
+import { TerminalComponentWrapper as TerminalComponent } from './terminal-component-wrapper';
 import { GitIntegration } from './git-integration';
 import { CollaborationProvider } from './collaboration-provider';
 import { CommandPalette } from './command-palette';

@@ -1,0 +1,270 @@
+project:
+  name: Restaurant Meal & Nutrition Tracker
+  type: pwa-app
+  description: Privacy-first PWA for logging restaurant meals, tracking nutrition,
+    and rating taste experiences offline
+  version: 1.0.0
+  category: health-wellness
+features:
+  core:
+    - name: Meal Logging
+      description: Log restaurant visits with meal photos, descriptions, and dining context
+      rationale: Essential for tracking dining experiences and building personal meal
+        history
+      implementation_notes: Camera API integration with compression, IndexedDB for offline storage
+      dependencies: []
+      apis:
+        - Camera API
+        - IndexedDB
+        - Geolocation API
+      compliance:
+        - GDPR (local storage only)
+        - Privacy by design
+    - name: Nutrition Tracking
+      description: Track nutritional information and dietary goals for logged meals
+      rationale: Core health functionality for monitoring dietary intake and goals
+      implementation_notes: Manual entry system with local food database for offline access
+      dependencies:
+        - Meal Logging
+      apis:
+        - IndexedDB
+        - Web Storage API
+      compliance:
+        - Health data privacy
+        - Local data storage only
+    - name: Taste Rating System
+      description: Rate and review taste, presentation, service, and overall experience
+      rationale: Enables personal preference tracking and restaurant comparison
+      implementation_notes: Multi-dimensional rating with local analytics
+      dependencies:
+        - Meal Logging
+      apis:
+        - IndexedDB
+      compliance:
+        - Personal data protection
+        - Review data privacy
+  advanced:
+    - name: Offline Data Management
+      description: Complete offline functionality with data sync capabilities
+      rationale: Essential PWA capability for uninterrupted usage without internet
+      implementation_notes: Service Worker with background sync and cache strategies
+      dependencies:
+        - Meal Logging
+        - Nutrition Tracking
+        - Taste Rating System
+      apis:
+        - Service Worker API
+        - Background Sync API
+        - Cache API
+      compliance:
+        - Offline data integrity
+        - Sync privacy protection
+    - name: Data Export
+      description: Export personal data in standard formats
+      rationale: User data portability and backup functionality
+      implementation_notes: Client-side export to JSON/CSV without server involvement
+      dependencies:
+        - Offline Data Management
+      apis:
+        - File System Access API
+        - Blob API
+      compliance:
+        - GDPR data portability
+        - No server data transmission
+  premium:
+    - name: Advanced Analytics
+      description: Detailed insights into dining patterns and nutritional trends
+      rationale: Premium feature for power users wanting deeper insights
+      implementation_notes: Client-side analytics with local processing only
+      dependencies:
+        - Nutrition Tracking
+        - Taste Rating System
+      apis:
+        - IndexedDB
+        - Chart.js integration
+      compliance:
+        - Analytics privacy
+        - Local processing only
+    - name: Recipe Suggestions
+      description: Personalized recipe recommendations based on preferences
+      rationale: Value-added feature for users wanting to recreate restaurant experiences
+      implementation_notes: Local recommendation engine based on taste ratings
+      dependencies:
+        - Taste Rating System
+        - Advanced Analytics
+      apis:
+        - IndexedDB
+        - Local ML processing
+      compliance:
+        - Recommendation privacy
+        - No external API calls
+  enterprise:
+    - name: Health App Integration
+      description: Export data to popular health and fitness applications
+      rationale: Enterprise users need integration with existing health ecosystems
+      implementation_notes: OAuth integration with secure data transfer protocols
+      dependencies:
+        - Data Export
+        - Advanced Analytics
+      apis:
+        - OAuth 2.0
+        - Health app APIs (Apple Health, Google Fit)
+      compliance:
+        - HIPAA considerations
+        - Health data regulations
+        - OAuth security standards
+technical:
+  architecture: Progressive Web App with offline-first design using modern web technologies
+  stack:
+    frontend:
+      - React 19 with TypeScript for type safety
+      - Tailwind CSS 4.0 for styling and responsive design
+      - Workbox for service worker management
+      - IDB for IndexedDB operations
+      - React Camera Pro for image capture
+    backend:
+      - Client-side only (no backend server)
+      - Local IndexedDB for data persistence
+    mobile:
+      - PWA with Add to Home Screen capability
+      - Native camera integration
+      - Offline-first architecture
+  integrations:
+    internal:
+      - Service Worker for offline functionality
+      - Background Sync for data management
+      - Cache API for asset caching
+    external:
+      - None (privacy-first approach)
+  security:
+    measures:
+      - HTTPS required for PWA installation
+      - Content Security Policy implementation
+      - Local storage encryption for sensitive data
+      - No external API calls for privacy
+    authentication:
+      - Local device-based access only
+      - No user accounts required
+  performance:
+    targets:
+      - "First Contentful Paint: under 1.5 seconds"
+      - "Largest Contentful Paint: under 2.5 seconds"
+      - "Time to Interactive: under 3 seconds"
+      - "Offline functionality: 100 percent coverage"
+      - "PWA score: 95 points or higher"
+    optimizations:
+      - Image compression and lazy loading
+      - Service Worker caching strategies
+      - Bundle splitting and code optimization
+compliance:
+  requirements:
+    - GDPR compliance for EU users
+    - Privacy by design principles
+    - Local data storage requirements
+    - PWA manifest standards
+  measures:
+    - No external data transmission
+    - Local storage encryption
+    - User consent for camera access
+    - Data portability features
+    - Clear privacy policy
+development:
+  phases:
+    - name: Foundation Setup
+      duration: 2 weeks
+      deliverables:
+        - PWA boilerplate with React and TypeScript
+        - Service Worker implementation
+        - Basic UI components and routing
+        - IndexedDB integration
+    - name: Core Features
+      duration: 4 weeks
+      deliverables:
+        - Meal logging functionality
+        - Camera integration and image handling
+        - Basic nutrition tracking
+        - Rating system implementation
+    - name: Advanced Features
+      duration: 3 weeks
+      deliverables:
+        - Offline synchronization
+        - Data export functionality
+        - Advanced UI/UX refinements
+        - Performance optimizations
+    - name: Testing and Polish
+      duration: 2 weeks
+      deliverables:
+        - Comprehensive testing suite
+        - PWA compliance verification
+        - Performance optimization
+        - Production deployment
+  team:
+    size: 3-4 developers
+    roles:
+      - Frontend React developer
+      - PWA specialist
+      - UI/UX designer
+      - QA engineer
+quality:
+  testing:
+    approaches:
+      - Unit testing with Vitest
+      - Component testing with React Testing Library
+      - E2E testing with Playwright
+      - PWA compliance testing
+      - Offline functionality testing
+    coverage:
+      target: 90 percent or higher
+      critical_paths: 100 percent coverage
+  metrics:
+    performance:
+      - Core Web Vitals monitoring
+      - PWA score tracking
+      - Offline functionality verification
+    quality:
+      - Code coverage reporting
+      - Accessibility compliance (WCAG 2.1 AA)
+      - Cross-browser compatibility testing
+  monitoring:
+    tools:
+      - Lighthouse CI for performance
+      - Workbox analytics for service worker
+      - Local error tracking (no external services)
+deployment:
+  environments:
+    development:
+      platform: Local Vite development server
+      features: Hot reload, debugging tools
+    staging:
+      platform: Vercel preview deployments
+      features: HTTPS, PWA testing environment
+    production:
+      platform: Vercel or Netlify with CDN
+      features: HTTPS, PWA manifest, service worker
+  ci_cd:
+    pipeline:
+      - Automated testing on pull requests
+      - Lighthouse CI performance checks
+      - PWA compliance validation
+      - Automated deployment to staging/production
+    tools:
+      - GitHub Actions for CI/CD
+      - Vercel/Netlify integration
+  hosting:
+    requirements:
+      - HTTPS support for PWA
+      - CDN for global performance
+      - Static site hosting capability
+    recommendations:
+      - Vercel for optimal React deployment
+      - Netlify as alternative option
+      - CloudFlare for additional CDN
+meta:
+  step: 1
+  version: "4.1"
+  timestamp: 2025-07-22T08:59:13.602Z
+  status: complete
+  checksum: 0f29f8f93a3ac88a2cb077cc714523616f77211768e4bebf413a7e0739436f90
+  batch_upgraded: true
+  upgrade_date: 2025-07-22T08:59:13.602Z
+  original_version: "1.0"

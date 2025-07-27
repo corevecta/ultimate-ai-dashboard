@@ -1,0 +1,91 @@
+project:
+  name: "Policy drafting/comment/approval block with logs"
+  type: "notion-integration"
+  description: "Privacy-first policy management system with drafting, commenting, approval workflows and comprehensive audit logs"
+  version: "1.0.0"
+
+branding:
+  company: "Corevecta"
+  vision: "Privacy by Default, Performance by Design"
+  style: "Professional privacy-first, dark theme, glassmorphism"
+  colors:
+    primary: "#f59e0b"
+    secondary: "#ea580c"
+    background: "gray-950"
+    surface: "gray-900"
+
+core_features:
+  - name: "Policy Drafting System"
+    description: "Rich text editor for creating and versioning policy documents with templates"
+    priority: high
+    technical_details:
+      - "Notion block-based rich text editor integration"
+      - "Version control with diff tracking"
+      - "Template library for common policies"
+      - "Auto-save with local persistence"
+
+  - name: "Comment & Review System"
+    description: "Collaborative commenting with threaded discussions and reviewer assignments"
+    priority: high
+    technical_details:
+      - "Inline comments on specific policy sections"
+      - "Threaded comment discussions"
+      - "Reviewer role assignments"
+      - "Comment resolution tracking"
+
+  - name: "Approval Workflow"
+    description: "Multi-stage approval process with customizable workflow states"
+    priority: high
+    technical_details:
+      - "Configurable approval stages"
+      - "Approval status tracking"
+      - "Notification system for approvers"
+      - "Digital signature integration"
+
+  - name: "Audit Logs"
+    description: "Comprehensive logging of all policy changes and workflow actions"
+    priority: medium
+    technical_details:
+      - "Complete change history tracking"
+      - "User action logging"
+      - "Export logs for compliance"
+      - "Search and filter capabilities"
+
+technical:
+  architecture: "Notion integration with local-first architecture"
+  dependencies:
+    production:
+      - "@notionhq/client": "^2.2.15"
+      - "typescript": "^5.5.4"
+      - "tailwindcss": "^4.0.0"
+      - "vite": "^5.3.4"
+    development:
+      - "@types/node": "^22.0.0"
+      - "eslint": "^9.7.0"
+      - "prettier": "^3.3.3"
+
+performance:
+  target_metrics:
+    - load_time: "< 2s"
+    - response_time: "< 100ms"
+    - memory_usage: "< 256MB"
+    - offline_storage: "< 500MB"
+
+privacy:
+  data_collection: "none"
+  tracking: false
+  storage: "local_only"
+  privacy_first: true
+
+deployment:
+  platforms:
+    - platform: "Notion workspace integration"
+      details: "Direct integration with Notion API v2"
+
+monetization:
+  model: "Free"
+  free_tier: "Full core features forever"
+  paid_tiers:
+    - name: "Pro"
+      price: "$9/month"
+      features: ["Advanced workflow automation", "Custom approval templates", "Enhanced audit reporting"]
